@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Formulario ejer03Formularios</title>
+</head>
+<body>
+
+    <header>
+        <h1>Formulario Html</h1>
+    </header>
+
+    <form action="./respuestaFormulario.html" target="_blank" method="get">
+
+        <section>
+            <h2>Entradas simples</h2>
+            <ul>
+                <li>
+                    <label for="nombre">Nombre:</label><br />
+                    <input type="text" id="nombre" name="nombre" value="" autofocus="autofocus" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="apellido">Apellido:</label><br />
+                    <input type="text" id="apellido" name="apellido" value="" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="usuario">Nombre de usuario:</label><br />
+                    <input type="text" id="usuario" name="usuario" value="" placeholder="letras, números y símbolos" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="clave">Contraseña:</label><br />
+                    <input type="password" id="clave" name="clave" value="" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label>Oculto:</label>
+                    <input type="hidden" id="idOculto" name="idOculto" value="registro_socio_984" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="campoDeshabilitado">Campo deshabilitado:</label><br />
+                    <input type="text" id="campoDeshabilitado" name="campoDeshabilitado" value="valorDeshabilitado" disabled="disabled" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="campoSoloLectura">Campo de solo lectura:</label><br />
+                    <input type="text" id="campoSoloLectura" name="campoSoloLectura" value="valorSoloLectura" readonly="readonly" />
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Entradas de selección</h2>
+            <ul>
+                <li>
+                    <label>Deportes que practica:</label><br />
+                    <input type="checkbox" id="futbol" name="futbol" value="si" />
+                    <label for="futbol">Fútbol</label><br />
+                    <input type="checkbox" id="natacion" name="natacion" value="si" checked="checked" />
+                    <label for="natacion">Natación</label><br />
+                    <input type="checkbox" id="tenis" name="tenis" value="si" />
+                    <label for="tenis">Tenis</label><br />
+                    <input type="checkbox" id="gimnasio" name="gimnasio" value="si" checked="checked" />
+                    <label for="gimnasio">Gimnasio / Musculación</label>
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label>Sexo</label><br />
+                    <label for="masculino">Masculino</label>
+                    <input type="radio" id="masculino" name="sexo" value="m" checked="checked" />
+                    <label for="femenino">Femenino</label>
+                    <input type="radio" id="femenino" name="sexo" value="f" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="estudios">Estudios cursados</label><br />
+                    <select id="estudios" name="estudios">
+                        <option value="pri">Primarios</option>
+                        <option value="sec" selected="selected">Secundarios</option>
+                        <option value="ter">Terciarios</option>
+                        <option value="uni">Universitarios</option>
+                        <option value="pos">Postgrado</option>
+                    </select>
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="fechaHora">Fecha y Hora</label><br />
+                    <input type="datetime-local" id="fechaHora" name="fechaHora" value="2026-08-17T19:00" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="colorPreferido">Color</label><br />
+                    <input type="color" id="colorPreferido" name="colorPreferido" value="#b22222" />
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Entradas con validación</h2>
+            <ul>
+                <li>
+                    <label for="objetivo">Objetivo de entrenamiento (validación por requerido):</label><br />
+                    <input type="text" id="objetivo" name="objetivo" required="required" placeholder="Ej: Rendimiento deportivo" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="email">Email con doble validación (x@x y required):</label><br />
+                    <input type="email" id="email" name="userEmail" required="required" placeholder="usuario@servidor.com" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="diasSemana">Días semanales de actividad (validación por tipo numérico y cotas 1 a 7):</label><br />
+                    <input type="number" id="diasSemana" name="diasSemana" min="1" max="7" value="3" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="estatura">Estatura en metros (número decimal con saltos de 0.01):</label><br />
+                    <input type="number" id="estatura" name="estatura" min="1.00" max="2.50" step="0.01" value="1.80" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="sitioWeb">Enlace de perfil o red social (validación por requerido, escribir http://):</label><br />
+                    <input type="url" id="sitioWeb" name="sitioWeb" required="required" placeholder="http://misitio.com" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="codigoSocio">Código de socio (Pattern de validación: 3 letras mayúsculas y 3 números):</label><br />
+                    <input type="text" id="codigoSocio" name="codigoSocio" pattern="[A-Z]{3}[0-9]{3}" title="3 letras mayúsculas seguidas de 3 números (Ej: SOC123)" placeholder="SOC123" />
+                </li>
+
+                <li style="margin-top: 10px;">
+                    <label for="telefono">Teléfono de contacto (Pattern de validación: formato internacional):</label><br />
+                    <input type="text" id="telefono" name="telefono" pattern="\(\+[0-9]{2}\)\s[0-9]{2}\s[0-9]{8}" title="(+54) 11 44445555" placeholder="(+54) 11 44445555" />
+                </li>
+
+                <li style="margin-top: 15px;">
+                    <button type="submit">Enviar</button>
+                </li>
+
+                <li style="margin-top: 5px;">
+                    <button type="reset">Restablecer</button>
+                </li>
+            </ul>
+        </section>
+
+    </form>
+
+</body>
+</html>

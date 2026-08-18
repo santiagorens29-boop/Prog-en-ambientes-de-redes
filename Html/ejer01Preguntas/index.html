@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Preguntas y referencias sobre protocolo HTTP</title>
+</head>
+<body>
+
+    <!-- 1. Encabezado principal (Semántico: header) -->
+    <header>
+        <h1>Preguntas y referencias sobre protocolo HTTP</h1>
+    </header>
+
+    <hr />
+
+    <!-- 2. Sección de navegación y enlaces (Semántico: nav) -->
+    <nav>
+        <h2>Sección de referencias de interes</h2>
+        <p>Abrir enlaces en nuevas pestañas:</p>
+        <ul>
+            <li>
+                <a href="https://concepto.de/http/" target="_blank">Concepto - ¿Qué es el protocolo HTTP?</a>
+            </li>
+            <li>
+                <a href="https://www.w3schools.com/tags/ref_httpmethods.asp" target="_blank">W3Schools - Referencia Oficial de Métodos y Peticiones HTTP</a>
+            </li>
+        </ul>
+    </nav>
+
+    <hr />
+
+    <!-- 3. Sección de Preguntas y Respuestas (Semántico: section) -->
+    <section>
+        <h2>Sección de Preguntas sobre HTTP</h2>
+        <ul>
+            <li>
+                <strong>Pregunta nro 1: ¿Sobre qué protocolo binario está montado el protocolo HTTP?</strong>
+                <p>Respuesta: El protocolo HTTP/3 está montado sobre el protocolo binario QUIC <br />
+                    (el cual opera sobre UDP). Además, a nivel de formato, desde la versión HTTP/2 <br />
+                    el propio protocolo pasó a estructurarse mediante un formato de frames (tramas) <br />
+                    binarias en lugar de texto plano.
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 2: ¿Cuáles son los clientes http y los servidores http más utilizados?</strong>
+                <p>Respuesta: Los clientes y servidores HTTP principales son: <br />
+                    Clientes HTTP más utilizados: <br />
+                    Navegadores web (como Chrome, Mozilla, etc.). <br />
+                    CURL (herramienta de línea de comandos para realizar peticiones HTTP). <br />
+                    Librerías nativas de diversos lenguajes de desarrollo (para realizar peticiones HTTP desde código). <br />
+                    Servidores / Entornos HTTP mencionados: <br />
+                    Servidor Web Apache (mencionado en las cabeceras de respuesta y ejemplos como Server: Apache/1.2). <br />
+                    Servidor web / Intérprete PHP (usado como intérprete del lado del servidor). <br />
+                    Tomcat (aclarando que no es un webserver tradicional, sino una Java Virtual Machine - JVM para interpretar código Java intermedio).
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 3: ¿Qué verbos admite un comando en el requerimiento HTTP?</strong>
+                <p>Respuesta: La línea inicial de un requerimiento admite los siguientes verbos o métodos principales: <br />
+                    GET: Utilizado para operaciones de solo lectura de un recurso. <br />
+                    POST: Utilizado normalmente para actualizar recursos o enviar datos de formularios/archivos en un servidor. <br /> 
+                    PUT: Utilizado para crear recursos en un servidor. <br />
+                    DELETE: Utilizado para borrar recursos en un servidor. <br />
+                    CONNECT: Método utilizado principalmente por los servidores proxy.
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 4: ¿Qué contenido lleva el body de un requerimiento HTTP?</strong>
+                <p>Respuesta: El body de un mensaje de requerimiento HTTP puede contener datos en cualquier formato. <br />
+                    Principalmente incluye: <br />
+                    Datos ingresados en campos de un formulario. <br />
+                    Archivos (files) enviados en un proceso de subida (upload).
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 5: ¿Qué diferencia existe entre un URL y un URI?</strong>
+                <p>Respuesta: La diferencia fundamental <br />
+                    es que la URI es la ruta específica y los parámetros del recurso dentro del servidor, <br />
+                    mientras que la URL es la dirección web completa que incluye el protocolo, el nombre de host/dominio, <br />
+                    el puerto y la propia URI.
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 6: ¿Cómo se almacena información relacionada con las respuestas http?</strong>
+                <p>Respuesta: La información relacionada con las respuestas HTTP <br />
+                    se almacena en el cliente a través de tres mecanismos principales: Cookies HTTP: Pequeñas piezas de <br />
+                    datos enviadas por el servidor mediante la cabecera Set-Cookie que el navegador guarda en memoria o <br />
+                    disco. Caché del navegador (HTTP Cache): Almacenamiento local de recursos (imágenes, archivos CSS, <br />
+                    JavaScript, etc.) para evitar descargarlos repetidamente. Archivos temporales de Streaming (HLS): <br />
+                    Fragmentos independientes de video o audio que se van guardando temporalmente en el navegador <br />
+                    durante una transmisión.
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 7: ¿Qué significa HTTP sobre conexiones preexistentes?</strong>
+                <p>Respuesta: Significa que el cliente realiza múltiples transacciones y solicitudes de <br />
+                    recursos (requests) sobre una única conexión persistente ya abierta, solicitando elementos <br />
+                    de forma continua hasta el último recurso sin necesidad de volver a realizar el saludo de 3 <br />
+                    vías de TCP por cada archivo. Esto se gestiona mediante la cabecera Connection: keep-alive. 
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 8: ¿Qué significa Virtual Hosting?</strong>
+                <p>Respuesta: Virtual Hosting (o alojamiento virtual) es la capacidad que tienen los servidores web <br />
+                    que corren sobre HTTP/1.1 para atender y hospedar múltiples dominios diferentes sobre una única <br />
+                    dirección IP pública. 
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 9: ¿Qué significa Caché por ETag?</strong>
+                <p>Respuesta: El caché por ETag es un sistema de validación donde el servidor asocia <br />
+                    a cada archivo una etiqueta o finger print (identificador/hash) que cambia cada vez <br />
+                    que el recurso es modificado. El cliente almacena este identificador y lo reenvía en <br />
+                    el encabezado If-None-Match; si el ETag en el servidor no cambió, el servidor devuelve <br />
+                    una respuesta 304 Not Modified y el navegador carga el recurso directamente desde su caché local. 
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 10: ¿Por qué el protocolo HTTP se considera STATELESS?</strong>
+                <p>Respuesta: HTTP se considera un protocolo stateless (sin estado) porque trata cada <br />
+                    requerimiento como una transacción totalmente independiente y aislada: al completarse <br />
+                    la respuesta o al no haber más conexión abierta, el servidor no almacena ni recuerda el <br />
+                    contexto previo, por lo que cualquier aplicación pierde el estado entre peticiones sucesivas. 
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 11: ¿Qué nueva versión de HTTP se está usando para mejorar la velocidad de la WEB?</strong>
+                <p>Respuesta: La versión que se implementó para mejorar la velocidad de transmisión de datos en la web <br />
+                    es HTTP/2 (funcionando desde 2015), mientras que la evolución más reciente para optimizar <br />
+                    la velocidad de conexión y recuperación en entornos con fallas o ruido es HTTP/3. 
+                </p>
+            </li>
+
+            <li>
+                <strong>Pregunta nro 12: ¿Cómo va a mejorar el comportamiento de una aplicación WEB en ambientes ruidosos o de débil conexión?</strong>
+                <p>El comportamiento mejora mediante la adopción de HTTP/3 montado sobre el protocolo QUIC <br />
+                    (operando sobre UDP), el cual ofrece una gran capacidad de reconexión inmediata y <br />
+                    alta velocidad de recuperación frente a caídas causadas por ruido ambiente, exceso de <br />
+                    tráfico o baja calidad de cobertura. 
+                </p>
+            </li>
+        </ul>
+    </section>
+
+    <hr />
+
+    <!-- 4. Sección de Imágenes (Semántico: section) -->
+    <section>
+        <h2>Sección de imagenes representativas del protocolo</h2>
+        <p>En esta sección mostraremos imagenes representativas del protocolo HTTP.</p>
+        <img src="./img1.png" alt="Imagen representativa HTTP 1" style="max-width: 600px; height: auto; display: block; margin-bottom: 15px;" />
+        <img src="./img2.png" alt="Imagen representativa HTTP 2" style="max-width: 600px; height: auto; display: block; margin-bottom: 15px;" />
+        <img src="./img3.png" alt="Imagen representativa HTTP 3" style="max-width: 600px; height: auto; display: block; margin-bottom: 15px;" />
+    </section>
+
+    <hr />
+
+    <!-- 5. Sección de Video Local descargado (Semántico: section) -->
+    <section>
+        <h2>Sección de videos representativos del protocolo</h2>
+        <video width="560" height="315" controls style="border: solid 1px black;">
+            <source src="./videoParilla.mp4" type="video/mp4" />
+            Tu navegador no soporta la reproducción de video HTML5.
+        </video>
+    </section>
+
+    <hr />
+
+    <!-- 6. Pie de página y Datos del alumno (Semántico: footer y address) -->
+    <footer>
+        <h2>Datos del alumno</h2>
+        <address>
+            <p>Nombre y apellido: Santiago Rens</p>
+            <p>Email: <a href="mailto:santiago.rens@comunidad.ub.edu.ar">santiago.rens@comunidad.ub.edu.ar</a></p>
+        </address>
+    </footer>
+
+</body>
+</html>

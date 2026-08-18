@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>ejer04Iframe</title>
+</head>
+<body>
+
+    <header>
+        <h1>INDICE</h1>
+    </header>
+
+    <nav>
+        <ol>
+            <li>
+                <a href="../ejer01Preguntas/index.html" target="fcontenido">Html básico</a>
+            </li>
+            <li>
+                <a href="../ejer02Tablas/index.html" target="fcontenido">Tabla</a>
+            </li>
+            <li>
+                <a href="../ejer03Formularios/index.html" target="fcontenido">Formulario</a>
+            </li>
+            <li>
+                <a href="./HTTP.pdf" target="fcontenido">Archivo pdf</a>
+            </li>
+            <li>
+                <a href="./videoLocal.mp4" target="fcontenido">Archivo de video local</a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/embed/BHdNbplsu8g" target="fcontenido">Video de youtube</a>
+            </li>
+        </ol>
+    </nav>
+
+    <br />
+
+    <section>
+        <h2>Iframe para presentar los ejercicios anteriores un pdf y un video streaming de youtube</h2>
+        <iframe 
+            src="../ejer01Preguntas/index.html" 
+            name="fcontenido" 
+            style="width: 95%; height: 450px; border: solid 2px black;">
+        </iframe>
+    </section>
+
+    <br /><br />
+
+    <section>
+        <h2>Iframe recomendado por youtube para insertar un video y visualizarlo en toda su dimensión</h2>
+        
+        <iframe 
+            width="932" 
+            height="524" 
+            src="https://www.youtube.com/embed/BHdNbplsu8g" 
+            title="Protocolo HTTP y HTTPS Explicado" 
+            style="border: 0;" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+
+    </section>
+
+    <br />
+    <hr />
+
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de HTML
+        </button>
+
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>
