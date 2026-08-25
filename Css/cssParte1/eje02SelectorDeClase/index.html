@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css02 Selectores De Clase</title>
+
+    <style>
+        /* Tipografía general */
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* 1. Encabezado h1 */
+        h1 {
+            font-size: 2.2em;
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+
+        /* 2. Estilo por defecto para cualquier párrafo p */
+        p {
+            font-size: 1.1em;
+            color: #2d3748;
+            margin-bottom: 35px; /* Separación vertical entre párrafos */
+            line-height: 1.5;
+        }
+
+        /* 3. Selector de clase: .claseAcotacion */
+        p.claseAcotacion {
+            text-align: center;
+            font-style: italic;
+            color: #2b6cb0;
+            border: 1px solid #3182ce;
+            padding: 10px;
+            background-color: #ebf8ff;
+        }
+
+        /* 4. Selector de clase: .claseResaltado */
+        p.claseResaltado {
+            font-weight: bold;
+            color: #744210;
+            background-color: #fefcbf; /* Fondo amarillo suave de resaltado */
+            padding: 8px 12px;
+            border-left: 6px solid #d69e2e;
+        }
+
+        /* 5. Selector de clase: .claseAyuda */
+        p.claseAyuda {
+            font-style: italic;
+            color: #276749;
+            background-color: #f0fff4;
+            border: 1px dashed #38a169;
+            padding: 10px;
+        }
+
+        /* 6. Selector de clase: .claseContenidoComun */
+        p.claseContenidoComun {
+            color: #4a5568;
+            font-size: 1.05em;
+        }
+
+        /* 7. Selector de elemento único por ID: #idUnico */
+        p#idUnico {
+            color: #9b2c2c;
+            font-style: italic;
+            font-weight: 600;
+            border: 2px solid #e53e3e;
+            padding: 15px;
+            width: 50%;
+            background-color: #fff5f5;
+        }
+
+        /* 8. Selector de clase para imágenes: .imagenAl50 */
+        img.imagenAl50 {
+            width: 50%; /* Ocupa el 50% del ancho del contenedor padre */
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado del ejercicio -->
+    <header>
+        <h1>Selectores de clase</h1>
+    </header>
+
+    <p><strong>A partir de esta página no usaremos más el atributo style en ninguna etiqueta.</strong></p>
+    
+    <p><strong>Todo el estilo aplicado en el documento será definido dentro de una etiqueta style como "clase" o "id", anidada en la etiqueta head del documento.</strong></p>
+
+    <!-- Explicación del estilo por defecto de p -->
+    <pre>
+p { /* El default para cualquier párrafo */
+    font-size: 1.1em;
+    margin-bottom: 35px;
+    line-height: 1.5;
+}
+    </pre>
+
+    <p>Todos los párrafos tienen un default como estilo que incluyen un margin-bottom para separarlos más entre ellos.</p>
+
+    <hr />
+
+    <!-- Párrafo con .claseAcotacion -->
+    <p class="claseAcotacion">
+        Este párrafo toma el estilo definido en la etiqueta style en el header del documento como class="claseAcotacion"
+    </p>
+
+    <!-- Párrafo con .claseResaltado -->
+    <p class="claseResaltado">
+        Este párrafo toma el estilo definido en la etiqueta style en el header del documento como class="claseResaltado"
+    </p>
+
+    <!-- Párrafo con .claseAyuda -->
+    <p class="claseAyuda">
+        Este párrafo toma el estilo definido en la etiqueta style en el header del documento como class="claseAyuda"
+    </p>
+
+    <!-- Párrafo con .claseContenidoComun -->
+    <p class="claseContenidoComun">
+        Este párrafo toma el estilo definido en la etiqueta style en el header del documento como class="claseContenidoComun"
+    </p>
+
+    <!-- Párrafo único identificado con ID -->
+    <p id="idUnico">
+        Párrafo formateado por un estilo particular definido en el style del documento para un párrafo específico id="idUnico". No se trata de un selector de clase sino de un selector de elemento "#"
+    </p>
+
+    <hr />
+
+    <!-- Sección de Imagen al 50% -->
+    <section>
+        <p><strong>Todas las imágenes con class="imagenAl50" en esta página se encuentran limitadas al 50% del ancho del contenedor más allá de su tamaño real en píxeles:</strong></p>
+        
+        <!-- Guarda tu imagen en esta misma carpeta con el nombre img1.jpg o cámbiale la extensión según corresponda -->
+        <img src="./img1.png" alt="Messi" class="imagenAl50" />
+    </section>
+
+    <br />
+    <hr />
+
+    <!-- Botones de navegación y retorno -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 1
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>
