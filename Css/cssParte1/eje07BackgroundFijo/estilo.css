@@ -1,0 +1,69 @@
+/* Reseteo y modelo de caja universal */
+* {
+    box-sizing: border-box; /*[cite: 1] */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    padding: 20px;
+    background-color: #f1f5f9;
+}
+
+/* 1. Contenedor exterior grande (fondo azul suave) */
+div#contenedorPrincipal {
+    width: 90%;
+    height: 480px;
+    background-color: #bfdbfe; /* Azul suave del marco exterior */
+    margin: 0 auto; /* Centrado horizontal */ /*[cite: 1] */
+    padding: 25px; /* Espacio perimetral para encuadrar la caja interna */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Caja interior con scroll, borde rojo e imagen de fondo */
+div#cajaConScroll {
+    width: 55%; /* Ocupa el 55% del contenedor padre */ /*[cite: 1] */
+    height: 100%; /* Ocupa el alto total disponible del contenedor */
+    
+    /* Borde destacado */
+    border: 3px solid #dc2626; /* Borde rojo */
+    border-radius: 4px;
+    
+    /* Separación interna */
+    padding: 20px; /*[cite: 1] */
+    
+    /* Habilitación de la barra de desplazamiento */
+    overflow: auto; /*[cite: 1] */
+
+    /* Configuración de la imagen de fondo */
+    background-image: url("./imgFondo.jpg"); /* Colocá una imagen con este nombre en la misma carpeta */ /*[cite: 1] */
+    background-repeat: no-repeat; /*[cite: 1] */
+    background-position: center center; /*[cite: 1] */
+    background-size: cover; /* Asegura cobertura sin distorsionar */ /*[cite: 1] */
+    
+    /* Color de respaldo si no carga la imagen */
+    background-color: #ffffff;
+}
+
+/* Estilos de tipografía para lectura sobre fondo */
+div#cajaConScroll h2 {
+    font-size: 1.3em;
+    color: #0f172a;
+    margin-bottom: 12px;
+    background-color: rgba(255, 255, 255, 0.85); /* Fondo translúcido para legibilidad */
+    padding: 6px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+div#cajaConScroll p {
+    font-size: 1.05em;
+    line-height: 1.6;
+    color: #1e293b;
+    margin-bottom: 14px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente que resalta el texto sobre la imagen */
+    padding: 8px 12px;
+    border-radius: 4px;
+}

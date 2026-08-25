@@ -1,0 +1,42 @@
+/* Configuración de fuente general */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px;
+}
+
+/* Estilo para los encabezados h1 */
+h1 {
+    font-size: 1.7em;
+    color: #0f172a; /* Azul noche oscuro */
+    text-align: center;
+    background: linear-gradient(90deg, #e0e7ff, #c7d2fe); /* Degradado suave */
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #a5b4fc;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* Estilo para los párrafos p */
+p {
+    font-size: 1.05em;
+    color: #334155;
+    font-style: italic;
+    text-align: justify;
+    border-top: 1px solid #64748b;
+    border-bottom: 1px solid #64748b;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Estilo para el bloque de código */
+pre {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    font-size: 0.95em;
+    color: #1e293b;
+}

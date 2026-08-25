@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css04FontSize</title>
+
+    <!-- Vinculación de la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Título principal con escala doble respecto al contenedor -->
+    <h1>Tamaño de los fonts dependiente de la resolución del medio de visualización</h1>
+
+    <!-- Párrafos explicativos con redacción estructurada -->
+    <p>
+        Los textos marcados con la etiqueta h1 tienen una dimensión doble (2em) respecto al tamaño base definido para el documento.
+    </p>
+    <p>
+        El tamaño de letra por defecto se define en píxeles en el body, y el resto de los elementos se dimensionan mediante unidades relativas "em".
+    </p>
+    <p>
+        Mediante la regla @media(), el tamaño de la tipografía y los fondos se ajustan automáticamente según el ancho del viewport de la pantalla.
+    </p>
+    <p>
+        La resolución de una pantalla se mide en píxeles de ancho por píxeles de alto, determinando el espacio útil disponible para renderizar.
+    </p>
+    <p>
+        Los dispositivos móviles modernos tienen pantallas pequeñas pero con alta densidad de imagen (alrededor de 400 a 500 ppp / píxeles por pulgada).
+    </p>
+    <p>
+        Los monitores de escritorio presentan mayor tamaño físico pero menor densidad de puntos (habitualmente entre 90 y 110 ppp).
+    </p>
+    <p>
+        El control de medios permite que el diseño se adapte de forma fluida, asegurando una legibilidad óptima en cualquier dispositivo sin requerir zoom manual.
+    </p>
+
+    <br />
+    <hr />
+
+    <!-- Botones de navegación y retorno -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 1
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css07BackgroundFijo</title>
+
+    <!-- Enlace a la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Contenedor maestro exterior -->
+    <div id="contenedorPrincipal">
+
+        <!-- Caja interior con scroll, padding, borde e imagen de fondo fija -->
+        <div id="cajaConScroll">
+            <h2>Propiedades de Contenedores y Fondo</h2>
+            
+            <p>
+                El <strong>padding</strong> es fundamental para generar una separación interna adecuada y evitar que el contenido textual quede adherido a los bordes de la caja.
+            </p>
+            
+            <p>
+                La propiedad <strong>box-sizing: border-box</strong> garantiza que el padding y los bordes se calculen hacia el interior, manteniendo inalteradas las dimensiones de ancho (width) y alto (height) definidas.
+            </p>
+
+            <p>
+                Al definir una altura fija junto con <strong>overflow: auto</strong>, el navegador genera automáticamente una barra de desplazamiento vertical cuando el contenido supera el espacio visible del contenedor.
+            </p>
+
+            <p>
+                La imagen establecida mediante <strong>background-image</strong> permanece fija como capa de fondo mientras el texto se desplaza libremente sobre ella.
+            </p>
+
+            <!-- Bloques de texto para habilitar el scrolling -->
+            <p>
+                Control de capas. Renderizado de fuentes. Flujo de maquetación. Posicionamiento relativo. Estructura modular. Arquitectura web limpia. Separación de capas semánticas y de diseño.
+            </p>
+            <p>
+                Optimización de rendimiento en navegadores modernos. Consistencia visual entre diferentes dispositivos. Modelo de renderizado por bloques. Hojas de estilo estructuradas y mantenibles.
+            </p>
+        </div>
+
+    </div>
+
+    <br />
+    <hr />
+
+    <!-- Botones de navegación y retorno -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 1
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>

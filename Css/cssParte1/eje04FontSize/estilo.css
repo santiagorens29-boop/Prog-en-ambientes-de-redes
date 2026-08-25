@@ -1,0 +1,66 @@
+/* 1. Estado Base: Pantallas Grandes / Escritorio (> 900px) */
+* {
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px; /* Base de referencia 1em = 16px */
+    margin: 20px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+h1 {
+    font-size: 2em; /* Equivale a 32px en escritorio */ /*[cite: 1] */
+    color: #1a202c;
+    text-align: center;
+    background-color: #cbd5e1; /* Fondo gris en escritorio */
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1em; /* Equivale a 16px en escritorio */ /*[cite: 1] */
+    color: #2d3748;
+    background-color: #e2e8f0;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-left: 5px solid #64748b;
+    line-height: 1.5;
+}
+
+/* 2. Media Query: Tablets y Pantallas Medianas (entre 601px y 900px) */
+@media (max-width: 900px) and (min-width: 601px) { /*[cite: 1] */
+    body {
+        font-size: 14px; /* Base 1em = 14px */
+    }
+
+    h1 {
+        background-color: #fef08a; /* Fondo amarillo */
+        color: #713f12;
+    }
+
+    p {
+        background-color: #fef9c3;
+        border-left: 5px solid #ca8a04;
+    }
+}
+
+/* 3. Media Query: Celulares y Pantallas Pequeñas (hasta 600px) */
+@media (max-width: 600px) { /*[cite: 1] */
+    body {
+        font-size: 12px; /* Base 1em = 12px */ /*[cite: 1] */
+    }
+
+    h1 {
+        background-color: #bbf7d0; /* Fondo verde */
+        color: #14532d;
+    }
+
+    p {
+        background-color: #dcfce7;
+        border-left: 5px solid #16a34a;
+    }
+}
