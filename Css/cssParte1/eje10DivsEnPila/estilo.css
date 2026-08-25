@@ -1,0 +1,89 @@
+/* Reseteo universal y modelo de caja */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #0f766e; /* Fondo verde azulado / teal oscuro elegante */
+    padding: 25px;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 2em;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+/* Regla común para todas las cajas apiladas */
+div.cajaComun {
+    width: 60%; /* Ancho proporcional de la pila */ /*[cite: 1] */
+    height: 170px; /* Altura fija por bloque */ /*[cite: 1] */
+    margin: 0 auto 24px auto; /* Centrado en X y separación vertical entre cajas */ /*[cite: 1] */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 10px 10px 18px rgba(0, 0, 0, 0.35); /* Sombra con canal alfa */ /*[cite: 1] */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+/* 1. Caja 1: Fondo adaptativo según la resolución */
+div#caja1 {
+    background-color: #e2e8f0; /* Fondo gris pizarra por defecto (> 1080px) */
+    padding-top: 35px;
+    color: #1e293b;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* 2. Caja 2: Gradiente Radial cálido con foco central */
+div#caja2 {
+    background: radial-gradient(circle, #f59e0b 0%, #fed7aa 45%, #fdf2f8 85%); /*[cite: 1] */
+    padding-top: 15px;
+    color: #7c2d12;
+    font-weight: 600;
+}
+
+/* 3. Caja 3: Imagen de fondo fija y centrada con contorno suave */
+div#caja3 {
+    background-color: #ffedd5;
+    background-image: url("./imgFondo.png"); /*[cite: 1] */
+    background-repeat: no-repeat; /*[cite: 1] */
+    background-position: center center; /*[cite: 1] */
+    background-size: contain; /* Mantiene la proporción íntegra de la imagen */ /*[cite: 1] */
+}
+
+/* 4. Caja 4: Gradiente Lineal en diagonal con texto a la izquierda */
+div#caja4 {
+    background: linear-gradient(135deg, #fef3c7, #fb923c); /* Gradiente lineal cálido */ /*[cite: 1] */
+    text-align: left;
+    padding: 20px 25px; /*[cite: 1] */
+    color: #431407;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+/* ---------------- MEDIAS QUERIES PARA CAJA 1 ---------------- */
+
+/* Viewport mediano: entre 601px y 1080px */
+@media (max-width: 1080px) and (min-width: 601px) { /*[cite: 1] */
+    div#caja1 {
+        background-color: #fef08a; /* Cambia a ámbar suave */ /*[cite: 1] */
+        color: #713f12;
+    }
+}
+
+/* Viewport pequeño: menor o igual a 600px */
+@media (max-width: 600px) { /*[cite: 1] */
+    div.cajaComun {
+        width: 90%; /* Se ensancha en móviles para no quedar comprimida */
+    }
+
+    div#caja1 {
+        background-color: #a5f3fc; /* Cambia a celeste cian */
+        color: #164e63;
+    }
+}

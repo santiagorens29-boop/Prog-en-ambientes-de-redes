@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css15SelectoresDeEvento</title>
+
+    <!-- Vinculación de la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- 1. Barra de botones con navegación por pseudoclases :hover y :active -->
+    <nav id="barraNavegacion">
+        <a href="./respuesta1.html" class="btopcion">Opción 1</a>
+        <a href="./respuesta2.html" class="btopcion">Opción 2</a>
+        <a href="./respuesta3.html" class="btopcion">Opción 3</a>
+        <div class="limpiarFlotacion"></div>
+    </nav>
+
+    <!-- 2. Formulario con pseudoclase :focus en inputs -->
+    <section id="seccionFormulario">
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" placeholder="Ingrese apellido" />
+
+        <label for="nombres">Nombres:</label>
+        <input type="text" id="nombres" name="nombres" placeholder="Ingrese nombres" />
+    </section>
+
+    <!-- 3. Sección de expansión de imágenes interactivas con clic (:active) -->
+    <section id="seccionGaleria">
+        <h2>Expandir la imagen al 30% del contenedor padre con un click</h2>
+
+        <div id="contenedorImagenes">
+            <div class="cajaImg">
+                <img src="./img1.png" alt="Imagen 1" class="imgInteractiva" />
+            </div>
+            <div class="cajaImg">
+                <img src="./img2.png" alt="Imagen 2" class="imgInteractiva" />
+            </div>
+            <div class="cajaImg">
+                <img src="./img3.png" alt="Imagen 3" class="imgInteractiva" />
+            </div>
+            <div class="cajaImg">
+                <img src="./img4.png" alt="Imagen 4" class="imgInteractiva" />
+            </div>
+            <div class="limpiarFlotacion"></div>
+        </div>
+    </section>
+
+    <br />
+    <hr />
+
+    <!-- Botones de retorno estructurados -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 1
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>

@@ -38,7 +38,7 @@ div#cajaConScroll {
     overflow: auto; /*[cite: 1] */
 
     /* Configuración de la imagen de fondo */
-    background-image: url("./imgFondo.jpg"); /* Colocá una imagen con este nombre en la misma carpeta */ /*[cite: 1] */
+    background-image: url("./imgFondo.png"); /* Colocá una imagen con este nombre en la misma carpeta */ /*[cite: 1] */
     background-repeat: no-repeat; /*[cite: 1] */
     background-position: center center; /*[cite: 1] */
     background-size: cover; /* Asegura cobertura sin distorsionar */ /*[cite: 1] */

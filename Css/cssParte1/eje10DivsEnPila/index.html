@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css10DivsEnPila</title>
+
+    <!-- Enlace a la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <h1>Cajas en Pila (Estructura de Bloques Verticales)</h1>
+    </header>
+
+    <!-- Caja 1: Media Query con cambio de fondo según Viewport -->
+    <div id="caja1" class="cajaComun">
+        <p>Fondo gris pizarra para viewport superior a 1080px</p>
+        <p>Fondo ámbar suave para viewport entre 600px y 1080px</p>
+        <p>Fondo azul cian para viewport menor a 600px</p>
+    </div>
+
+    <!-- Caja 2: Gradiente Radial -->
+    <div id="caja2" class="cajaComun">
+        <p>Caja con fondo configurado mediante gradiente radial (radial-gradient)</p>
+    </div>
+
+    <!-- Caja 3: Imagen de Fondo Fija Centrada -->
+    <div id="caja3" class="cajaComun">
+        <!-- El fondo se carga por CSS mediante background-image -->
+    </div>
+
+    <!-- Caja 4: Gradiente Lineal con Texto Alineado a la Izquierda y Padding -->
+    <div id="caja4" class="cajaComun">
+        <p>Nodo de texto en caja 4 alineado a la izquierda, con padding interno y gradiente lineal</p>
+    </div>
+
+    <br />
+    <hr />
+
+    <!-- Botones de navegación y retorno -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 1
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>

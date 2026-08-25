@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css14DivsInternosEnColumnas</title>
+
+    <!-- Enlace a la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <header>
+        <h1>Encolumnado sin tablas (Distribución modular por columnas DIV)</h1>
+    </header>
+
+    <!-- Contenedor Maestro de Columnas -->
+    <div id="contenedorColumnas">
+
+        <!-- Columna 1: Tarjeta larga con imagen final -->
+        <div class="columna">
+            <div class="articulo">
+                <h3>Artículo 1</h3>
+                <p>Datos técnicos para incluir en esta columna. La maquetación modular permite distribuir bloques de contenido dinámico sin recurrir a tablas rígidas.</p>
+                <p>La siguiente imagen queda marginada automáticamente y ocupa el máximo ancho posible dentro de su tarjeta contenedora, preservando siempre la relación de aspecto original.</p>
+                <!-- Imagen adaptativa 1 -->
+                <img src="./img2.png" alt="Imagen descriptiva 1" />
+            </div>
+        </div>
+
+        <!-- Columna 2: Tarjeta individual extensa -->
+        <div class="columna">
+            <div class="articulo">
+                <h3>Artículo 2</h3>
+                <p>Estructura de flujo de datos en columna. Cada contenedor ajusta su altura automáticamente de acuerdo al volumen de texto que aloja en su interior.</p>
+                <p>El uso de porcentajes relativos asegura que las cinco columnas mantengan una proporción simétrica y balanceada respecto al ancho de la pantalla.</p>
+            </div>
+        </div>
+
+        <!-- Columna 3: Dos artículos apilados con imagen en el inferior -->
+        <div class="columna">
+            <div class="articulo">
+                <h3>Artículo 3</h3>
+                <p>Bloque superior de la tercera columna con información técnica y formato de texto estándar.</p>
+            </div>
+            <div class="articulo">
+                <h3>Artículo 6</h3>
+                <p>Bloque inferior apilado naturalmente debajo del artículo 3, manteniendo la separación vertical.</p>
+                <!-- Imagen adaptativa 2 -->
+                <img src="./img1.png" alt="Imagen descriptiva 2" />
+            </div>
+        </div>
+
+        <!-- Columna 4: Dos artículos apilados -->
+        <div class="columna">
+            <div class="articulo">
+                <h3>Artículo 4</h3>
+                <p>Información procesada para la cuarta columna en el sector superior de la cuadrícula.</p>
+            </div>
+            <div class="articulo">
+                <h3>Artículo 7</h3>
+                <p>Datos complementarios asignados al bloque inferior dentro de la misma columna.</p>
+            </div>
+        </div>
+
+        <!-- Columna 5: Dos artículos apilados -->
+        <div class="columna">
+            <div class="articulo">
+                <h3>Artículo 5</h3>
+                <p>Detalle de parámetros y configuración de estilos para el sector superior de la última columna.</p>
+            </div>
+            <div class="articulo">
+                <h3>Artículo 8</h3>
+                <p>Cierre del encolumnado modular con información estructurada de la tarjeta final.</p>
+            </div>
+        </div>
+
+        <!-- Limpieza de flotación para contener el encolumnado completo -->
+        <div class="limpiarFlotacion"></div>
+
+    </div>
+
+    <br />
+    <hr />
+
+    <!-- Botones de navegación y retorno -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 1
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>

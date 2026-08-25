@@ -1,0 +1,98 @@
+/* Reseteo universal y modelo de caja */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+h1 {
+    font-size: 1.8em;
+    color: #0f172a;
+    margin-bottom: 25px;
+}
+
+/* Contenedor principal de la tira horizontal (fondo celeste pastel) */
+div#contenedorFila {
+    width: 100%;
+    background-color: #bfdbfe; /* Fondo azul cielo del contenedor */
+    padding: 15px 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Reglas comunes para todas las cajas flotantes */
+div.cajaFila {
+    float: left; /* Flotación horizontal hacia la izquierda */ /*[cite: 1] */
+    width: 15%; /* 6 cajas distribuidas en el 100% de la fila */
+    height: 110px; /* Altura uniforme */ /*[cite: 1] */
+    margin: 0 0.8%; /* Separación horizontal entre tarjetas */ /*[cite: 1] */
+    border: 1px solid #64748b;
+    border-radius: 6px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25); /* Sombra elegante */ /*[cite: 1] */
+    overflow: auto; /* Barra de scroll si el texto excede la altura */ /*[cite: 1] */
+    text-align: center;
+}
+
+/* 1. Caja 1: Gradiente lineal vertical */
+div#caja1 {
+    background: linear-gradient(180deg, #f59e0b, #fed7aa, #ffffff); /*[cite: 1] */
+    padding: 8px;
+    font-size: 0.85em;
+    color: #451a03;
+}
+
+/* 2. Caja 2: Gradiente radial y texto */
+div#caja2 {
+    background: radial-gradient(circle, #fde047 0%, #fed7aa 50%, #fdf2f8 85%); /*[cite: 1] */
+    padding-top: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #78350f;
+}
+
+/* 3. Caja 3: Imagen completa fija (img1.png) */
+div#caja3 {
+    background-image: url("./img1.png");
+    background-repeat: no-repeat; /*[cite: 1] */
+    background-position: center center; /*[cite: 1] */
+    background-size: cover;
+    background-color: #e2e8f0;
+}
+
+/* 4. Caja 4: Combinación de imagen (img2.png) y gradiente de fondo */
+div#caja4 {
+    background-image: url("./img2.png");
+    background-repeat: no-repeat; /*[cite: 1] */
+    background-position: left center;
+    background-size: 40% auto;
+    background-color: #ffedd5;
+    background-image: url("./img2.png"), radial-gradient(circle, #f59e0b 0%, #fed7aa 60%, #fff 100%);
+}
+
+/* 5. Caja 5: Gradiente lineal cálido */
+div#caja5 {
+    background: linear-gradient(180deg, #fb923c, #fef3c7); /*[cite: 1] */
+    padding: 8px;
+    font-size: 0.85em;
+    color: #7c2d12;
+}
+
+/* 6. Caja 6: Gradiente radial */
+div#caja6 {
+    background: radial-gradient(circle, #fca5a5 0%, #fef2f2 70%); /*[cite: 1] */
+    padding-top: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #881337;
+}
+
+/* Limpieza de la flotación para que el contenedor padre abrace toda la fila */
+div.limpiarFlotacion {
+    clear: both; /*[cite: 1] */
+}

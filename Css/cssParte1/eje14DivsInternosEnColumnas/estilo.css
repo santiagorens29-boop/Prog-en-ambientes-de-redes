@@ -1,0 +1,123 @@
+/* Reseteo universal y modelo de caja (apunte pág. 14) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fef9c3; /* Fondo marfil base */
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+h1 {
+    font-size: 1.8em;
+    color: #1e293b;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* Contenedor general */
+div#contenedorColumnas {
+    width: 100%;
+}
+
+/* 1. Estado Base: Pantallas Grandes / Escritorio (> 992px) */
+div.columna {
+    float: left; /*[cite: 1] */
+    width: 18.8%; /* 5 columnas horizontales */
+    margin: 0 0.6%; /*[cite: 1] */
+}
+
+div.articulo {
+    background-color: #a5f3fc; /* Fondo celeste en escritorio */
+    border: 1px solid #67e8f9;
+    border-radius: 6px;
+    padding: 12px; /*[cite: 1] */
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+div.articulo h3 {
+    font-size: 1.05em;
+    color: #0e7490;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(14, 116, 144, 0.2);
+    padding-bottom: 4px;
+}
+
+div.articulo p {
+    font-size: 0.88em;
+    line-height: 1.45;
+    color: #164e63;
+    margin-bottom: 8px;
+    text-align: justify;
+}
+
+img {
+    max-width: 100%; /*[cite: 1] */
+    max-height: 100%; /*[cite: 1] */
+    margin: 1%; /*[cite: 1] */
+    display: block;
+    border-radius: 4px;
+}
+
+div.limpiarFlotacion {
+    clear: both; /*[cite: 1] */
+}
+
+/* 2. Media Query: Tablets / Pantallas Medianas (entre 601px y 992px) */
+@media (max-width: 992px) and (min-width: 601px) { /*[cite: 1] */
+    body {
+        background-color: #fff7ed; /* Fondo general naranja muy suave */
+    }
+
+    div.columna {
+        width: 48%; /* Pasa a 2 columnas por fila para mejor lectura */
+        margin: 1%;
+    }
+
+    div.articulo {
+        background-color: #fed7aa; /* Fondo ámbar/naranja pastel para los cuadros */
+        border-color: #fb923c;
+    }
+
+    div.articulo h3 {
+        color: #9a3412;
+        border-bottom-color: rgba(154, 52, 18, 0.2);
+    }
+
+    div.articulo p {
+        color: #7c2d12;
+    }
+}
+
+/* 3. Media Query: Celulares / Pantallas Pequeñas (hasta 600px) */
+@media (max-width: 600px) { /*[cite: 1] */
+    body {
+        background-color: #f0fdf4; /* Fondo general verde menta */
+    }
+
+    div.columna {
+        width: 100%; /* Columna única que ocupa todo el ancho */
+        margin: 0 0 15px 0;
+        float: none; /* Se desactiva la flotación lateral */
+    }
+
+    div.articulo {
+        background-color: #bbf7d0; /* Fondo verde pastel para los cuadros */
+        border-color: #86efac;
+    }
+
+    div.articulo h3 {
+        color: #166534;
+        border-bottom-color: rgba(22, 101, 52, 0.2);
+    }
+
+    div.articulo p {
+        color: #14532d;
+    }
+}

@@ -1,0 +1,65 @@
+/* Configuración general */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 20px;
+    background-color: #f8fafc;
+}
+
+h1 {
+    font-size: 1.8em;
+    color: #0f172a;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 1. Caja Base: 50% de ancho, centrado y sin padding */
+div.cajaBase {
+    width: 50%; /*[cite: 1] */
+    margin: auto; /* Centrado automático en el eje X */ /*[cite: 1] */
+    background-color: #bae6fd; /* Azul cielo */
+    border: 1px solid #0284c7;
+    color: #0369a1;
+}
+
+div.cajaBase p {
+    margin: 6px 0;
+    font-size: 0.95em;
+}
+
+/* 2. Caja con Padding sin border-box (se expande al 70%) */
+div.cajaSinBorderBox {
+    box-sizing: content-box; /* Modelo por defecto */
+    width: 50%; /*[cite: 1] */
+    margin: auto; /*[cite: 1] */
+    padding-left: 10%; /* Suma 10% al ancho */ /*[cite: 1] */
+    padding-right: 10%; /* Suma otro 10% al ancho */ /*[cite: 1] */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #bbf7d0; /* Verde claro */
+    border: 1px solid #16a34a;
+    color: #15803d;
+}
+
+div.cajaSinBorderBox p {
+    margin: 6px 0;
+    font-size: 0.95em;
+}
+
+/* 3. Caja con Padding y con box-sizing: border-box (mantiene 50% exacto) */
+div.cajaConBorderBox {
+    box-sizing: border-box; /* Fuerza a que el padding reste espacio interno sin alterar el ancho */ /*[cite: 1] */
+    width: 50%; /*[cite: 1] */
+    margin: auto; /*[cite: 1] */
+    padding-left: 10%; /*[cite: 1] */
+    padding-right: 10%; /*[cite: 1] */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #fef08a; /* Amarillo suave */
+    border: 1px solid #ca8a04;
+    color: #854d0e;
+}
+
+div.cajaConBorderBox p {
+    margin: 6px 0;
+    font-size: 0.95em;
+}

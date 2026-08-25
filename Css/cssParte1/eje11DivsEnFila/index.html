@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css11DivsEnFila</title>
+
+    <!-- Vinculación del archivo CSS externo -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <header>
+        <h1>Cajas en Fila con Flotación (float: left)</h1>
+    </header>
+
+    <!-- Contenedor general que envuelve la fila de divs -->
+    <div id="contenedorFila">
+
+        <!-- Caja 1: Gradiente lineal vertical con overflow de texto -->
+        <div id="caja1" class="cajaFila">
+            <p>Texto en caja 1 con gradiente lineal y barra de scroll vertical automática para texto extenso.</p>
+        </div>
+
+        <!-- Caja 2: Gradiente radial -->
+        <div id="caja2" class="cajaFila">
+            <p>Texto en caja 2</p>
+        </div>
+
+        <!-- Caja 3: Imagen de fondo completa (img1.png) -->
+        <div id="caja3" class="cajaFila">
+            <!-- Imagen cargada mediante background-image en CSS -->
+        </div>
+
+        <!-- Caja 4: Combinación de imagen lateral (img2.png) y gradiente radial -->
+        <div id="caja4" class="cajaFila">
+            <!-- Imagen izquierda y gradiente mediante CSS -->
+        </div>
+
+        <!-- Caja 5: Gradiente lineal cálido -->
+        <div id="caja5" class="cajaFila">
+            <p>Texto en caja 5 con degradado suave y overflow de contenido.</p>
+        </div>
+
+        <!-- Caja 6: Gradiente radial y texto centrado -->
+        <div id="caja6" class="cajaFila">
+            <p>Texto en caja 6</p>
+        </div>
+
+        <!-- Div para limpiar la flotación y asegurar la altura del contenedor padre -->
+        <div class="limpiarFlotacion"></div>
+
+    </div>
+
+    <br />
+    <hr />
+
+    <!-- Botones de navegación y retorno -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 1
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>

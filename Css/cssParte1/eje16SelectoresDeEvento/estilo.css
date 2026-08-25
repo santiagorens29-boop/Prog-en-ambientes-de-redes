@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #bfdbfe; /* Fondo azul cielo suave */
+    padding: 20px;
+}
+
+/* 1. Barra de Opciones / Botones de navegación (apunte pág. 16) */
+nav#barraNavegacion {
+    width: 100%;
+    background-color: #94a3b8; /* Barra gris suave */
+    margin-bottom: 25px;
+    border-radius: 4px;
+}
+
+a.btopcion {
+    display: block;
+    float: left; /* Botones flotantes a la izquierda */ /*[cite: 1] */
+    width: 200px;
+    padding: 12px 0;
+    text-align: center;
+    text-decoration: none;
+    color: #1e3a8a;
+    font-weight: 600;
+    font-size: 1.05em;
+    border-right: 1px solid #cbd5e1;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Pseudoclase :hover (al pasar el cursor por encima) */
+a.btopcion:hover {
+    background-color: #1e40af; /* Azul oscuro */ /*[cite: 1] */
+    color: #ffffff; /* Texto blanco */ /*[cite: 1] */
+}
+
+/* Pseudoclase :active (al pulsar el clic izquierdo del mouse) */
+a.btopcion:active {
+    background-color: #0f172a; /* Azul noche */ /*[cite: 1] */
+    color: #38bdf8; /*[cite: 1] */
+}
+
+/* 2. Estilos para Formulario e Inputs (apunte pág. 17) */
+section#seccionFormulario {
+    margin-bottom: 30px;
+}
+
+section#seccionFormulario label {
+    display: block;
+    font-weight: bold;
+    color: #0f172a;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+/* Input con display: block y ancho definido */
+section#seccionFormulario input {
+    display: block; /*[cite: 1] */
+    width: 220px; /*[cite: 1] */
+    padding: 6px 10px;
+    border: 1px solid #475569;
+    border-radius: 4px;
+    font-size: 0.95em;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Pseudoclase :focus (cuando el input es seleccionado con clic) */
+section#seccionFormulario input:focus {
+    background-color: #fef08a; /* Resaltado en amarillo suave */ /*[cite: 1] */
+    border-color: #d97706;
+    box-shadow: 0 0 5px rgba(217, 119, 6, 0.5);
+}
+
+/* 3. Galería de Imágenes Interactivas (:active) */
+section#seccionGaleria h2 {
+    font-size: 1.5em;
+    color: #0f172a;
+    margin-bottom: 15px;
+}
+
+div#contenedorImagenes {
+    width: 100%;
+}
+
+div.cajaImg {
+    float: left; /*[cite: 1] */
+    width: 12%; /* Ancho base del contenedor de imagen */
+    height: 110px;
+    margin-right: 15px;
+    background-color: #cbd5e1;
+    border: 1px solid #64748b;
+    overflow: hidden;
+}
+
+img.imgInteractiva {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Pseudoclase :active sobre la imagen (se expande al 30% con un clic sostenido) */
+img.imgInteractiva:active {
+    position: relative;
+    width: 30vw; /* Expansión al 30% del viewport */
+    height: auto;
+    z-index: 10;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Limpieza de flotación */
+div.limpiarFlotacion {
+    clear: both; /*[cite: 1] */
+}

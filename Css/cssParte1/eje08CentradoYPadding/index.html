@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css08CentradoYPadding.html</title>
+
+    <!-- Vinculación de la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Encabezado del ejercicio -->
+    <header>
+        <h1>Comparativa de Cajas al 50% de Ancho y Comportamiento de Padding</h1>
+    </header>
+
+    <!-- Caja 1: Ancho 50% base sin padding adicional -->
+    <div class="cajaBase">
+        <p><strong>Caja 1: Base (width: 50% | sin padding)</strong></p>
+        <p>El ancho total es exactamente el 50% de la ventana.</p>
+        <p>Centrada horizontalmente mediante margin: auto.</p>
+        <p>El texto queda pegado a los límites del borde.</p>
+        <p>Flujo estándar de renderizado en bloque.</p>
+    </div>
+
+    <!-- Caja 2: Con padding lateral y SIN border-box (se ensancha y desborda el 50%) -->
+    <div class="cajaSinBorderBox">
+        <p><strong>Caja 2: Con Padding y SIN border-box (content-box)</strong></p>
+        <p>El padding del 10% lateral se suma al ancho original.</p>
+        <p>Ancho resultante: 50% + 10% (izq) + 10% (der) = 70% total.</p>
+        <p>La caja se desborda y rompe la alineación con las demás.</p>
+        <p>Comportamiento por defecto del modelo de caja tradicional.</p>
+    </div>
+
+    <!-- Caja 3: Con padding lateral y CON box-sizing: border-box (mantiene el 50% exacto) -->
+    <div class="cajaConBorderBox">
+        <p><strong>Caja 3: Con Padding y CON box-sizing: border-box</strong></p>
+        <p>El padding del 10% se calcula hacia el interior de la caja.</p>
+        <p>El ancho total se conserva estrictamente en el 50% definido.</p>
+        <p>Mantiene la alineación simétrica y el centrado perfecto.</p>
+        <p>Estándar recomendado para maquetación web responsiva.</p>
+    </div>
+
+    <br />
+    <hr />
+
+    <!-- Botones de navegación y retorno -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 1
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>
