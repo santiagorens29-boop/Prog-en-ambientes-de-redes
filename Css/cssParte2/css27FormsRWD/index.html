@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css27 Forms RWD</title>
+
+    <!-- Enlace a la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Encabezado del Formulario -->
+    <header id="cabeceraFormulario">
+        <h1>Formulario</h1>
+    </header>
+
+    <!-- Contenedor del Formulario con scroll interno (apunte pág. 11) -->
+    <form id="formularioRWD" action="#" method="get">
+
+        <!-- 1. Apellido -->
+        <div class="entrada">
+            <label for="apellido">1 Apellido:</label>
+            <input type="text" id="apellido" name="apellido" />
+        </div>
+
+        <!-- 2. Nombres -->
+        <div class="entrada">
+            <label for="nombres">2 Nombres:</label>
+            <input type="text" id="nombres" name="nombres" />
+        </div>
+
+        <!-- 3. Contraseña -->
+        <div class="entrada">
+            <label for="clave">3 Contraseña:</label>
+            <input type="password" id="clave" name="clave" />
+        </div>
+
+        <!-- 4. Campo deshabilitado -->
+        <div class="entrada">
+            <label for="deshabilitado">4 Campo deshabilitado:</label>
+            <input type="text" id="deshabilitado" name="deshabilitado" value="valor deshabilitado" disabled />
+        </div>
+
+        <!-- 5. Fecha -->
+        <div class="entrada">
+            <label for="fechaNac">5 Fecha:</label>
+            <input type="date" id="fechaNac" name="fechaNac" />
+        </div>
+
+        <!-- 6. DNI -->
+        <div class="entrada">
+            <label for="dni">6 DNI:</label>
+            <input type="text" id="dni" name="dni" />
+        </div>
+
+        <!-- 7. Actividades extracurriculares -->
+        <div class="entrada">
+            <label>7 Actividades extracurriculares:</label>
+            <div class="opcionItem">
+                <span>Gimnasio:</span>
+                <input type="checkbox" id="gimnasio" name="actividad" value="gimnasio" />
+            </div>
+            <div class="opcionItem">
+                <span>Natación:</span>
+                <input type="checkbox" id="natacion" name="actividad" value="natacion" />
+            </div>
+        </div>
+
+        <!-- 8. Sexo -->
+        <div class="entrada">
+            <label>8 Sexo:</label>
+            <div class="opcionItem">
+                <span>Masculino:</span>
+                <input type="radio" id="sexoM" name="sexo" value="M" />
+            </div>
+            <div class="opcionItem">
+                <span>Femenino:</span>
+                <input type="radio" id="sexoF" name="sexo" value="F" />
+            </div>
+        </div>
+
+        <!-- 9. Vacío -->
+        <div class="entrada">
+            <label>9 Vacío</label>
+        </div>
+
+        <!-- 10. Estudios cursados -->
+        <div class="entrada">
+            <label for="estudios">10 Estudios cursados:</label>
+            <select id="estudios" name="estudios">
+                <option value="primarios">Primarios</option>
+                <option value="secundarios">Secundarios</option>
+                <option value="universitarios">Universitarios</option>
+            </select>
+        </div>
+
+        <!-- 11. Área de desempeño -->
+        <div class="entrada">
+            <label for="area">11 Área de desempeño:</label>
+            <select id="area" name="area">
+                <option value="administracion">Administración</option>
+                <option value="sistemas">Sistemas</option>
+                <option value="redes">Redes</option>
+            </select>
+        </div>
+
+        <!-- 12. Turno -->
+        <div class="entrada">
+            <label for="turno">12 Turno:</label>
+            <select id="turno" name="turno">
+                <option value="manana">Mañana</option>
+                <option value="tarde">Tarde</option>
+                <option value="noche">Noche</option>
+            </select>
+        </div>
+
+        <!-- 13. Conduce -->
+        <div class="entrada">
+            <label>13 Conduce:</label>
+            <div class="opcionItem">
+                <span>SI</span>
+                <input type="radio" id="conduceSi" name="conduce" value="si" />
+                <span>NO</span>
+                <input type="radio" id="conduceNo" name="conduce" value="no" />
+            </div>
+        </div>
+
+        <!-- Limpieza de flotación previa a los botones (apunte pág. 11) -->
+        <div class="limpiarFlotacion"></div>
+
+        <!-- Barra de Control con Botones Enviar y Reset (apunte pág. 11) -->
+        <div class="barraControl">
+            <input type="submit" value="Enviar" class="boton" />
+            <input type="reset" value="Reset" class="boton" />
+        </div>
+
+    </form>
+
+    <!-- Botones de navegación fijos en el pie -->
+    <footer id="barraPie">
+        <button type="button" onclick="location.href='../index.html'">Volver a CSS Parte 2</button>
+        <button type="button" onclick="location.href='../../index.html'">Volver a CSS</button>
+        <button type="button" onclick="location.href='../../../index.html'">Volver al Inicio</button>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+/* 1. Base del documento al 100% sin scroll global (apunte pág. 1, 4 y 11) */
+html, body {
+    margin: 0px; /*[cite: 1] */
+    padding: 0; /*[cite: 1] */
+    box-sizing: border-box; /*[cite: 1] */
+    height: 100%; /*[cite: 1] */
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #cbd5e1;
+    overflow: hidden; /* Ventana global fija sin scroll exterior */ /*[cite: 1] */
+}
+
+/* Encabezado del Formulario (apunte pág. 11) */
+header#cabeceraFormulario {
+    height: 10%;
+    background-color: #00695c; /* Teal oscuro */
+    display: flex; /*[cite: 1] */
+    justify-content: center; /*[cite: 1] */
+    align-items: center; /*[cite: 1] */
+    color: #ffffff;
+}
+
+header#cabeceraFormulario h1 {
+    font-size: 1.3em;
+    letter-spacing: 1px;
+}
+
+/* 2. Formulario contenedor con scroll vertical propio (apunte pág. 11) */
+form#formularioRWD {
+    height: 80%; /* Altura relativa al body */ /*[cite: 1] */
+    width: 100%; /*[cite: 1] */
+    overflow-y: auto; /* Scroll vertical interno cuando los elementos se apilan */ /*[cite: 1] */
+    overflow-x: hidden;
+    background-color: #d1d5db;
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+/* 3. Estilo de las entradas en cuadrícula simétrica (apunte pág. 12) */
+.entrada {
+    text-align: left; /*[cite: 1] */
+    height: 110px; /* Altura idéntica y fija para evitar que se desfasen las filas */ /*[cite: 1] */
+    float: left; /* Flotación horizontal */ /*[cite: 1] */
+    border-style: solid; /*[cite: 1] */
+    border-color: #9ca3af; /*[cite: 1] */
+    border-width: 1px; /*[cite: 1] */
+    padding: 1%; /* Separación interna uniforme */ /*[cite: 1] */
+    box-sizing: border-box; /* Mantiene bordes y paddings adentro */ /*[cite: 1] */
+    background-color: #e5e7eb;
+}
+
+/* Label con display block (apunte pág. 11) */
+label {
+    display: block; /* Fuerza a que el input vaya al siguiente renglón */ /*[cite: 1] */
+    font-weight: bold;
+    font-size: 0.88em;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.entrada input[type="text"],
+.entrada input[type="password"],
+.entrada input[type="date"],
+.entrada select {
+    width: 85%;
+    padding: 4px 6px;
+    font-size: 0.85em;
+    border: 1px solid #6b7280;
+    border-radius: 3px;
+    background-color: #ffffff;
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+.entrada .opcionItem {
+    margin-top: 3px;
+    font-size: 0.82em;
+    color: #374151;
+}
+
+/* 4. Limpieza de flotación previa a la barra de botones (apunte pág. 11) */
+div.limpiarFlotacion {
+    clear: both; /*[cite: 1] */
+}
+
+/* 5. Barra de Control con botones Enviar y Reset (apunte pág. 11) */
+div.barraControl {
+    display: flex; /*[cite: 1] */
+    justify-content: center; /* Centrado en X */ /*[cite: 1] */
+    align-items: center; /* Centrado en Y */ /*[cite: 1] */
+    width: 100%; /*[cite: 1] */
+    height: 70px;
+    background-color: #9ca3af;
+    clear: both; /*[cite: 1] */
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+/* Botones según apunte pág. 11 */
+.boton {
+    width: 110px;
+    height: 36px;
+    background-color: #00695c;
+    color: #ffffff;
+    cursor: pointer; /*[cite: 1] */
+    border: 1px solid #004d40;
+    border-radius: 4px;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.boton:hover {
+    background-color: #004d40;
+}
+
+/* 6. Pie de página de navegación */
+footer#barraPie {
+    height: 10%;
+    background-color: #0f172a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer#barraPie button {
+    padding: 6px 14px;
+    margin: 0 5px;
+    background-color: #334155;
+    color: #ffffff;
+    border: 1px solid #64748b;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+
+/* ---------------- CONSULTA DE MEDIOS RWD (apunte pág. 13) ---------------- */
+
+/* 1. Escritorio Grande (> 1100px): 5 columnas por fila */
+@media (min-width: 1101px) { /*[cite: 1] */
+    .entrada {
+        width: 20%; /*[cite: 1] */
+    }
+}
+
+/* 2. Pantallas Medianas (851px a 1100px): 4 columnas por fila */
+@media (min-width: 851px) and (max-width: 1100px) { /*[cite: 1] */
+    .entrada {
+        width: 25%; /*[cite: 1] */
+    }
+}
+
+/* 3. Tablets (601px a 850px): 2 columnas por fila */
+@media (min-width: 601px) and (max-width: 850px) {
+    .entrada {
+        width: 50%;
+    }
+}
+
+/* 4. Móviles / Ventana Chica (<= 600px): 1 columna por fila con scroll interno */
+@media (max-width: 600px) {
+    .entrada {
+        width: 100%;
+        float: none; /* Se desactiva la flotación lateral */
+    }
+}
