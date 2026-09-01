@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Divs internos relativos y ventana modal</title>
+
+    <!-- Vinculación del archivo CSS externo -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Ventana Modal fija en pantalla (apunte pág. 3) -->
+    <div class="paraVentanaModal">
+        <h3>Contenedor Modal Fijo</h3>
+        <p>Este bloque tiene position: fixed y z-index: 10.</p>
+        <p>Permanece estático en la pantalla aunque se realice scroll del fondo.</p>
+        <p>Tiene opacidad translúcida para dejar ver los elementos inferiores.</p>
+        <p>Contenido modal de prueba 1.</p>
+        <p>Contenido modal de prueba 2.</p>
+        <p>Contenido modal de prueba 3.</p>
+        <p>Contenido modal de prueba 4.</p>
+        <p>Contenido modal de prueba 5.</p>
+    </div>
+
+    <!-- Contenedor general relativo que da contexto y fondo lateral -->
+    <div id="contenedorBase">
+
+        <!-- Bloque 1: Verde esmeralda superior -->
+        <div class="contenedorRelativoClase1">
+            <h2>Contenedor Relativo Clase 1</h2>
+            <p>Posicionamiento relativo inicial dentro del flujo regular del documento.</p>
+        </div>
+
+        <!-- Bloque 2: Caja vertical amplia para permitir el scroll de la página -->
+        <div class="contenedorRelativoClase2">
+            <h2>Contenedor Relativo Clase 2</h2>
+            <p>Bloque de contenido extenso que genera el scroll vertical de la ventana.</p>
+            <p>Línea de texto 1: El contenido se desplaza naturalmente por detrás de la modal.</p>
+            <p>Línea de texto 2: Visualización de capas mediante el orden z-index.</p>
+            <p>Línea de texto 3: Estructura modular construida con CSS puro.</p>
+            <p>Línea de texto 4: Configuración de márgenes relativos en coordenadas X e Y.</p>
+
+            <!-- Bloque 3: Caja intermedia con su propia barra de scroll -->
+            <div class="contenedorRelativoClase3">
+                <h3>Contenedor Relativo Clase 3</h3>
+                <p>Esta caja interior posee scroll vertical propio mediante la propiedad overflow-y: auto.</p>
+                <p>Texto de prueba con desbordamiento para forzar la barra de desplazamiento.</p>
+                <p>Línea adicional A con contenido técnico.</p>
+                <p>Línea adicional B con contenido técnico.</p>
+                <p>Línea adicional C con contenido técnico.</p>
+                <p>Línea adicional D con contenido técnico.</p>
+            </div>
+
+            <p>Línea de texto 5: Continuación del contenedor relativo clase 2.</p>
+            <p>Línea de texto 6: Verificación de permanencia de la ventana modal fija.</p>
+            <p>Línea de texto 7: Fin del bloque de desplazamiento.</p>
+        </div>
+
+    </div>
+
+    <br />
+    <hr />
+
+    <!-- Botones de navegación y retorno -->
+    <footer>
+        <button type="button" onclick="location.href='../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver al índice de CSS Parte 2
+        </button>
+        <button type="button" onclick="location.href='../../index.html'" style="padding: 8px 15px; margin-right: 10px; cursor: pointer;">
+            Volver a la carpeta CSS
+        </button>
+        <button type="button" onclick="location.href='../../../index.html'" style="padding: 8px 15px; cursor: pointer;">
+            Volver al índice principal
+        </button>
+    </footer>
+
+</body>
+</html>

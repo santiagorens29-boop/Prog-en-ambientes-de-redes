@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>css21DivsInternosAbsolutos</title>
+
+    <!-- Enlace a la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Encabezado en posición absoluta superior -->
+    <header id="tituloGeneral">
+        <h1>Estructura de posicionamiento absoluto adaptable al medio de presentación</h1>
+    </header>
+
+    <!-- Contenedor Interno 1 (Caja turquesa sólida a la izquierda) -->
+    <div id="contenedorInterno1">
+        <h3>Contenedor interno 1</h3>
+        <p>Posicionamiento absoluto ubicado mediante coordenadas relativas en porcentaje respecto al viewport.</p>
+        <p>Tamaño tipográfico escalable definido en unidades vw para preservar la proporción visual.</p>
+    </div>
+
+    <!-- Contenedor Interno 2 (Caja inferior derecha rotada con imágenes) -->
+    <div id="contenedorInterno2">
+        <h3>Contenedor interno 2</h3>
+        <p>Elemento rotado mediante transform: rotateZ() según el apunte.</p>
+        <div class="cajaImagenes">
+            <img src="./img1.png" alt="Imagen demostrativa 1" />
+            <img src="./img2.png" alt="Imagen demostrativa 2" />
+        </div>
+    </div>
+
+    <!-- Contenedor Interno 3 (Caja semitransparente superpuesta por encima con z-index) -->
+    <div id="contenedorInterno3">
+        <h3>Contenedor interno 3</h3>
+        <p>Ubicado con position: absolute (top: 45%; left: 30%;) y z-index: 3.</p>
+        <p>Posee opacidad y desbordamiento controlado (overflow: auto) según la teoría de la página 4.</p>
+        <p>Se superpone parcialmente sobre el contenedor interno 1 y el contenedor interno 2.</p>
+    </div>
+
+    <!-- Botones de navegación y retorno anclados en posición fija -->
+    <footer id="panelNavegacion">
+        <button type="button" onclick="location.href='../index.html'">Volver a CSS Parte 2</button>
+        <button type="button" onclick="location.href='../../index.html'">Volver a CSS</button>
+        <button type="button" onclick="location.href='../../../index.html'">Volver al Inicio</button>
+    </footer>
+
+</body>
+</html>

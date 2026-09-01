@@ -1,0 +1,109 @@
+/* 1. Base para documento y body ocupando el 100% de la ventana (apunte pág. 1 y 4) */
+html, body {
+    margin: 0px; /*[cite: 1] */
+    padding: 0; /*[cite: 1] */
+    box-sizing: border-box; /*[cite: 1] */
+    height: 100%; /* El documento ocupa el 100% de la ventana del navegador */ /*[cite: 1] */
+    background-color: #bae6fd; /* Azul cielo claro de fondo general */
+    font-family: "Segoe UI", Arial, sans-serif;
+    overflow: hidden; /* Evita cualquier barra de scroll general según consigna */ /*[cite: 1] */
+    position: relative; /* Contexto de coordenadas para los hijos absolutos */ /*[cite: 1] */
+}
+
+/* Encabezado superior */
+header#tituloGeneral {
+    position: absolute; /*[cite: 1] */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0284c7;
+    padding: 6px 15px;
+    z-index: 5;
+}
+
+header#tituloGeneral h1 {
+    font-size: 1.15em;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* 2. Contenedor Interno 1 (apunte pág. 4) */
+div#contenedorInterno1 {
+    position: absolute; /* Coordenadas absolutas respecto al body */ /*[cite: 1] */
+    top: 15%;
+    left: 10%;
+    width: 32%;
+    height: 48%;
+    background-color: #10b981; /* Verde esmeralda vivo */
+    color: #064e3b;
+    padding: 15px;
+    box-sizing: border-box; /*[cite: 1] */
+    overflow: auto; /* Scroll interno si desborda */ /*[cite: 1] */
+    font-size: 1vw; /* Tipografía responsiva escalable al 1% del viewport */ /*[cite: 1] */
+    z-index: 1; /* Capa base en el eje Z */ /*[cite: 1] */
+}
+
+/* 3. Contenedor Interno 2 con rotación Z (apunte pág. 4 y 18) */
+div#contenedorInterno2 {
+    position: absolute; /*[cite: 1] */
+    top: 55%;
+    left: 45%;
+    width: 48%;
+    height: 40%;
+    background-color: #d9f99d; /* Lima suave */
+    color: #365314;
+    padding: 12px;
+    box-sizing: border-box; /*[cite: 1] */
+    font-size: 1vw; /*[cite: 1] */
+    z-index: 2; /* Por encima de la caja 1 */ /*[cite: 1] */
+    transform: rotateZ(-4deg); /* Rotación angular en el eje Z según apunte pág. 18 */ /*[cite: 1] */
+}
+
+div#contenedorInterno2 .cajaImagenes {
+    margin-top: 8px;
+}
+
+div#contenedorInterno2 img {
+    width: 45%;
+    height: 90px;
+    object-fit: cover;
+    margin-right: 2%;
+    border: 1px solid #65a30d;
+}
+
+/* 4. Contenedor Interno 3 superpuesto con opacidad (apunte pág. 3 y 4) */
+div#contenedorInterno3 {
+    position: absolute; /*[cite: 1] */
+    top: 38%;
+    left: 26%;
+    width: 42%;
+    height: 44%;
+    background-color: #64748b; /* Gris azulado */
+    color: #ffffff;
+    padding: 15px;
+    box-sizing: border-box; /*[cite: 1] */
+    opacity: 0.78; /* Transparencia para traslucir el fondo */ /*[cite: 1] */
+    overflow: auto; /* Barra de scroll si el contenido supera la altura */ /*[cite: 1] */
+    font-size: 1vw; /* Letra escalable */ /*[cite: 1] */
+    z-index: 3; /* Queda al frente por tener el valor más alto */ /*[cite: 1] */
+    border: 2px dashed #ffffff;
+}
+
+/* 5. Panel de navegación inferior */
+footer#panelNavegacion {
+    position: absolute; /*[cite: 1] */
+    bottom: 10px;
+    left: 10px;
+    z-index: 10; /*[cite: 1] */
+}
+
+footer#panelNavegacion button {
+    padding: 6px 12px;
+    margin-right: 6px;
+    background-color: #0f172a;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.85em;
+}

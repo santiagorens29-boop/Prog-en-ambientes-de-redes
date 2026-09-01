@@ -1,0 +1,88 @@
+/* 1. Base para html y body (apunte pág. 1 y 2) */
+html, body {
+    margin: 0px; /*[cite: 1] */
+    padding: 0; /*[cite: 1] */
+    box-sizing: border-box; /*[cite: 1] */
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f8fafc;
+}
+
+/* 2. Menú Principal: Contenedor y listas (apunte pág. 8) */
+#menu {
+    width: 100%;
+    background-color: #1e3a8a; /* Azul marino principal */
+}
+
+#menu ul {
+    list-style: none; /* Toda lista ul dentro de #menu no lleva viñetas */ 
+    margin: 0;
+    padding: 0;
+}
+
+#menu ul li {
+    position: relative; /* Padre relativo para ubicar el submenú absoluto */ 
+    float: left; /* Acomoda los ítems principales en fila horizontal */ 
+    background-color: #1e3a8a; /*[cite: 1] */
+}
+
+#menu ul a {
+    display: block; /* Ocupa todo el contenedor li */ 
+    text-decoration: none; /* Quita el subrayado */ 
+    color: #ffffff;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+}
+
+#menu ul a:hover {
+    background-color: #2563eb; /* Resaltado al pasar el ratón */
+}
+
+/* 3. Submenú Desplegable Oculto (apunte pág. 9) */
+#menu ul ul {
+    display: none; /* No visible por default y no ocupa lugar */ 
+    position: absolute; /* Se posiciona respecto al li padre */ 
+    top: 100%; /* Ubicado totalmente por debajo del ítem horizontal */ 
+    left: 0; /* Alineado al inicio del ítem horizontal */ 
+    background-color: #1e40af; /* Azul medio para el submenú */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+/* Ítems del submenú desplegable en vertical (apunte pág. 9) */
+#menu ul ul li {
+    float: none; /* Los ítems del desplegable van uno debajo del otro */ /*[cite: 1] */
+    width: 180px; /* Ancho fijo para las opciones desplegadas */ /*[cite: 1] */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enlaces dentro del submenú (apunte pág. 10) */
+#menu ul ul a {
+    padding: 10px 15px; /* Indentación adecuada para lectura */ /*[cite: 1] */
+    font-size: 0.88em;
+}
+
+/* 4. Mostrar el submenú con mouseover (apunte pág. 10) */
+#menu ul li:hover ul {
+    display: block; /* Se hace visible al colocar el cursor sobre el li */ /*[cite: 1] */
+}
+
+/* 5. Limpieza de flotación y pie */
+div.limpiarFlotacion {
+    clear: both;
+}
+
+footer {
+    padding: 30px 20px;
+}
+
+footer button {
+    padding: 8px 16px;
+    margin-right: 8px;
+    background-color: #0f172a;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
