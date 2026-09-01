@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css29 Tablas RWD</title>
+
+    <!-- Enlace a la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Encabezado superior con porcentaje del viewport (apunte pág. 16) -->
+    <header id="cabeceraTabla">
+        <h1>RWD (Responsive Web Design) TABLE - Ciudades y Sedes Globales</h1>
+    </header>
+
+    <!-- Contenedor intermedio de la tabla estructurada (apunte pág. 15 y 16) -->
+    <main id="seccionTabla">
+        <table>
+            <!-- Encabezado con atributos genéricos campo-dato (apunte pág. 15) -->
+            <thead>
+                <tr>
+                    <th campo-dato="Id">Id</th>
+                    <th campo-dato="Ciudad">Ciudad</th>
+                    <th campo-dato="Pais">País</th>
+                    <th campo-dato="Web">Web Oficial</th>
+                    <th campo-dato="ZonaHoraria">Zona Horaria</th>
+                    <th campo-dato="CodigoPostal">Cód. Postal</th>
+                </tr>
+            </thead>
+
+            <!-- Cuerpo de la tabla con scroll vertical independiente (apunte pág. 15) -->
+            <tbody>
+                <tr>
+                    <td campo-dato="Id">1</td>
+                    <td campo-dato="Ciudad">Buenos Aires</td>
+                    <td campo-dato="Pais">Argentina</td>
+                    <td campo-dato="Web">https://buenosaires.gob.ar</td>
+                    <td campo-dato="ZonaHoraria">GMT-3</td>
+                    <td campo-dato="CodigoPostal">C1000</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">2</td>
+                    <td campo-dato="Ciudad">Tokio</td>
+                    <td campo-dato="Pais">Japón</td>
+                    <td campo-dato="Web">https://metro.tokyo.lg.jp</td>
+                    <td campo-dato="ZonaHoraria">GMT+9</td>
+                    <td campo-dato="CodigoPostal">100-0001</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">3</td>
+                    <td campo-dato="Ciudad">Madrid</td>
+                    <td campo-dato="Pais">España</td>
+                    <td campo-dato="Web">https://madrid.es</td>
+                    <td campo-dato="ZonaHoraria">GMT+1</td>
+                    <td campo-dato="CodigoPostal">28001</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">4</td>
+                    <td campo-dato="Ciudad">Miami</td>
+                    <td campo-dato="Pais">Estados Unidos</td>
+                    <td campo-dato="Web">https://miamigov.com</td>
+                    <td campo-dato="ZonaHoraria">GMT-5</td>
+                    <td campo-dato="CodigoPostal">33101</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">5</td>
+                    <td campo-dato="Ciudad">Berlín</td>
+                    <td campo-dato="Pais">Alemania</td>
+                    <td campo-dato="Web">https://berlin.de</td>
+                    <td campo-dato="ZonaHoraria">GMT+1</td>
+                    <td campo-dato="CodigoPostal">10115</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">6</td>
+                    <td campo-dato="Ciudad">Roma</td>
+                    <td campo-dato="Pais">Italia</td>
+                    <td campo-dato="Web">https://comune.roma.it</td>
+                    <td campo-dato="ZonaHoraria">GMT+1</td>
+                    <td campo-dato="CodigoPostal">00100</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">7</td>
+                    <td campo-dato="Ciudad">Sydney</td>
+                    <td campo-dato="Pais">Australia</td>
+                    <td campo-dato="Web">https://cityofsydney.nsw.gov.au</td>
+                    <td campo-dato="ZonaHoraria">GMT+10</td>
+                    <td campo-dato="CodigoPostal">2000</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">8</td>
+                    <td campo-dato="Ciudad">Montreal</td>
+                    <td campo-dato="Pais">Canadá</td>
+                    <td campo-dato="Web">https://montreal.ca</td>
+                    <td campo-dato="ZonaHoraria">GMT-5</td>
+                    <td campo-dato="CodigoPostal">H2Y</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">9</td>
+                    <td campo-dato="Ciudad">Londres</td>
+                    <td campo-dato="Pais">Reino Unido</td>
+                    <td campo-dato="Web">https://london.gov.uk</td>
+                    <td campo-dato="ZonaHoraria">GMT+0</td>
+                    <td campo-dato="CodigoPostal">EC1A</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">10</td>
+                    <td campo-dato="Ciudad">París</td>
+                    <td campo-dato="Pais">Francia</td>
+                    <td campo-dato="Web">https://paris.fr</td>
+                    <td campo-dato="ZonaHoraria">GMT+1</td>
+                    <td campo-dato="CodigoPostal">75001</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">11</td>
+                    <td campo-dato="Ciudad">Seúl</td>
+                    <td campo-dato="Pais">Corea del Sur</td>
+                    <td campo-dato="Web">https://english.seoul.go.kr</td>
+                    <td campo-dato="ZonaHoraria">GMT+9</td>
+                    <td campo-dato="CodigoPostal">04524</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">12</td>
+                    <td campo-dato="Ciudad">Sao Paulo</td>
+                    <td campo-dato="Pais">Brasil</td>
+                    <td campo-dato="Web">https://prefeitura.sp.gov.br</td>
+                    <td campo-dato="ZonaHoraria">GMT-3</td>
+                    <td campo-dato="CodigoPostal">01000</td>
+                </tr>
+                <tr>
+                    <td campo-dato="Id">13</td>
+                    <td campo-dato="Ciudad">Ámsterdam</td>
+                    <td campo-dato="Pais">Países Bajos</td>
+                    <td campo-dato="Web">https://amsterdam.nl</td>
+                    <td campo-dato="ZonaHoraria">GMT+1</td>
+                    <td campo-dato="CodigoPostal">1012</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Pie de página al 10% con navegación (apunte pág. 16) -->
+    <footer id="pieTabla">
+        <button type="button" onclick="location.href='../index.html'">Volver a CSS Parte 2</button>
+        <button type="button" onclick="location.href='../../index.html'">Volver a CSS</button>
+        <button type="button" onclick="location.href='../../../index.html'">Volver al Inicio</button>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+/* 1. Base del documento al 100% de la ventana sin scroll global (apunte pág. 1, 4 y 16) */
+html, body {
+    margin: 0px; /*[cite: 1] */
+    padding: 0; /*[cite: 1] */
+    box-sizing: border-box; /*[cite: 1] */
+    height: 100%; /*[cite: 1] */
+    font-family: "Segoe UI", Arial, sans-serif;
+    overflow: hidden; /* Sin scroll de página externa */ /*[cite: 1] */
+}
+
+/* 2. Encabezado de la página al 10% de alto (apunte pág. 16) */
+header#cabeceraTabla {
+    height: 10%; /*[cite: 1] */
+    background-color: #0d9488; /* Verde azulado */
+    display: flex; /*[cite: 1] */
+    justify-content: center; /*[cite: 1] */
+    align-items: center; /*[cite: 1] */
+    color: #ffffff;
+}
+
+header#cabeceraTabla h1 {
+    font-size: 1.3em;
+    letter-spacing: 0.5px;
+}
+
+/* 3. Contenedor principal de la tabla al 80% de alto (apunte pág. 16) */
+main#seccionTabla {
+    height: 80%; /*[cite: 1] */
+    width: 100%;
+    background-color: #0f766e; /* Fondo base verde petróleo */
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+/* Encabezado de la tabla (apunte pág. 15) */
+thead {
+    display: block; /*[cite: 1] */
+    width: 100%;
+    height: 48px;
+    background-color: #fb7185; /* Tono salmón coral */
+    color: #ffffff;
+}
+
+thead tr {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+th {
+    float: left; /* Celdas flotantes para coincidir con el cuerpo */ /*[cite: 1] */
+    height: 100%;
+    display: flex; /*[cite: 1] */
+    align-items: center; /* Centrado vertical del texto */ /*[cite: 1] */
+    justify-content: flex-start;
+    padding-left: 10px;
+    font-size: 0.95em;
+    font-weight: 700;
+    box-sizing: border-box; /*[cite: 1] */
+}
+
+/* Cuerpo de la tabla con scroll vertical propio (apunte pág. 3 y 15) */
+tbody {
+    display: block; /*[cite: 1] */
+    width: 100%;
+    height: calc(100% - 48px); /* Resto del alto total disponible */
+    overflow-y: auto; /* Barra de scroll vertical exclusiva para las filas */ /*[cite: 1] */
+    overflow-x: hidden;
+}
+
+tbody tr {
+    display: block;
+    width: 100%;
+    min-height: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+td {
+    float: left; /* Flotación para coincidir exactamente con el ancho de th */ /*[cite: 1] */
+    min-height: 40px;
+    display: flex; /*[cite: 1] */
+    align-items: center; /*[cite: 1] */
+    padding-left: 10px;
+    font-size: 0.88em;
+    box-sizing: border-box; /*[cite: 1] */
+    word-break: break-all;
+}
+
+/* Control de filas impares (efecto cebra) según apunte pág. 15 */
+tbody tr:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.2); /*[cite: 1] */
+}
+
+/* 4. Selectores para atributos genéricos campo-dato (apunte pág. 15) */
+[campo-dato='Id'] {
+    width: 6%; /* Ancho de la columna ID */ /*[cite: 1] */
+}
+
+[campo-dato='Ciudad'] {
+    width: 16%;
+}
+
+[campo-dato='Pais'] {
+    width: 18%;
+}
+
+[campo-dato='Web'] {
+    width: 28%;
+}
+
+[campo-dato='ZonaHoraria'] {
+    width: 16%;
+}
+
+[campo-dato='CodigoPostal'] {
+    width: 16%;
+}
+
+/* 5. Pie de página al 10% de alto (apunte pág. 16) */
+footer#pieTabla {
+    height: 10%; /*[cite: 1] */
+    background-color: #64748b; /* Gris medio */
+    display: flex; /*[cite: 1] */
+    justify-content: center; /*[cite: 1] */
+    align-items: center; /*[cite: 1] */
+}
+
+footer#pieTabla button {
+    padding: 6px 14px;
+    margin: 0 6px;
+    background-color: #1e293b;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+
+/* ---------------- CONSULTA DE MEDIOS (apunte pág. 15) ---------------- */
+
+/* Pantallas medianas (menos de 1000px): Se oculta la columna CodigoPostal */
+@media (max-width: 1000px) {
+    [campo-dato='CodigoPostal'] {
+        display: none; /* No se visualiza ni ocupa lugar según apunte pág. 5 y 15 */ /*[cite: 1] */
+    }
+
+    /* Redistribución proporcional del ancho sobrante */
+    [campo-dato='Id'] { width: 8%; } /*[cite: 1] */
+    [campo-dato='Ciudad'] { width: 20%; }
+    [campo-dato='Pais'] { width: 22%; }
+    [campo-dato='Web'] { width: 32%; }
+    [campo-dato='ZonaHoraria'] { width: 18%; }
+}
+
+/* Pantallas pequeñas (menos de 700px): Se oculta también la columna ZonaHoraria */
+@media (max-width: 700px) {
+    [campo-dato='ZonaHoraria'] {
+        display: none; /*[cite: 1] */
+    }
+
+    /* Redistribución en pantallas móviles */
+    [campo-dato='Id'] { width: 10%; } /*[cite: 1] */
+    [campo-dato='Ciudad'] { width: 26%; }
+    [campo-dato='Pais'] { width: 26%; }
+    [campo-dato='Web'] { width: 38%; }
+}

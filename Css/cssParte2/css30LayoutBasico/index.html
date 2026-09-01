@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css30 Layout Básico</title>
+
+    <!-- Enlace a la hoja de estilo externa -->
+    <link rel="stylesheet" type="text/css" href="./estilo.css" />
+</head>
+<body>
+
+    <!-- Bloque B: Header superior (apunte pág. 16) -->
+    <header id="cabecera">
+        <h1>Títulos principal de página 1</h1>
+    </header>
+
+    <!-- Bloque C: Contenedor medio que agrupa nav y main (apunte pág. 16 y 17) -->
+    <section id="contenedorMedio">
+
+        <!-- Bloque E: Nav lateral (apunte pág. 16 y 17) -->
+        <nav id="menuLateral">
+            <h2>Menú</h2>
+            <div class="cajaBotones">
+                <a href="../../../Html/index.html" target="marcoContenido" class="btNav">HTML</a>
+                <a href="../../../Css/index.html" target="marcoContenido" class="btNav">CSS</a>
+                <a href="#" target="marcoContenido" class="btNav">JSCRIPT</a>
+                <a href="#" target="marcoContenido" class="btNav">PHP</a>
+            </div>
+        </nav>
+
+        <!-- Bloque F: Main contenedor con Iframe responsivo (apunte pág. 17) -->
+        <main id="seccionPrincipal">
+            <iframe src="./contenido.html" name="marcoContenido" id="marcoContenido"></iframe>
+        </main>
+
+        <!-- Contenedor de corte de flotación (apunte pág. 17) -->
+        <div class="limpiarFlotacion"></div>
+
+    </section>
+
+    <!-- Bloque D: Footer inferior (apunte pág. 16) -->
+    <footer id="piePagina">
+        <p>Pie de página</p>
+        <div class="panelBotonesPie">
+            <button type="button" onclick="location.href='../index.html'">Volver a CSS Parte 2</button>
+            <button type="button" onclick="location.href='../../index.html'">Volver a CSS</button>
+            <button type="button" onclick="location.href='../../../index.html'">Volver al Inicio</button>
+        </div>
+    </footer>
+
+</body>
+</html>
