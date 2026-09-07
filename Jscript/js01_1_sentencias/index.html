@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Sentencias simples en JavaScript - Flujo de Escritura</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 30px;
+            line-height: 1.6;
+        }
+        h2 {
+            color: #0369a1;
+            margin-top: 15px;
+            font-size: 1.25em;
+        }
+        h3 {
+            color: #0f766e;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        p {
+            font-size: 0.95em;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+        .contenedorNavegacion {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #1e293b;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Bloque HTML directo inicial -->
+    <h2>Texto 1: Encabezado escrito directamente en el código HTML</h2>
+
+    <script type="text/javascript">
+        /* Alerta inicial que bloquea la renderización previa (apunte pág. 2 y 3) */
+        alert("Alert 1: Este mensaje se dispara desde el script.\n\nLa ventana de alerta es sincrónica y modal: interrumpe el flujo de renderizado del navegador hasta que el usuario presione Aceptar.");
+
+        /* Escritura dinámica sobre el flujo abierto (apunte pág. 3) */
+        document.write("<h3>Texto 2: Mensaje inyectado con el método document.write() desde JavaScript.</h3>");
+        document.write("<p>No pisa el documento original porque el flujo de escritura del navegador aún permanece abierto.</p>");
+    </script>
+
+    <!-- 2. Bloque HTML posterior al primer script -->
+    <h2>Texto 3: Bloque HTML procesado tras aceptar el primer alert()</h2>
+    <p>El motor del navegador continúa interpretando el árbol HTML secuencialmente.</p>
+
+    <script type="text/javascript">
+        /* Segunda alerta sincrónica */
+        alert("Alert 2: Mensaje ejecutado previo a la última sentencia de escritura.");
+
+        /* Segunda escritura dinámica antes del cierre de flujo */
+        document.write("<h3>Texto 4: Segunda escritura dinámica con document.write() aplicada al documento.</h3>");
+        document.write("<p>El flujo de escritura sobre el viewport concluye un tiempo después de interpretar la última línea del documento y haber cerrado todas las ventanas modales sincrónicas.</p>");
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
