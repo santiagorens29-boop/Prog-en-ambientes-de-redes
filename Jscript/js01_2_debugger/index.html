@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>js01_2 Debugger y Consola DevTools</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 35px;
+            line-height: 1.6;
+        }
+        h2 {
+            color: #1e293b;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+        }
+        .bloqueCodigo {
+            background-color: #e2e8f0;
+            border-left: 4px solid #0f766e;
+            padding: 12px 18px;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 1.05em;
+            color: #042f2e;
+            margin-bottom: 15px;
+            border-radius: 0 4px 4px 0;
+        }
+        .instruccionDev {
+            font-weight: bold;
+            color: #0369a1;
+            font-size: 1.05em;
+        }
+        .contenedorNavegacion {
+            margin-top: 35px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>El siguiente código será ejecutado a continuación:</h2>
+
+    <div class="bloqueCodigo">
+        var a = 8; var b = 14; var c = a + b; console.log('Valor de la variable c: ' + c);
+    </div>
+
+    <p class="instruccionDev">
+        Abrir el devTools del navegador con F12 y visualizar resultado en la consola.
+    </p>
+
+    <!-- Script de ejecución y envío a consola (apunte pág. 1 y 3) -->
+    <script type="text/javascript">
+        var a = 8;
+        var b = 14;
+        var c = a + b;
+
+        /* Salida a la consola del navegador para debugging (apunte pág. 3) */
+        console.log("=== Ejecución Ejercicio js01_2 ===");
+        console.log("Valor de la variable a: " + a);
+        console.log("Valor de la variable b: " + b);
+        console.log("Valor de la variable c: " + c);
+        console.log("Tipo de la variable c: " + typeof c);
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
