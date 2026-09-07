@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Ejercicio JS02 - Comandos en Atributos de Evento</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 30px;
+        }
+        h2 {
+            font-size: 1.4em;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+        .btnAccion {
+            padding: 8px 16px;
+            margin-right: 10px;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .btnAccion:hover {
+            background-color: #cbd5e1;
+        }
+        .contenedorNavegacion {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ejercicio JS02_comando_en_evento.html</h2>
+
+    <!-- Botón 1: alert() directo en el atributo de evento (apunte pág. 3 y 4) -->
+    <button class="btnAccion" onclick="alert('Sentencia alert ejecutada en evento onclick del botón pulsado.\nEl código lo escribimos como valor del atributo onclick del objeto button.')">
+        Click Aquí para ejecutar un alert
+    </button>
+
+    <!-- Botón 2: document.write() en evento -> Pisa el documento completo (apunte pág. 3 y 4) -->
+    <button class="btnAccion" onclick="document.write('<h2>Hola. Esta escritura pisa lo anterior.</h2><p>document.write() ejecutado dentro de un evento pisa el documento original porque el flujo de lectura inicial ya había terminado.</p>')">
+        Click Aquí para ejecutar un document.write()
+    </button>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
