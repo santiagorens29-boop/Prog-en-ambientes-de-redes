@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS05_1 Redirección con Objeto Location del BOM</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 30px;
+        }
+
+        h2 {
+            font-size: 1.3em;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .panelBotones {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btnDestino {
+            padding: 8px 18px;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btnDestino:hover {
+            background-color: #0284c7;
+            color: #ffffff;
+            border-color: #0284c7;
+        }
+
+        .contenedorNavegacion {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Redirección a Sitios Web mediante el Objeto Location:</h2>
+
+    <!-- Botones interactivos asociados a funciones de redirección (apunte pág. 7) -->
+    <div class="panelBotones">
+        <button class="btnDestino" type="button" onclick="irAGitHub()">GitHub</button>
+        <button class="btnDestino" type="button" onclick="irAMDN()">MDN Web Docs</button>
+        <button class="btnDestino" type="button" onclick="irAStackOverflow()">Stack Overflow</button>
+    </div>
+
+    <!-- Script con asignación a location.href (apunte pág. 7) -->
+    <script type="text/javascript">
+        /* 1. Redirección a GitHub */
+        function irAGitHub() {
+            location.href = "https://github.com";
+        }
+
+        /* 2. Redirección a MDN Web Docs */
+        function irAMDN() {
+            location.href = "https://developer.mozilla.org";
+        }
+
+        /* 3. Redirección a Stack Overflow */
+        function irAStackOverflow() {
+            location.href = "https://stackoverflow.com";
+        }
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
