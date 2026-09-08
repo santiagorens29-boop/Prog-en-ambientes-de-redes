@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS04_2 Operaciones entre Múltiples Inputs</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 30px;
+        }
+        h2 {
+            font-size: 1.25em;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+        /* Contenedor panel celeste según la captura */
+        .panelEntradas {
+            background-color: #bae6fd;
+            border: 1px solid #7dd3fc;
+            padding: 18px 24px;
+            width: fit-content;
+            min-width: 550px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .filaDato {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .filaDato:last-child {
+            margin-bottom: 0;
+        }
+        .filaDato label {
+            width: 120px;
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.95em;
+        }
+        .campoTexto {
+            padding: 5px 8px;
+            font-size: 0.95em;
+            border: 1px solid #64748b;
+            border-radius: 2px;
+            width: 140px;
+            outline: none;
+            background-color: #ffffff;
+        }
+        .campoTexto:focus {
+            border-color: #0284c7;
+        }
+        .campoResultado {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            color: #0369a1;
+        }
+        .panelBotones {
+            display: flex;
+            gap: 8px;
+        }
+        .btnCalculo {
+            padding: 6px 14px;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        .btnCalculo:hover {
+            background-color: #cbd5e1;
+        }
+        .contenedorNavegacion {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Introducir un valor en los cuadros de texto y luego pulsar el botón para ejecutar la función correspondiente.</h2>
+
+    <!-- Panel de Entradas y Salida (apunte pág. 5 y 6) -->
+    <div class="panelEntradas">
+        <div class="filaDato">
+            <label for="entrada1">Entrada 1:</label>
+            <input type="text" id="entrada1" class="campoTexto" value="0" />
+        </div>
+        <div class="filaDato">
+            <label for="entrada2">Entrada 2:</label>
+            <input type="text" id="entrada2" class="campoTexto" value="0" />
+        </div>
+        <div class="filaDato">
+            <label for="entrada3">Entrada 3:</label>
+            <input type="text" id="entrada3" class="campoTexto" value="0" />
+        </div>
+        <div class="filaDato">
+            <label for="resultado">Resultado:</label>
+            <input type="text" id="resultado" class="campoTexto campoResultado" readonly />
+        </div>
+    </div>
+
+    <!-- Botones de Acción (apunte pág. 5, 6 y 7) -->
+    <div class="panelBotones">
+        <button class="btnCalculo" type="button" onclick="calcularSuma()">Suma</button>
+        <button class="btnCalculo" type="button" onclick="calcularPromedio()">Promedia</button>
+        <button class="btnCalculo" type="button" onclick="calcularMayor()">Mayor</button>
+    </div>
+
+    <!-- Script con funciones de cálculo y escritura sobre .value (apunte pág. 5, 6 y 7) -->
+    <script type="text/javascript">
+        /* Función auxiliar para obtener los valores convertidos a enteros */
+        function obtenerValores() {
+            var n1 = parseInt(document.getElementById("entrada1").value) || 0;
+            var n2 = parseInt(document.getElementById("entrada2").value) || 0;
+            var n3 = parseInt(document.getElementById("entrada3").value) || 0;
+            return { v1: n1, v2: n2, v3: n3 };
+        }
+
+        /* 1. Suma aritmética de las 3 entradas */
+        function calcularSuma() {
+            var datos = obtenerValores();
+            var total = datos.v1 + datos.v2 + datos.v3;
+            document.getElementById("resultado").value = total;
+        }
+
+        /* 2. Promedio aritmético */
+        function calcularPromedio() {
+            var datos = obtenerValores();
+            var promedio = (datos.v1 + datos.v2 + datos.v3) / 3;
+            /* Si tiene decimales mostramos hasta 2 dígitos */
+            document.getElementById("resultado").value = Number.isInteger(promedio) ? promedio : promedio.toFixed(2);
+        }
+
+        /* 3. Cálculo del mayor valor mediante condicionales if/else (apunte pág. 7) */
+        function calcularMayor() {
+            var datos = obtenerValores();
+            var maximo = datos.v1;
+
+            if (datos.v2 > maximo) {
+                maximo = datos.v2;
+            }
+            if (datos.v3 > maximo) {
+                maximo = datos.v3;
+            }
+
+            document.getElementById("resultado").value = maximo;
+        }
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
