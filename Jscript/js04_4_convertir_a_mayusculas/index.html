@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS04_4 Conversión a Mayúsculas en Evento Focusout</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 30px;
+        }
+
+        /* Panel contenedor celeste según la captura */
+        .panelFormulario {
+            background-color: #bae6fd;
+            border: 1px solid #7dd3fc;
+            padding: 24px 30px;
+            width: fit-content;
+            min-width: 480px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        .campoGrupo {
+            margin-bottom: 16px;
+        }
+
+        .campoGrupo:last-child {
+            margin-bottom: 0;
+        }
+
+        .campoGrupo label {
+            display: block;
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.95em;
+            margin-bottom: 5px;
+        }
+
+        .campoTexto {
+            padding: 6px 10px;
+            font-size: 0.95em;
+            border: 1px solid #64748b;
+            border-radius: 3px;
+            width: 220px;
+            outline: none;
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+
+        .campoTexto:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .contenedorNavegacion {
+            margin-top: 35px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="panelFormulario">
+        <div class="campoGrupo">
+            <label for="nombre">Ingrese nombre:</label>
+            <input type="text" id="nombre" class="campoTexto" placeholder="Nombre" />
+        </div>
+
+        <div class="campoGrupo">
+            <label for="apellido">Ingrese el apellido(s):</label>
+            <input type="text" id="apellido" class="campoTexto" placeholder="Apellido" />
+        </div>
+    </div>
+
+    <!-- Script con manejadores de evento focusout y uso de this (apunte pág. 6) -->
+    <script type="text/javascript">
+        /* Escuchador para el campo nombre (apunte pág. 6) */
+        document.getElementById("nombre").addEventListener("focusout", function() {
+            this.value = this.value.toUpperCase();
+        });
+
+        /* Escuchador para el campo apellido (apunte pág. 6) */
+        document.getElementById("apellido").addEventListener("focusout", function() {
+            this.value = this.value.toUpperCase();
+        });
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
