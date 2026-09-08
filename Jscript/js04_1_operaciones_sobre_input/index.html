@@ -29,6 +29,7 @@
             border-radius: 4px;
             width: 140px;
             outline: none;
+            background-color: #ffffff;
         }
         .campoEntrada:focus {
             border-color: #0284c7;
@@ -71,10 +72,10 @@
     <h2>Introducir un valor en el cuadro de texto y luego pulsar el botón para ejecutar el procedimiento correspondiente:</h2>
 
     <div class="filaOperaciones">
-        <!-- Input identificado unívocamente por su id (apunte pág. 5) -->
+        <!-- Input identificado por id (apunte pág. 5) -->
         <input type="text" id="x" class="campoEntrada" placeholder="Ingrese número" />
 
-        <!-- Botones de ejecución de procedimientos (apunte pág. 5 y 6) -->
+        <!-- Botones de operaciones -->
         <button class="btnOperacion" type="button" onclick="mostrarValor()">Muestra valor</button>
         <button class="btnOperacion" type="button" onclick="sumarUno()">Suma 1</button>
         <button class="btnOperacion" type="button" onclick="elevarAlCuadrado()">x**2</button>
@@ -82,54 +83,60 @@
         <button class="btnOperacion" type="button" onclick="potenciaDeDos()">2**x</button>
     </div>
 
-    <!-- Script con funciones y conversión parseInt() (apunte pág. 5 y 6) -->
+    <!-- Script con manipulación directa de la propiedad .value (apunte pág. 5 y 6) -->
     <script type="text/javascript">
-        /* 1. Muestra el valor en string directamente del DOM (apunte pág. 5) */
+        /* 1. Muestra el valor en el cartel modal alert() */
         function mostrarValor() {
             var valor = document.getElementById("x").value;
             alert(valor);
         }
 
-        /* 2. Suma 1 transformando previamente a tipo numérico con parseInt (apunte pág. 6) */
+        /* 2. Suma 1 y sobreescribe directamente en el input */
         function sumarUno() {
-            var inputDOM = document.getElementById("x");
-            var valorNumerico = parseInt(inputDOM.value);
+            var inputElemento = document.getElementById("x");
+            var valorNumerico = parseInt(inputElemento.value);
 
             if (isNaN(valorNumerico)) {
                 alert("Por favor ingrese un valor numérico válido.");
                 return;
             }
-            alert(valorNumerico + 1);
+            inputElemento.value = valorNumerico + 1;
         }
 
-        /* 3. Calcula x elevado al cuadrado (x^2) */
+        /* 3. Calcula x**2 y lo asigna al input */
         function elevarAlCuadrado() {
-            var valorNumerico = parseInt(document.getElementById("x").value);
+            var inputElemento = document.getElementById("x");
+            var valorNumerico = parseInt(inputElemento.value);
+
             if (isNaN(valorNumerico)) {
                 alert("Por favor ingrese un valor numérico válido.");
                 return;
             }
-            alert(valorNumerico ** 2);
+            inputElemento.value = valorNumerico ** 2;
         }
 
-        /* 4. Multiplica el número por 2 */
+        /* 4. Multiplica por 2 y lo asigna al input */
         function multiplicarPorDos() {
-            var valorNumerico = parseInt(document.getElementById("x").value);
+            var inputElemento = document.getElementById("x");
+            var valorNumerico = parseInt(inputElemento.value);
+
             if (isNaN(valorNumerico)) {
                 alert("Por favor ingrese un valor numérico válido.");
                 return;
             }
-            alert(valorNumerico * 2);
+            inputElemento.value = valorNumerico * 2;
         }
 
-        /* 5. Calcula 2 elevado a la potencia x (2^x) */
+        /* 5. Calcula 2**x y lo asigna al input */
         function potenciaDeDos() {
-            var valorNumerico = parseInt(document.getElementById("x").value);
+            var inputElemento = document.getElementById("x");
+            var valorNumerico = parseInt(inputElemento.value);
+
             if (isNaN(valorNumerico)) {
                 alert("Por favor ingrese un valor numérico válido.");
                 return;
             }
-            alert(2 ** valorNumerico);
+            inputElemento.value = 2 ** valorNumerico;
         }
     </script>
 
