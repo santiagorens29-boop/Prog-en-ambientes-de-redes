@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS03_6 Arreglos de Índice Numérico</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 30px;
+            line-height: 1.6;
+        }
+        h2 {
+            font-size: 1.4em;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+        h3 {
+            font-size: 1.2em;
+            color: #0369a1;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+        h4 {
+            font-size: 1em;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 6px 0;
+        }
+        .resaltadoTipo {
+            background-color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+            color: #0f766e;
+        }
+        .contenedorNavegacion {
+            margin-top: 35px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Variables Multidimensionales</h2>
+    <h3>Array de índice numérico</h3>
+
+    <!-- Script de manipulación de arreglos (apunte pág. 4) -->
+    <script type="text/javascript">
+        /* 1. Declaración e inicialización de arreglo con 2 elementos (apunte pág. 4) */
+        var arregloFrutas = ["banana", "manzana"];
+
+        /* 2. Captura por teclado y método .push() para agregar el tercer elemento (apunte pág. 4) */
+        var frutaTeclado = prompt("El arregloFrutas ya tiene dos elementos asignados por programa (banana y manzana), agregue el tercer elemento con índice numérico:");
+        if (frutaTeclado !== null && frutaTeclado.trim() !== "") {
+            arregloFrutas.push(frutaTeclado);
+        } else {
+            arregloFrutas.push("pera");
+        }
+
+        /* 3. Escritura dinámica en el flujo del documento (apunte pág. 3 y 4) */
+        document.write("<h4>Tipo para arregloFrutas: <span class='resaltadoTipo'>" + typeof arregloFrutas + "</span></h4>");
+        document.write("<h4>Primer elemento cargado desde programa: " + arregloFrutas[0] + "</h4>");
+        document.write("<h4>Segundo elemento cargado desde programa: " + arregloFrutas[1] + "</h4>");
+        document.write("<h4>Tercer elemento cargado desde teclado: " + arregloFrutas[2] + "</h4>");
+        document.write("<h4>Cantidad de elementos (longitud): " + arregloFrutas.length + "</h4>");
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
