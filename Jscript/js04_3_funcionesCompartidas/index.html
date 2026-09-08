@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS04_3 Funciones Compartidas y Teclado Numérico</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Contenedor principal de la calculadora */
+        .calculadora {
+            width: 420px;
+            background-color: #cbd5e1;
+            padding: 16px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Display numérico */
+        .display {
+            width: 100%;
+            height: 45px;
+            font-size: 1.5em;
+            text-align: right;
+            padding: 6px 12px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border: 1px solid #94a3b8;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        /* Panel celeste de botones numéricos */
+        .panelNumerico {
+            background-color: #bae6fd;
+            padding: 14px;
+            border-radius: 4px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .btnNumero {
+            padding: 10px 0;
+            font-size: 1.1em;
+            font-weight: 600;
+            background-color: #f8fafc;
+            color: #1e293b;
+            border: 1px solid #94a3b8;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btnNumero:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btnCero {
+            grid-column: span 1;
+        }
+
+        /* Panel amarillo claro de operaciones del acumulador */
+        .panelControl {
+            background-color: #fef08a;
+            padding: 12px;
+            border-radius: 4px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .btnAccion {
+            padding: 9px 6px;
+            font-size: 0.88em;
+            font-weight: 600;
+            background-color: #f8fafc;
+            color: #1e293b;
+            border: 1px solid #94a3b8;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnAccion:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* Navegación inferior */
+        .contenedorNavegacion {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #94a3b8;
+            width: 420px;
+            text-align: center;
+        }
+
+        .btnVolver {
+            padding: 7px 14px;
+            margin: 0 4px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculadora">
+        <!-- Display de salida (apunte pág. 5) -->
+        <input type="text" id="display" class="display" readonly value="" placeholder="0" />
+
+        <!-- Panel de Dígitos que invocan a la función compartida con argumentos (apunte pág. 7) -->
+        <div class="panelNumerico">
+            <button class="btnNumero" type="button" onclick="ingresarDigito('1')">1</button>
+            <button class="btnNumero" type="button" onclick="ingresarDigito('2')">2</button>
+            <button class="btnNumero" type="button" onclick="ingresarDigito('3')">3</button>
+            <button class="btnNumero" type="button" onclick="ingresarDigito('4')">4</button>
+            <button class="btnNumero" type="button" onclick="ingresarDigito('5')">5</button>
+            <button class="btnNumero" type="button" onclick="ingresarDigito('6')">6</button>
+            <button class="btnNumero" type="button" onclick="ingresarDigito('7')">7</button>
+            <button class="btnNumero" type="button" onclick="ingresarDigito('8')">8</button>
+            <button class="btnNumero" type="button" onclick="ingresarDigito('9')">9</button>
+            <button class="btnNumero btnCero" type="button" onclick="ingresarDigito('0')">0</button>
+        </div>
+
+        <!-- Panel de Control de Acumulador (apunte pág. 2, 5 y 6) -->
+        <div class="panelControl">
+            <button class="btnAccion" type="button" onclick="sumarAlAcumulador()">+Acumulador</button>
+            <button class="btnAccion" type="button" onclick="mostrarAcumulador()">Muestra Acumulador</button>
+            <button class="btnAccion" type="button" onclick="borrarAcumulador()">Borra Acumulador</button>
+            <button class="btnAccion" type="button" onclick="borrarDisplay()">Borra display</button>
+        </div>
+    </div>
+
+    <!-- Script con funciones compartidas y lógica de acumulación (apunte pág. 2, 6 y 7) -->
+    <script type="text/javascript">
+        /* Variable global para acumular sumas en memoria (apunte pág. 2) */
+        var acumulador = 0;
+
+        /* 1. Función compartida que recibe un argumento y concatena en el display (apunte pág. 7) */
+        function ingresarDigito(digito) {
+            var display = document.getElementById("display");
+            display.value = display.value + digito;
+        }
+
+        /* 2. Suma el valor del display al acumulador con parseInt() (apunte pág. 6) */
+        function sumarAlAcumulador() {
+            var display = document.getElementById("display");
+            var valorActual = parseInt(display.value);
+
+            if (!isNaN(valorActual)) {
+                acumulador += valorActual;
+            }
+            display.value = "";
+        }
+
+        /* 3. Muestra el total acumulado en el display */
+        function mostrarAcumulador() {
+            var display = document.getElementById("display");
+            display.value = acumulador;
+        }
+
+        /* 4. Resetea la variable global acumulador a cero */
+        function borrarAcumulador() {
+            acumulador = 0;
+            alert("Acumulador reseteado a 0.");
+        }
+
+        /* 5. Limpia solo el contenido visual del display */
+        function borrarDisplay() {
+            document.getElementById("display").value = "";
+        }
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
