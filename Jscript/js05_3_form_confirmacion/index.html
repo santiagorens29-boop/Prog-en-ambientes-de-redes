@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS05_3 Confirmación de Envío y Reset</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 30px;
+        }
+
+        /* Contenedor celeste que ocupa todo el ancho visual del formulario */
+        .panelFormulario {
+            background-color: #bae6fd;
+            border: 1px solid #7dd3fc;
+            padding: 24px 30px;
+            width: 100%;
+            max-width: 900px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        h2 {
+            font-size: 1.35em;
+            color: #0f172a;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .campoFila {
+            margin-bottom: 14px;
+        }
+
+        .campoFila label {
+            display: block;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .campoTexto {
+            padding: 5px 8px;
+            font-size: 0.95em;
+            border: 1px solid #64748b;
+            border-radius: 2px;
+            width: 180px;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .campoTexto:focus {
+            border-color: #0284c7;
+        }
+
+        /* Botones inferiores centrados */
+        .contenedorAcciones {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btnForm {
+            padding: 5px 14px;
+            margin: 0 3px;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .btnForm:hover {
+            background-color: #cbd5e1;
+        }
+
+        .contenedorNavegacion {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="panelFormulario">
+        <h2>Confirmación de envío y de reset</h2>
+
+        <!-- Formulario con atributos name en los inputs para el envío por GET (apunte pág. 5) -->
+        <form id="miFormulario" action="respuestaFormulario.html" method="get">
+            <div class="campoFila">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="campoTexto" required />
+            </div>
+
+            <div class="campoFila">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" class="campoTexto" required />
+            </div>
+
+            <div class="contenedorAcciones">
+                <input type="reset" id="btnReset" class="btnForm" value="Blanquear" />
+                <input type="submit" id="btnSubmit" class="btnForm" value="Enviar" />
+            </div>
+        </form>
+    </div>
+
+    <!-- Script con control de eventos submit y reset mediante addEventListener (apunte pág. 5 y 6) -->
+    <script type="text/javascript">
+        var form = document.getElementById("miFormulario");
+
+        /* Intercepción y confirmación del evento Submit */
+        form.addEventListener("submit", function(event) {
+            var confirma = confirm("¿Está seguro de enviar?");
+            if (!confirma) {
+                event.preventDefault(); /* Cancela el envío si el usuario presiona Cancelar */
+            }
+        });
+
+        /* Intercepción y confirmación del evento Reset */
+        form.addEventListener("reset", function(event) {
+            var confirma = confirm("¿Está seguro de blanquear todos los campos?");
+            if (!confirma) {
+                event.preventDefault(); /* Cancela el blanqueo */
+            }
+        });
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
