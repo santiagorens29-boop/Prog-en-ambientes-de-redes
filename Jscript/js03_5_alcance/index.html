@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS04 Alcance y Ámbito de Variables</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 30px;
+        }
+        h2 {
+            font-size: 1.35em;
+            color: #0f172a;
+            margin-bottom: 25px;
+        }
+        .panelBotones {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .btnAlcance {
+            padding: 9px 16px;
+            background-color: #e2e8f0;
+            color: #1e293b;
+            border: 1px solid #94a3b8;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .btnAlcance:hover {
+            background-color: #cbd5e1;
+        }
+        .contenedorNavegacion {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Asignaremos valor a la variable global desde adentro de una función:</h2>
+
+    <div class="panelBotones">
+        <!-- Botón 1: Crea variable local por redeclaración (apunte pág. 2) -->
+        <button class="btnAlcance" title="Inicializa variable local desde adentro de una función con declaración var" onclick="asignacionConDeclaracion()">
+            Asignacion con declaración (declaracion + asignación)
+        </button>
+
+        <!-- Botón 2: Modifica la variable global por no usar var (apunte pág. 2) -->
+        <button class="btnAlcance" title="Asigna directamente a la variable global sin usar palabra clave" onclick="asignacionSinDeclaracion()">
+            Asignacion forzada sin declaración
+        </button>
+
+        <!-- Botón 3: Consulta el valor real de la variable global (apunte pág. 2) -->
+        <button class="btnAlcance" title="Inspecciona el valor actual de la variable global" onclick="mostrarVariableGlobal()">
+            Muestra variable global
+        </button>
+    </div>
+
+    <!-- Script con demostración de alcance (Scope) (apunte pág. 2 y 4) -->
+    <script type="text/javascript">
+        /* Declaración de la variable global sin inicializar (apunte pág. 2) */
+        var variableGlobal;
+
+        /* Secuencia de alertas automáticas al cargar la página (apunte pág. 2 y 3) */
+        alert("Una variable global fue declarada pero no asignada:\nvar variableGlobal;");
+        alert("El valor de variableGlobal es: " + variableGlobal);
+        alert("El tipo de variableGlobal es: " + typeof variableGlobal);
+
+        /* 1. Función que redeclara con 'var': genera alcance local (apunte pág. 2) */
+        function asignacionConDeclaracion() {
+            var variableGlobal = prompt("Ingrese valor para la variable global:");
+            alert("El valor de la variable local ingresada es: " + variableGlobal);
+            alert("El tipo de la variable local ingresada es: " + typeof variableGlobal);
+        }
+
+        /* 2. Función con asignación forzada sin declaración: impacta en la variable global (apunte pág. 2) */
+        function asignacionSinDeclaracion() {
+            variableGlobal = prompt("Ingrese valor para la variable global:");
+            alert("El valor asignado a la variable global es: " + variableGlobal);
+            alert("El tipo de la variable global es: " + typeof variableGlobal);
+        }
+
+        /* 3. Función para inspeccionar la variable global externa (apunte pág. 2) */
+        function mostrarVariableGlobal() {
+            if (variableGlobal === undefined) {
+                alert("La variable global no ha sido asignada.");
+            } else {
+                alert("El valor actual de variableGlobal es: " + variableGlobal + "\nTipo: " + typeof variableGlobal);
+            }
+        }
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
