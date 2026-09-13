@@ -32,14 +32,12 @@
             color: #334155;
         }
 
-        /* Layout de dos columnas para Ingreso y Control */
         .filaPaneles {
             display: flex;
             gap: 20px;
             margin-bottom: 20px;
         }
 
-        /* Panel 1: Ingreso de datos */
         .panelIngreso {
             flex: 1;
             background-color: #fefce8;
@@ -81,7 +79,6 @@
             border-color: #0284c7;
         }
 
-        /* Panel 2: Control */
         .panelControl {
             flex: 1;
             background-color: #ffffff;
@@ -118,7 +115,6 @@
             background-color: #cbd5e1;
         }
 
-        /* Panel 3: Presentación */
         #presentacion {
             display: none;
             background-color: #fefce8;
@@ -210,7 +206,7 @@
             </div>
             <div class="campoGrupo">
                 <label for="fechaNac">Fecha de Nacimiento:</label>
-                <input type="text" id="fechaNac" class="campoEntrada" placeholder="DD/MM/AAAA" required />
+                <input type="text" id="fechaNac" class="campoEntrada" placeholder="DD/MM/AAAA" maxlength="10" required />
             </div>
         </div>
 
@@ -228,7 +224,7 @@
     <!-- 3. Contenedor: Presentación de tabla dinámico -->
     <div id="presentacion"></div>
 
-    <!-- Script con lógica de Objetos de dato, Array, forEach e innerHTML -->
+    <!-- Script con lógica de Objetos, validación y formateo automático de fecha -->
     <script type="text/javascript">
         /* Carga inicial de 2 objetos por programa (apunte pág. 2) */
         let arregloPersonas = [
@@ -236,7 +232,27 @@
             { nombre: "Camila", apellido: "Vázquez", fechaNac: "25/09/2001" }
         ];
 
-        /* 1. Función para crear persona previa validación (apunte pág. 2, 3 y 4) */
+        /* Formateo automático de barras DD/MM/AAAA en evento keyup (apunte pág. 1 y 6) */
+        document.getElementById("fechaNac").addEventListener("keyup", function(e) {
+            /* Permite borrar hacia atrás sin trabar el teclado */
+            if (e.key === "Backspace" || e.key === "Delete") {
+                return;
+            }
+
+            /* Extrae únicamente los dígitos numéricos */
+            let valor = this.value.replace(/\D/g, "");
+
+            /* Intercala las barras según la longitud de caracteres */
+            if (valor.length > 2 && valor.length <= 4) {
+                this.value = valor.substring(0, 2) + "/" + valor.substring(2);
+            } else if (valor.length > 4) {
+                this.value = valor.substring(0, 2) + "/" + valor.substring(2, 4) + "/" + valor.substring(4, 8);
+            } else {
+                this.value = valor;
+            }
+        });
+
+        /* Función para crear persona previa validación (apunte pág. 2, 3 y 4) */
         function crearPersona() {
             const inputNombre = document.getElementById("nombre");
             const inputApellido = document.getElementById("apellido");
@@ -248,7 +264,12 @@
                 return;
             }
 
-            /* Declaración del objeto de dato y agregado al array con push() (apunte pág. 2) */
+            if (inputFecha.value.trim().length !== 10) {
+                alert("Por favor ingrese una fecha válida en formato DD/MM/AAAA.");
+                return;
+            }
+
+            /* Creación de objeto literal y agregado con push() (apunte pág. 2) */
             let nuevaPersona = {
                 nombre: inputNombre.value.trim(),
                 apellido: inputApellido.value.trim(),
@@ -257,7 +278,7 @@
 
             arregloPersonas.push(nuevaPersona);
 
-            /* Limpieza de inputs */
+            /* Limpieza de campos */
             inputNombre.value = "";
             inputApellido.value = "";
             inputFecha.value = "";
@@ -266,7 +287,7 @@
             listarPersonas();
         }
 
-        /* 2. Función para listar personas en tabla con forEach e innerHTML (apunte pág. 2, 3 y 4) */
+        /* Función para listar personas en tabla con forEach e innerHTML (apunte pág. 2, 3 y 4) */
         function listarPersonas() {
             const contenedor = document.getElementById("presentacion");
 
@@ -275,7 +296,6 @@
             html += "<thead><tr><th>Nombre</th><th>Apellido</th><th>Fecha de Nacimiento</th></tr></thead>";
             html += "<tbody>";
 
-            /* Recorrido con forEach del array de objetos (apunte pág. 3 y 4) */
             arregloPersonas.forEach(function(persona) {
                 html += "<tr>";
                 html += "<td>" + persona.nombre + "</td>";
@@ -288,10 +308,10 @@
             html += "<p class='infoLongitud'>Longitud del arreglo de objetos: " + arregloPersonas.length + "</p>";
 
             contenedor.innerHTML = html;
-            contenedor.style.display = "block"; /* Mostrar contenedor (apunte pág. 4) */
+            contenedor.style.display = "block";
         }
 
-        /* 3. Función para ocultar la presentación cambiando el display a none (apunte pág. 4) */
+        /* Función para ocultar la presentación (apunte pág. 4) */
         function ocultarPresentacion() {
             document.getElementById("presentacion").style.display = "none";
         }
