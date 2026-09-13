@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS06_1 Detección de Idioma del Navegador (BOM)</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .contenedorFrase {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .textoPrincipal {
+            font-size: 2.8em;
+            font-weight: 700;
+            color: #0369a1;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .textoSecundario {
+            font-size: 1.6em;
+            font-weight: 400;
+            color: #475569;
+            margin: 0;
+        }
+
+        .tarjetaInfo {
+            background-color: #e2e8f0;
+            border-left: 4px solid #0f766e;
+            padding: 10px 18px;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9em;
+            color: #1e293b;
+            margin-bottom: 30px;
+        }
+
+        .tarjetaInfo code {
+            font-family: Consolas, monospace;
+            font-weight: bold;
+            color: #0f766e;
+        }
+
+        .contenedorNavegacion {
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .btnVolver {
+            padding: 7px 14px;
+            margin: 0 4px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Frase dinámica que se traduce según la configuración regional -->
+    <div class="contenedorFrase">
+        <h1 id="frasePrincipal" class="textoPrincipal">...</h1>
+        <h2 id="fraseSecundaria" class="textoSecundario">...</h2>
+    </div>
+
+    <!-- Indicador informativo del BOM detectado -->
+    <div class="tarjetaInfo">
+        Idioma detectado por el BOM: <code id="codigoIdioma">...</code>
+    </div>
+
+    <!-- Script de detección y renderizado (apunte pág. 1 y 2) -->
+    <script type="text/javascript">
+        /* 1. Detección del lenguaje configurado en el navegador (apunte pág. 1) */
+        const lenguajeCompleto = window.navigator.language || window.navigator.languages[0];
+        
+        /* 2. Extracción de los 2 primeros caracteres con substr (apunte pág. 1) */
+        const codigoIso = lenguajeCompleto.substr(0, 2).toLowerCase();
+
+        /* 3. Estructura de datos tipo objeto con las traducciones (apunte pág. 1 y 2) */
+        const diccionarioFrases = {
+            es: {
+                principal: "Aprender a",
+                secundario: "programar con disciplina"
+            },
+            en: {
+                principal: "Learn to",
+                secundario: "code with discipline"
+            },
+            pt: {
+                principal: "Aprenda a",
+                secundario: "programar com disciplina"
+            },
+            fr: {
+                principal: "Apprendre à",
+                secundario: "programmer avec discipline"
+            },
+            it: {
+                principal: "Imparare a",
+                secundario: "programmare con disciplina"
+            }
+        };
+
+        /* 4. Selección del contenido (si no coincide, usa inglés por defecto) */
+        const contenido = diccionarioFrases[codigoIso] || diccionarioFrases.en;
+
+        /* 5. Inyección en los elementos del DOM */
+        document.getElementById("frasePrincipal").textContent = contenido.principal;
+        document.getElementById("fraseSecundaria").textContent = contenido.secundario;
+        document.getElementById("codigoIdioma").textContent = lenguajeCompleto + " (" + codigoIso + ")";
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
