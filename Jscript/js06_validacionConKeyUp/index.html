@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS06 Validación de Input en Evento keyup</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 30px;
+        }
+
+        h2 {
+            font-size: 1.3em;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        /* Panel contenedor celeste según el diseño del curso */
+        .panelFormulario {
+            background-color: #bae6fd;
+            border: 1px solid #7dd3fc;
+            padding: 24px 30px;
+            width: 100%;
+            max-width: 850px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        .campoFila {
+            margin-bottom: 14px;
+        }
+
+        .campoFila label {
+            display: block;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .campoEntrada {
+            padding: 5px 8px;
+            font-size: 0.95em;
+            border: 1px solid #64748b;
+            border-radius: 2px;
+            width: 180px;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .campoEntrada:focus {
+            border-color: #0284c7;
+        }
+
+        .contenedorBotones {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .btnForm {
+            padding: 6px 20px;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+            min-width: 140px;
+        }
+
+        .btnForm:hover {
+            background-color: #cbd5e1;
+        }
+
+        .contenedorNavegacion {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ejer validación de un INPUT de formulario en el evento de onKeyUp</h2>
+
+    <div class="panelFormulario">
+        <!-- Formulario con destino GET a respuesta.html (apunte pág. 5 y 6) -->
+        <form id="formFecha" action="respuesta.html" method="get">
+            <div class="campoFila">
+                <label for="diaDelMes">Ingrese el día del mes:</label>
+                <!-- Atributos HTML5 min y max evaluados por checkValidity() (apunte pág. 3 y 6) -->
+                <input type="number" id="diaDelMes" name="diaDelMes" class="campoEntrada" min="1" max="31" required />
+            </div>
+
+            <div class="campoFila">
+                <label for="mes">Ingrese el mes:</label>
+                <input type="number" id="mes" name="mes" class="campoEntrada" min="1" max="12" required />
+            </div>
+
+            <div class="contenedorBotones">
+                <input type="submit" class="btnForm" value="Enviar" />
+                <input type="reset" class="btnForm" value="Reset" />
+            </div>
+        </form>
+    </div>
+
+    <!-- Script con validación en evento keyup (apunte pág. 3 y 6) -->
+    <script type="text/javascript">
+        const inputDia = document.getElementById("diaDelMes");
+
+        /* Escuchador en tiempo real al levantar la tecla (apunte pág. 6) */
+        inputDia.addEventListener("keyup", function() {
+            /* Si el valor no está vacío y no pasa las restricciones HTML5 */
+            if (this.value !== "" && !this.checkValidity()) {
+                alert("El valor debe estar entre 1 y 31");
+                this.value = "";
+                this.focus();
+            }
+        });
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
