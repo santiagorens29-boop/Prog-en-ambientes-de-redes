@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS07 Formulario ABM y Control Dinámico</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Panel superior celeste del formulario */
+        .panelFormulario {
+            background-color: #bae6fd;
+            border: 1px solid #7dd3fc;
+            padding: 24px 30px;
+            width: 480px;
+            box-sizing: border-box;
+            border-radius: 4px 4px 0 0;
+        }
+
+        h2 {
+            font-size: 1.45em;
+            color: #0f172a;
+            letter-spacing: 0.5px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .campoFila {
+            margin-bottom: 12px;
+        }
+
+        .campoFila label {
+            display: block;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .campoTexto {
+            padding: 5px 8px;
+            font-size: 0.95em;
+            border: 1px solid #64748b;
+            border-radius: 2px;
+            width: 220px;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .campoTexto:focus {
+            border-color: #0284c7;
+        }
+
+        /* Panel inferior verde aguamarina para la botonera ABM */
+        .panelBotonera {
+            background-color: #6ee7b7;
+            border: 1px solid #34d399;
+            padding: 15px 20px;
+            width: 480px;
+            box-sizing: border-box;
+            border-radius: 0 0 4px 4px;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btnABM {
+            padding: 5px 14px;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.88em;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+
+        .btnABM:hover:not(:disabled) {
+            background-color: #cbd5e1;
+        }
+
+        .btnABM:disabled {
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            border-color: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .contenedorNavegacion {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+            width: 480px;
+            text-align: center;
+        }
+
+        .btnVolver {
+            padding: 7px 14px;
+            margin: 0 4px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Formulario ABM (apunte pág. 5 y 7) -->
+    <form id="formABM" method="get">
+        <div class="panelFormulario">
+            <h2>Formulario ABM</h2>
+
+            <div class="campoFila">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" class="campoTexto" required />
+            </div>
+
+            <div class="campoFila">
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" class="campoTexto" required />
+            </div>
+
+            <div class="campoFila">
+                <label for="saldo">Saldo:</label>
+                <input type="number" id="saldo" name="saldo" class="campoTexto" min="1" required />
+            </div>
+        </div>
+
+        <!-- Barra inferior de acciones (apunte pág. 5, 7 y 8) -->
+        <div class="panelBotonera">
+            <button type="button" id="btBlanquear" class="btnABM">Blanquear</button>
+            <button type="button" id="btAlta" class="btnABM">Alta</button>
+            <button type="button" id="btModi" class="btnABM">Modi</button>
+            <button type="button" id="btBaja" class="btnABM">Baja</button>
+        </div>
+    </form>
+
+    <!-- Script con arquitectura de control por eventos (apunte pág. 5, 7 y 8) -->
+    <script type="text/javascript">
+        /* Referencias a objetos del DOM */
+        const form = document.getElementById("formABM");
+        const txtApellido = document.getElementById("apellido");
+        const txtNombres = document.getElementById("nombres");
+        const txtSaldo = document.getElementById("saldo");
+
+        const btBlanquear = document.getElementById("btBlanquear");
+        const btAlta = document.getElementById("btAlta");
+        const btModi = document.getElementById("btModi");
+        const btBaja = document.getElementById("btBaja");
+
+        /* 1. Función de carga inicial del documento (apunte pág. 7 y 8) */
+        function cargaInicial() {
+            btAlta.disabled = true;
+            btModi.disabled = true;
+            btBaja.disabled = true;
+            txtApellido.select();
+        }
+
+        /* 2. Función evaluadora que habilita o deshabilita botones según checkValidity() (apunte pág. 6, 7 y 8) */
+        function todoListo() {
+            if (form.checkValidity()) {
+                btAlta.disabled = false;
+                btModi.disabled = false;
+                btBaja.disabled = false;
+            } else {
+                btAlta.disabled = true;
+                btModi.disabled = true;
+                btBaja.disabled = true;
+            }
+        }
+
+        /* 3. Escuchadores de eventos al cargar y al interactuar con el teclado (apunte pág. 7) */
+        window.addEventListener("load", function() {
+            cargaInicial();
+        });
+
+        /* Monitoreo en keyup y focus para cada input (apunte pág. 7) */
+        [txtApellido, txtNombres, txtSaldo].forEach(function(input) {
+            input.addEventListener("keyup", todoListo);
+            input.addEventListener("focus", todoListo);
+        });
+
+        /* 4. Asignación dinámica del atributo action y submit programático (apunte pág. 5) */
+        btAlta.addEventListener("click", function() {
+            form.action = "./alta.html";
+            form.submit();
+        });
+
+        btModi.addEventListener("click", function() {
+            form.action = "./modi.html";
+            form.submit();
+        });
+
+        btBaja.addEventListener("click", function() {
+            form.action = "./baja.html";
+            form.submit();
+        });
+
+        /* 5. Blanqueo con reset() y restauración de foco (apunte pág. 5, 7 y 8) */
+        btBlanquear.addEventListener("click", function() {
+            form.reset();
+            cargaInicial();
+        });
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
