@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>JS09 Creación Dinámica y Remoción de Nodos DOM</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            padding: 25px;
+            margin: 0;
+        }
+
+        /* Panel superior de botones de control */
+        .panelControl {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 25px;
+        }
+
+        .btnControl {
+            padding: 6px 14px;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: background 0.15s;
+        }
+
+        .btnControl:hover {
+            background-color: #cbd5e1;
+        }
+
+        /* Contenedor padre principal (fondo amarillo suave según la captura) */
+        #contenedor {
+            background-color: #fef9c3;
+            border: 2px dashed #facc15;
+            min-height: 380px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding: 20px;
+            width: 100%;
+            max-width: 650px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        /* Clase CSS para los elementos creados dinámicamente desde JS (apunte pág. 8) */
+        .claseObjetoDinamico {
+            background-color: #bae6fd;
+            border: 1px solid #0284c7;
+            padding: 14px 20px;
+            margin-bottom: 8px;
+            border-radius: 3px;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        .claseObjetoDinamico h3 {
+            margin: 0;
+            font-size: 1.35em;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* Barra de navegación inferior */
+        .contenedorNavegacion {
+            margin-top: 35px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e1;
+            max-width: 650px;
+        }
+
+        .btnVolver {
+            padding: 7px 14px;
+            margin-right: 8px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botonera de acciones (apunte pág. 8 y 9) -->
+    <div class="panelControl">
+        <button class="btnControl" type="button" onclick="crearElemento()">Crear</button>
+        <button class="btnControl" type="button" onclick="limpiarElementos()">Limpiar</button>
+        <button class="btnControl" type="button" onclick="mostrarInfo()">Info</button>
+    </div>
+
+    <!-- Contenedor receptor de los nodos dinámicos -->
+    <div id="contenedor"></div>
+
+    <!-- Script con createElement, appendChild, childNodes y removeChild (apunte pág. 8 y 9) -->
+    <script type="text/javascript">
+        /* 1. Función para crear dinámicamente un objeto del DOM (apunte pág. 8) */
+        function crearElemento() {
+            const contenedor = document.getElementById("contenedor");
+
+            /* Crea el nodo en memoria */
+            const objDiv = document.createElement("div");
+
+            /* Asigna el contenido concatenando la cantidad de nodos actuales */
+            const numElemento = contenedor.childNodes.length + 1;
+            objDiv.innerHTML = "<h3>Elemento creado: " + numElemento + "</h3>";
+
+            /* Asigna la clase de estilo CSS (apunte pág. 8) */
+            objDiv.className = "claseObjetoDinamico";
+
+            /* Inyecta el nodo en el árbol DOM del documento */
+            contenedor.appendChild(objDiv);
+        }
+
+        /* 2. Función para remover todos los nodos hijos con bucle while (apunte pág. 9) */
+        function limpiarElementos() {
+            const contenedor = document.getElementById("contenedor");
+
+            while (contenedor.childNodes.length > 0) {
+                contenedor.removeChild(contenedor.childNodes[0]);
+            }
+        }
+
+        /* 3. Función para inspeccionar la cantidad de childNodes (apunte pág. 8 y 9) */
+        function mostrarInfo() {
+            const contenedor = document.getElementById("contenedor");
+            alert("Longitud de childNodes: " + contenedor.childNodes.length);
+        }
+    </script>
+
+    <!-- Barra de navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a JavaScript</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
