@@ -5,6 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>Portal de Trabajos Prácticos - Desarrollo Web</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: "Segoe UI", Arial, sans-serif;
             background-color: #f1f5f9;
@@ -14,12 +18,11 @@
         }
 
         .contenedorPrincipal {
-            max-width: 960px;
+            max-width: 1050px;
             margin: 0 auto;
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
             border: 1px solid #cbd5e1;
         }
 
@@ -27,6 +30,7 @@
             background-color: #0f172a;
             color: #ffffff;
             padding: 24px 30px;
+            border-radius: 8px 8px 0 0;
         }
 
         header h1 {
@@ -41,111 +45,149 @@
             color: #94a3b8;
         }
 
-        /* Menú de pestañas / módulos principales */
+        /* BARRA DE NAVEGACIÓN Y MENÚ HOVER */
         .barraNavegacion {
-            display: flex;
             background-color: #1e293b;
             border-bottom: 3px solid #0284c7;
         }
 
-        .btnPestana {
-            flex: 1;
-            padding: 14px 20px;
-            background-color: transparent;
-            color: #94a3b8;
-            border: none;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-
-        .btnPestana:hover {
-            background-color: #334155;
-            color: #ffffff;
-        }
-
-        .btnPestana.activa {
-            background-color: #0284c7;
-            color: #ffffff;
-        }
-
-        /* Panel de contenido donde se inyectan los ejercicios */
-        #panelContenido {
-            padding: 30px;
-            min-height: 380px;
-        }
-
-        .tituloSeccion {
-            font-size: 1.3em;
-            color: #0369a1;
-            margin: 0 0 16px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .subtituloModulo {
-            font-size: 1.1em;
-            color: #0f766e;
-            margin: 22px 0 10px 0;
-            font-weight: 600;
-        }
-
-        .subtituloModulo:first-of-type {
-            margin-top: 5px;
-        }
-
-        .listaEjercicios {
+        .menuPrincipal {
             list-style: none;
-            padding: 0;
-            margin: 0 0 15px 0;
-            display: grid;
-            gap: 10px;
-        }
-
-        .tarjetaEjercicio {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #0284c7;
-            border-radius: 4px;
-            padding: 10px 16px;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .tarjetaEjercicio:hover {
-            transform: translateX(4px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            background-color: #f0f9ff;
-        }
-
-        .tarjetaEjercicio a {
-            text-decoration: none;
-            color: #0f172a;
-            font-weight: 600;
-            font-size: 0.98em;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .tarjetaEjercicio a:hover {
-            color: #0284c7;
-        }
-
-        .descripcionEjercicio {
-            font-size: 0.85em;
-            color: #64748b;
             margin: 0;
+            padding: 0;
+            display: flex;
         }
 
-        .contadorTotal {
-            margin-top: 25px;
-            font-size: 0.9em;
+        .menuItem {
+            position: relative;
+        }
+
+        .menuItem > a {
+            display: block;
+            padding: 14px 24px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: background-color 0.2s ease;
+        }
+
+        .menuItem:hover > a {
+            background-color: #0284c7;
+        }
+
+        /* SUBMENÚ NIVEL 1 (Despliega hacia abajo) */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 320px;
+            list-style: none;
+            margin: 0;
+            padding: 6px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+            border: 1px solid #cbd5e1;
+            border-radius: 0 0 4px 4px;
+            z-index: 1000;
+        }
+
+        .menuItem:hover > .submenu {
+            display: block;
+        }
+
+        .submenu li {
+            position: relative;
+        }
+
+        .submenu a {
+            display: block;
+            padding: 9px 18px;
+            color: #334155;
+            text-decoration: none;
+            font-size: 0.88em;
+            font-weight: 500;
+            transition: all 0.15s ease;
+        }
+
+        .submenu a:hover {
+            background-color: #f0f9ff;
+            color: #0284c7;
+            padding-left: 22px;
+        }
+
+        /* SUBMENÚ NIVEL 2 (Despliega lateralmente a la derecha) */
+        .itemConSubmenu {
+            position: relative;
+        }
+
+        .itemConSubmenu > a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-weight: 600;
             color: #0f766e;
-            text-align: right;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 10px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .itemConSubmenu > a:hover {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .submenuLateral {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: #ffffff;
+            min-width: 320px;
+            list-style: none;
+            margin: 0;
+            padding: 6px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            z-index: 1001;
+            max-height: 460px;
+            overflow-y: auto;
+        }
+
+        /* Despliegue hover del submenú lateral */
+        .itemConSubmenu:hover > .submenuLateral {
+            display: block;
+        }
+
+        .submenuScroll {
+            max-height: 460px;
+            overflow-y: auto;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        main {
+            padding: 40px 30px;
+            min-height: 350px;
+        }
+
+        .tarjetaBienvenida {
+            background-color: #f8fafc;
+            border-left: 4px solid #0284c7;
+            padding: 24px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tarjetaBienvenida h2 {
+            margin-top: 0;
+            color: #0f172a;
+            font-size: 1.3em;
+        }
+
+        .tarjetaBienvenida p {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -154,142 +196,99 @@
     <div class="contenedorPrincipal">
         <header>
             <h1>Portal de Trabajos Prácticos</h1>
-            <p>Seleccione una categoría para desplegar la colección de ejercicios interactivos.</p>
+            
         </header>
 
-        <!-- Pestañas de categorías principales -->
+        <!-- BARRA CON MENÚ MULTINIVEL HOVER -->
         <nav class="barraNavegacion">
-            <button class="btnPestana activa" onclick="mostrarCategoria('js', this)">JavaScript</button>
-            <button class="btnPestana" onclick="mostrarCategoria('html', this)">HTML</button>
-            <button class="btnPestana" onclick="mostrarCategoria('css', this)">CSS</button>
+            <ul class="menuPrincipal">
+                
+                <!-- 1. MENÚ HTML -->
+                <li class="menuItem">
+                    <a href="./Html/index.html">HTML &#9662;</a>
+                    <ul class="submenu">
+                        <li><a href="./Html/ejer01Preguntas/index.html">Ejercicio 1: Preguntas</a></li>
+                        <li><a href="./Html/ejer02Tablas/index.html">Ejercicio 2: Tablas</a></li>
+                        <li><a href="./Html/ejer03Formularios/index.html">Ejercicio 3: Formularios</a></li>
+                        <li><a href="./Html/ejer04Iframe/index.html">Ejercicio 4: Iframes</a></li>
+                    </ul>
+                </li>
+
+                <!-- 2. MENÚ CSS (Con subdesplegables laterales para Parte 1 y Parte 2) -->
+                <li class="menuItem">
+                    <a href="./Css/index.html">CSS &#9662;</a>
+                    <ul class="submenu">
+                        
+                        <!-- Submenú lateral CSS Parte 1 -->
+                        <li class="itemConSubmenu">
+                            <a href="./Css/cssParte1/index.html">
+                                <span>CSS Parte 1: Cajas y Selectores</span>
+                                <span>&#9656;</span>
+                            </a>
+                            <ul class="submenuLateral">
+                                <li><a href="./Css/cssParte1/eje01StyleHeader/index.html">01: StyleHeader</a></li>
+                                <li><a href="./Css/cssParte1/eje02SelectorDeClase/index.html">02: SelectorDeClase</a></li>
+                                <li><a href="./Css/cssParte1/eje03StyleEnFile/index.html">03: StyleEnFile</a></li>
+                                <li><a href="./Css/cssParte1/eje04FontSize/index.html">04: FontSize</a></li>
+                                <li><a href="./Css/cssParte1/eje07BackgroundFijo/index.html">05: BackgroundFijo</a></li>
+                                <li><a href="./Css/cssParte1/eje08CentradoYPadding/index.html">06: CentradoYPadding</a></li>
+                                <li><a href="./Css/cssParte1/eje10DivsEnPila/index.html">07: DivsEnPila</a></li>
+                                <li><a href="./Css/cssParte1/eje11DivsEnFila/index.html">08: DivsEnFila</a></li>
+                                <li><a href="./Css/cssParte1/eje14DivsInternosEnColumnas/index.html">09: DivsInternosEnColumnas</a></li>
+                                <li><a href="./Css/cssParte1/eje16SelectoresDeEvento/index.html">10: SelectoresDeEvento</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Submenú lateral CSS Parte 2 -->
+                        <li class="itemConSubmenu">
+                            <a href="./Css/cssParte2/index.html">
+                                <span>CSS Parte 2: Diseños y RWD</span>
+                                <span>&#9656;</span>
+                            </a>
+                            <ul class="submenuLateral">
+                                <li><a href="./Css/cssParte2/css20DivsInternosRelativos/index.html">20: DivsInternosRelativos</a></li>
+                                <li><a href="./Css/cssParte2/css21DivsInternosAbsolutos/index.html">21: DivsInternosAbsolutos</a></li>
+                                <li><a href="./Css/cssParte2/css22CentradoVerticalCajaFlex/index.html">22: CentradoVerticalCajaFlex</a></li>
+                                <li><a href="./Css/cssParte2/css25Menu/index.html">25: Menú Desplegable</a></li>
+                                <li><a href="./Css/cssParte2/css27FormsRWD/index.html">27: FormsRWD</a></li>
+                                <li><a href="./Css/cssParte2/css29TablasRWD/index.html">29: TablasRWD</a></li>
+                                <li><a href="./Css/cssParte2/css30LayoutBasico/index.html">30: LayoutBasico</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <!-- 3. MENÚ JAVASCRIPT -->
+                <li class="menuItem">
+                    <a href="./Jscript/index.html">JavaScript &#9662;</a>
+                    <ul class="submenu submenuScroll">
+                        <li><a href="./Jscript/js01_1_sentencias/index.html">01.1: Sentencias y Flujo de Escritura</a></li>
+                        <li><a href="./Jscript/js01_2_debugger/index.html">01.2: Debugger y DevTools</a></li>
+                        <li><a href="./Jscript/js02_comando_en_evento/index.html">02: Comandos en Evento</a></li>
+                        <li><a href="./Jscript/js03_1_variablesSimples/index.html">03.1: Variables Simples y Tipos</a></li>
+                        <li><a href="./Jscript/js03_5_alcance/index.html">03.5: Alcance (Scope) de Variables</a></li>
+                        <li><a href="./Jscript/js03_6_arreglos/index.html">03.6: Arreglos de Índice Numérico</a></li>
+                        <li><a href="./Jscript/js04_1_operaciones_sobre_input/index.html">04.1: Operaciones sobre Input</a></li>
+                        <li><a href="./Jscript/js04_2_operaciones_entre_inputs/index.html">04.2: Operaciones entre Múltiples Inputs</a></li>
+                        <li><a href="./Jscript/js04_3_funcionesCompartidas/index.html">04.3: Funciones Compartidas (Teclado)</a></li>
+                        <li><a href="./Jscript/js04_4_convertir_a_mayusculas/index.html">04.4: Conversión a Mayúsculas en focusout</a></li>
+                        <li><a href="./Jscript/js04_5_funcionFlecha/index.html">04.5: Función Flecha (Arrow Function)</a></li>
+                        <li><a href="./Jscript/js05_1_location/index.html">05.1: Redirección con BOM Location</a></li>
+                        <li><a href="./Jscript/js05_3_form_confirmacion/index.html">05.3: Confirmación de Formulario (confirm)</a></li>
+                        <li><a href="./Jscript/js06_1_idioma/index.html">06.1: Detección de Idioma del BOM</a></li>
+                        <li><a href="./Jscript/js05_6_variables_objeto_dato/index.html">05.6: Variables de Tipo Objeto de Dato</a></li>
+                        <li><a href="./Jscript/js06_validacionConKeyUp/index.html">06: Validación en Evento keyup</a></li>
+                        <li><a href="./Jscript/js07_form_abm/index.html">07: Formulario ABM Dinámico</a></li>
+                        <li><a href="./Jscript/js09_creacion_objetos/index.html">09: Creación Dinámica de Nodos DOM</a></li>
+                    </ul>
+                </li>
+
+            </ul>
         </nav>
 
-        <!-- Contenedor dinámico del listado -->
-        <main id="panelContenido"></main>
+        
     </div>
-
-    <!-- Script con objeto estructurado y renderizado dinámico (apunte pág. 1, 2, 3 y 4) -->
-    <script type="text/javascript">
-        const baseDeDatos = {
-            js: {
-                titulo: "Módulo de JavaScript (DOM, BOM y Eventos)",
-                secciones: [
-                    {
-                        subtitulo: "Ejercicios Prácticos",
-                        items: [
-                            { nombre: "js01_1: Sentencias y Flujo de Escritura", url: "./Jscript/js01_1_sentencias/index.html", desc: "Flujo de lectura/escritura, alertas sincrónicas y document.write()." },
-                            { nombre: "js01_2: Debugger y DevTools", url: "./Jscript/js01_2_debugger/index.html", desc: "Depuración en consola mediante console.log() y DevTools con F12." },
-                            { nombre: "js02: Comandos en Atributos de Evento", url: "./Jscript/js02_comando_en_evento/index.html", desc: "Código inline en onclick vs sobreescritura total con document.write()." },
-                            { nombre: "js03_1: Variables Simples y Tipos", url: "./Jscript/js03_1_variablesSimples/index.html", desc: "Operador typeof, coerción implícita de tipos y suma vs concatenación." },
-                            { nombre: "js03_5: Alcance (Scope) de Variables", url: "./Jscript/js03_5_alcance/index.html", desc: "Variables globales vs locales con var y asignación sin declarar." },
-                            { nombre: "js03_6: Arreglos de Índice Numérico", url: "./Jscript/js03_6_arreglos/index.html", desc: "Estructuras de array, método .push(), propiedad .length y typeof object." },
-                            { nombre: "js04_1: Operaciones sobre Input", url: "./Jscript/js04_1_operaciones_sobre_input/index.html", desc: "Captura de inputs del DOM y conversión obligatoria con parseInt()." },
-                            { nombre: "js04_2: Operaciones entre Múltiples Inputs", url: "./Jscript/js04_2_operaciones_entre_inputs/index.html", desc: "Suma, promedio y cálculo del mayor con salida a la propiedad .value." },
-                            { nombre: "js04_3: Funciones Compartidas", url: "./Jscript/js04_3_funcionesCompartidas/index.html", desc: "Teclado numérico, funciones con argumentos y lógica de acumulador." },
-                            { nombre: "js04_4: Conversión a Mayúsculas", url: "./Jscript/js04_4_convertir_a_mayusculas/index.html", desc: "Evento focusout, referencia contextual this y método .toUpperCase()." },
-                            { nombre: "js04_5: Función Flecha (Arrow Function)", url: "./Jscript/js04_5_funcionFlecha/index.html", desc: "Sintaxis moderna de funciones flecha en ES6 declaradas con const." },
-                            { nombre: "js05_1: Redirección con BOM Location", url: "./Jscript/js05_1_location/index.html", desc: "Navegación dinámica mediante el objeto location.href del BOM." },
-                            { nombre: "js05_3: Confirmación de Formulario", url: "./Jscript/js05_3_form_confirmacion/index.html", desc: "Intercepción de submit y reset con ventanas modales confirm()." },
-                            { nombre: "js06_1: Detección de Idioma del Navegador", url: "./Jscript/js06_1_idioma/index.html", desc: "Lectura con navigator.language, extracción con substr() y diccionarios objeto." },
-                            { nombre: "js05_6: Variables de Tipo Objeto de Dato", url: "./Jscript/js05_6_variables_objeto_dato/index.html", desc: "Colección de objetos, tabla con forEach, auto-barras en fecha y display toggle." },
-                            { nombre: "js06: Validación en Evento keyup", url: "./Jscript/js06_validacionConKeyUp/index.html", desc: "Evaluación reactiva con checkValidity() en tiempo real al soltar la tecla." },
-                            { nombre: "js07: Formulario ABM Dinámico", url: "./Jscript/js07_form_abm/index.html", desc: "Control con .disabled, foco con .select() y ruteo dinámico a alta, modi y baja." },
-                            { nombre: "js09: Creación Dinámica de Nodos DOM", url: "./Jscript/js09_creacion_objetos/index.html", desc: "Manipulación de árbol con createElement, appendChild, childNodes y removeChild." }
-                        ]
-                    }
-                ]
-            },
-            html: {
-                titulo: "Módulo de HTML (Estructura Semántica y Formularios)",
-                secciones: [
-                    {
-                        subtitulo: "Ejercicios Prácticos",
-                        items: [
-                            { nombre: "Ejercicio 1: Preguntas", url: "./Html/ejer01Preguntas/index.html", desc: "Estructuración de textos, encabezados, párrafos y contenido semántico." },
-                            { nombre: "Ejercicio 2: Tablas", url: "./Html/ejer02Tablas/index.html", desc: "Diseño y organización tabular con thead, tbody, tr y celdas th/td." },
-                            { nombre: "Ejercicio 3: Formularios", url: "./Html/ejer03Formularios/index.html", desc: "Campos de entrada variados, etiquetas asociadas y envío por método GET/POST." },
-                            { nombre: "Ejercicio 4: Iframes", url: "./Html/ejer04Iframe/index.html", desc: "Incrustación de documentos externos y marcos de navegación anidados." }
-                        ]
-                    }
-                ]
-            },
-            css: {
-                titulo: "Módulo de CSS (Hojas de Estilo en Cascada)",
-                secciones: [
-                    {
-                        subtitulo: "CSS Parte 1: Introducción, Cajas y Selectores",
-                        items: [
-                            { nombre: "Ejercicio 01: StyleHeader", url: "./Css/cssParte1/eje01StyleHeader/index.html", desc: "Estilos en línea y etiquetas de encabezado." },
-                            { nombre: "Ejercicio 02: SelectorDeClase", url: "./Css/cssParte1/eje02SelectorDeClase/index.html", desc: "Reutilización de reglas mediante selectores de clase (.clase)." },
-                            { nombre: "Ejercicio 03: StyleEnFile", url: "./Css/cssParte1/eje03StyleEnFile/index.html", desc: "Hojas de estilo externas vinculadas mediante etiqueta <link>." },
-                            { nombre: "Ejercicio 04: FontSize", url: "./Css/cssParte1/eje04FontSize/index.html", desc: "Tipografías, unidades de medida y dimensionamiento de fuentes." },
-                            { nombre: "Ejercicio 05: BackgroundFijo", url: "./Css/cssParte1/eje07BackgroundFijo/index.html", desc: "Propiedades de fondo fijo y scroll de contenido." },
-                            { nombre: "Ejercicio 06: CentradoYPadding", url: "./Css/cssParte1/eje08CentradoYPadding/index.html", desc: "Modelo de caja, márgenes automáticos y espaciado de relleno interno." },
-                            { nombre: "Ejercicio 07: DivsEnPila", url: "./Css/cssParte1/eje10DivsEnPila/index.html", desc: "Comportamiento de elementos en bloque apilados verticalmente." },
-                            { nombre: "Ejercicio 08: DivsEnFila", url: "./Css/cssParte1/eje11DivsEnFila/index.html", desc: "Alineación horizontal de bloques contenedores." },
-                            { nombre: "Ejercicio 09: DivsInternosEnColumnas", url: "./Css/cssParte1/eje14DivsInternosEnColumnas/index.html", desc: "Maquetación en columnas anidadas dentro de contenedores padre." },
-                            { nombre: "Ejercicio 10: SelectoresDeEvento", url: "./Css/cssParte1/eje16SelectoresDeEvento/index.html", desc: "Pseudoclases dinámicas para interactividad (:hover, :active, :focus)." }
-                        ]
-                    },
-                    {
-                        subtitulo: "CSS Parte 2: Diseños Avanzados y Maquetación RWD",
-                        items: [
-                            { nombre: "Ejercicio 20: DivsInternosRelativos", url: "./Css/cssParte2/css20DivsInternosRelativos/index.html", desc: "Posicionamiento relativo y ventana modal fija (position: fixed)." },
-                            { nombre: "Ejercicio 21: DivsInternosAbsolutos", url: "./Css/cssParte2/css21DivsInternosAbsolutos/index.html", desc: "Posicionamiento absoluto, apilamiento z-index y transform: rotateZ." },
-                            { nombre: "Ejercicio 22: CentradoVerticalCajaFlex", url: "./Css/cssParte2/css22CentradoVerticalCajaFlex/index.html", desc: "Centrado y redistribución con Flexbox (flex-wrap: wrap)." },
-                            { nombre: "Ejercicio 25: Menu", url: "./Css/cssParte2/css25Menu/index.html", desc: "Menús desplegables multinivel con selectores anidados (ul > ul)." },
-                            { nombre: "Ejercicio 27: FormsRWD", url: "./Css/cssParte2/css27FormsRWD/index.html", desc: "Formularios adaptables (RWD) con display: block y @media queries." },
-                            { nombre: "Ejercicio 29: TablasRWD", url: "./Css/cssParte2/css29TablasRWD/index.html", desc: "Tabla adaptable con scroll en tbody, atributos [campo-dato] y media queries." },
-                            { nombre: "Ejercicio 30: LayoutBasico", url: "./Css/cssParte2/css30LayoutBasico/index.html", desc: "Maquetación estructural básica (Header, Nav + Main con Iframe, Footer)." }
-                        ]
-                    }
-                ]
-            }
-        };
-
-        /* 2. Función controladora para renderizar la sección seleccionada (apunte pág. 3 y 4) */
-        function mostrarCategoria(claveCategoria, botonPulsado) {
-            const panel = document.getElementById("panelContenido");
-            const data = baseDeDatos[claveCategoria];
-
-            if (!data) return;
-
-            /* Manejo visual de pestaña activa */
-            const botones = document.querySelectorAll(".btnPestana");
-            botones.forEach(btn => btn.classList.remove("activa"));
-            if (botonPulsado) {
-                botonPulsado.classList.add("activa");
-            }
-
-            /* Construcción del HTML dinámico con forEach e innerHTML (apunte pág. 3 y 4) */
-            let html = "<h2 class='tituloSeccion'>" + data.titulo + "</h2>";
-            let totalEjercicios = 0;
-
-            data.secciones.forEach(function(seccion) {
-                html += "<h3 class='subtituloModulo'>" + seccion.subtitulo + "</h3>";
-                html += "<ul class='listaEjercicios'>";
-
-                seccion.items.forEach(function(item) {
-                    totalEjercicios++;
-                    html += "<li class='tarjetaEjercicio'>";
-                    html += "<a href='" + item.url + "'>" + item.nombre + "</a>";
-                    html += "<p class='descripcionEjercicio'>" + item.desc + "</p>";
-                    html += "</li>";
-                });
-
-                html += "</ul>";
-            });
-
-            html += "<p class='contadorTotal'>Total de trabajos en este módulo: " + totalEjercicios + "</p>";
-
-            panel.innerHTML = html;
-        }
-
-        /* Inicia mostrando JavaScript por defecto */
-        window.addEventListener("load", function() {
-            mostrarCategoria("js");
-        });
-    </script>
 
 </body>
 </html>
