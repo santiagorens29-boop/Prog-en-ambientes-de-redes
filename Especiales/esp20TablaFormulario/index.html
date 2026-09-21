@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabla y Formulario Juntos - Renglones de Factura</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #cbd5e1;
+            color: #0f172a;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 1. CONTENEDOR PRINCIPAL Y ESTADOS DE INTERACCIÓN (especiales.pdf pág. 7 y 8) */
+        #contenedorPrincipal {
+            width: 96vw;
+            max-width: 1200px;
+            background-color: #f7f9e8;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: opacity 0.25s ease;
+        }
+
+        .contenedorActivo {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .contenedorPasivo {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* Cabecera superior con título y 3 botones de control */
+        .cabeceraSuperior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background-color: #f7f9e8;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .cabeceraSuperior h2 {
+            margin: 0;
+            font-size: 1.35em;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .botoneraControl {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btnAccion {
+            padding: 8px 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            background-color: #f8fafc;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .btnAccion:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* Área de la tabla con scroll vertical */
+        .areaTablaScroll {
+            width: 100%;
+            overflow-x: auto;
+            background-color: #bae6fd; /* Tono celeste según capturas */
+        }
+
+        table {
+            width: 100%;
+            min-width: 950px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        /* Encabezado y pie en color coral */
+        thead tr, tfoot tr {
+            background-color: #ff6b52;
+            color: #ffffff;
+        }
+
+        thead th {
+            padding: 10px 12px;
+            font-size: 0.82em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-right: 1px solid #f87171;
+        }
+
+        thead th:last-child {
+            border-right: none;
+        }
+
+        tfoot td {
+            padding: 8px 12px;
+            font-size: 0.82em;
+            font-weight: 600;
+            border-right: 1px solid #f87171;
+        }
+
+        tfoot td:last-child {
+            border-right: none;
+        }
+
+        /* Cuerpo de la tabla */
+        tbody {
+            background-color: #ffffff;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fde8e4;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #e2e8f0;
+        }
+
+        tbody tr:hover {
+            background-color: #fed7aa;
+        }
+
+        tbody td {
+            padding: 8px 12px;
+            font-size: 0.86em;
+            color: #0f172a;
+        }
+
+        .pieSeccion {
+            background-color: #f7f9e8;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.88em;
+            color: #475569;
+            font-weight: 600;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .linkPdf {
+            color: #0284c7;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .linkPdf:hover {
+            text-decoration: underline;
+        }
+
+        /* 2. VENTANA MODAL (especiales.pdf pág. 7 y 8) */
+        #ventanaModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            max-width: 820px;
+            background-color: #94a3b8;
+            border: 1px solid #64748b;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+            border-radius: 4px;
+            z-index: 2000;
+            overflow: hidden;
+            transition: visibility 0.2s, opacity 0.2s;
+        }
+
+        .ventanaModalApagado {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .ventanaModalPrendido {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .barraTituloModal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #94a3b8;
+            padding: 8px 16px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .btnCerrarModal {
+            background: none;
+            border: none;
+            font-size: 1.3em;
+            font-weight: 800;
+            color: #dc2626;
+            cursor: pointer;
+            padding: 2px 6px;
+            line-height: 1;
+        }
+
+        .btnCerrarModal:hover {
+            color: #991b1b;
+        }
+
+        /* Subencabezado rojo del formulario según captura */
+        .subEncabezadoForm {
+            background-color: #991b1b;
+            color: #ffffff;
+            padding: 8px 16px;
+            font-weight: 700;
+            font-size: 0.95em;
+            text-align: center;
+        }
+
+        .cuerpoModal {
+            background-color: #f7f9e8;
+            padding: 20px 24px;
+        }
+
+        .formModalGrilla {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px 24px;
+        }
+
+        .campoGrupo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campoGrupo label {
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+
+        .campoControl {
+            padding: 7px 10px;
+            font-size: 0.9em;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .campoControl:focus {
+            border-color: #0284c7;
+        }
+
+        .campoControl[readonly] {
+            background-color: #e2e8f0;
+        }
+
+        .areaBotonEnviar {
+            grid-column: span 2;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        .btnEnviarModal {
+            padding: 8px 30px;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btnEnviarModal:hover {
+            background-color: #cbd5e1;
+        }
+
+        .pieModal {
+            background-color: #94a3b8;
+            padding: 8px 16px;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* RWD para modal y controles */
+        @media (max-width: 650px) {
+            .formModalGrilla {
+                grid-template-columns: 1fr;
+            }
+            .areaBotonEnviar {
+                grid-column: span 1;
+            }
+            .btnEnviarModal {
+                width: 100%;
+            }
+            .cabeceraSuperior {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .botoneraControl {
+                flex-wrap: wrap;
+            }
+            .btnAccion {
+                flex: 1;
+            }
+        }
+
+        .contenedorNavegacion {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .btnVolver {
+            padding: 8px 16px;
+            margin: 0 4px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL: TABLA DE FACTURAS -->
+    <div id="contenedorPrincipal" class="contenedorActivo">
+        <div class="cabeceraSuperior">
+            <h2>Renglones de Facturas de Compra</h2>
+            <div class="botoneraControl">
+                <button type="button" class="btnAccion" onclick="cargarDatos()">Cargar datos</button>
+                <button type="button" class="btnAccion" onclick="vaciarDatos()">Vaciar datos</button>
+                <button type="button" class="btnAccion" onclick="abrirModal()">Cargar Form</button>
+            </div>
+        </div>
+
+        <div class="areaTablaScroll">
+            <table id="tablaFacturas">
+                <thead>
+                    <tr>
+                        <th>NroFactura</th>
+                        <th>cod-prod</th>
+                        <th>Unidad-medida</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>PrecioUnit</th>
+                        <th>TotalRenglon</th>
+                        <th>PdfComprobante</th>
+                    </tr>
+                </thead>
+                <tbody id="tbDatos">
+                    <!-- Registros dinámicos -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>sum NroFactura</td>
+                        <td>sum cod-prod</td>
+                        <td>sum um</td>
+                        <td>sum descripción</td>
+                        <td id="totCantidad">0</td>
+                        <td>-</td>
+                        <td id="totMonto">$ 0.00</td>
+                        <td>-</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="pieSeccion">
+            Pie del informe de comprobantes de compra
+        </div>
+    </div>
+
+    <!-- VENTANA MODAL FLOTANTE (FORMULARIO ALTA) -->
+    <div id="ventanaModal" class="ventanaModalApagado">
+        <div class="barraTituloModal">
+            <span>Encabezado modal</span>
+            <button type="button" class="btnCerrarModal" title="Cerrar ventana" onclick="cerrarModal()">X</button>
+        </div>
+
+        <div class="subEncabezadoForm">
+            Formulario para ALTA - Renglones de Factura de Compra
+        </div>
+
+        <div class="cuerpoModal">
+            <form id="formAltaModal" onsubmit="event.preventDefault(); agregarRenglonDesdeForm();">
+                <div class="formModalGrilla">
+                    <div class="campoGrupo">
+                        <label for="modalNroFactura">NroFactura:</label>
+                        <input type="text" id="modalNroFactura" class="campoControl" placeholder="FC-A-0001-00004582" required />
+                    </div>
+
+                    <div class="campoGrupo">
+                        <label for="modalSelectUm">Unidad-medida:</label>
+                        <select id="modalSelectUm" class="campoControl" required>
+                            <option value="">Seleccione una unidad...</option>
+                        </select>
+                    </div>
+
+                    <div class="campoGrupo">
+                        <label for="modalCodProd">cod-prod:</label>
+                        <input type="text" id="modalCodProd" class="campoControl" placeholder="PRD-0101" required />
+                    </div>
+
+                    <div class="campoGrupo">
+                        <label for="modalCantidad">Cantidad:</label>
+                        <input type="number" id="modalCantidad" class="campoControl" min="1" value="1" required />
+                    </div>
+
+                    <div class="campoGrupo">
+                        <label for="modalDescripcion">Descripcion-producto-servicio:</label>
+                        <input type="text" id="modalDescripcion" class="campoControl" placeholder="Descripción del producto" required />
+                    </div>
+
+                    <div class="campoGrupo">
+                        <label for="modalPrecioUnit">PrecioUnit:</label>
+                        <input type="number" id="modalPrecioUnit" class="campoControl" step="0.01" min="0.01" placeholder="0.00" required />
+                    </div>
+
+                    <div class="campoGrupo">
+                        <label for="modalTotalRenglon">TotalRenglon:</label>
+                        <input type="number" id="modalTotalRenglon" class="campoControl" readonly placeholder="0.00" />
+                    </div>
+
+                    <div class="campoGrupo">
+                        <label for="modalPdf">PdfComprobante:</label>
+                        <input type="text" id="modalPdf" class="campoControl" placeholder="comprobante.pdf" required />
+                    </div>
+
+                    <div class="areaBotonEnviar">
+                        <button type="submit" class="btnEnviarModal">ENVIAR</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="pieModal">
+            Pie del formulario
+        </div>
+    </div>
+
+    <!-- Navegación inferior -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a Especiales</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+    <!-- Script con lógica de JSON, DOM dinámico, totales y Modal -->
+    <script type="text/javascript">
+        /* Variable JSON inicial con datos de Facturas (json.pdf y especiales.pdf) */
+        let textoJSONFacturas = '{"facturas": [' +
+            '{"nroFactura":"FC-0001-00001201", "codProd":"PNT-01", "descripcion":"Pintura Látex Interior Lavable", "unidadMedida":"Lt", "cantidad":10, "precioUnit":4500.00, "totalRenglon":45000.00, "pdfComprobante":"factura_1201.pdf"},' +
+            '{"nroFactura":"FC-0001-00001202", "codProd":"CEM-30", "descripcion":"Cemento Portland Tipo Loma", "unidadMedida":"bls30kg", "cantidad":25, "precioUnit":8200.00, "totalRenglon":205000.00, "pdfComprobante":"factura_1202.pdf"},' +
+            '{"nroFactura":"FC-0001-00001203", "codProd":"CAL-20", "descripcion":"Cal Hidráulica para Revoque", "unidadMedida":"bls20kg", "cantidad":40, "precioUnit":3100.50, "totalRenglon":124020.00, "pdfComprobante":"factura_1203.pdf"},' +
+            '{"nroFactura":"FC-0001-00001204", "codProd":"IMP-02", "descripcion":"Impermeabilizante Techos Rojo", "unidadMedida":"caja2lts", "cantidad":15, "precioUnit":9400.00, "totalRenglon":141000.00, "pdfComprobante":"factura_1204.pdf"},' +
+            '{"nroFactura":"FC-0001-00001205", "codProd":"SOL-01", "descripcion":"Solvente Sintético Desengrasante", "unidadMedida":"Lt", "cantidad":8, "precioUnit":3850.00, "totalRenglon":30800.00, "pdfComprobante":"factura_1205.pdf"},' +
+            '{"nroFactura":"FC-0001-00001206", "codProd":"CEM-30", "descripcion":"Cemento Reforzado Alta Resistencia", "unidadMedida":"bls30kg", "cantidad":30, "precioUnit":8500.00, "totalRenglon":255000.00, "pdfComprobante":"factura_1206.pdf"},' +
+            '{"nroFactura":"FC-0001-00001207", "codProd":"PNT-02", "descripcion":"Esmalte Satinado Blanco Puro", "unidadMedida":"caja2lts", "cantidad":12, "precioUnit":11200.00, "totalRenglon":134400.00, "pdfComprobante":"factura_1207.pdf"}' +
+        ']}';
+
+        /* Unidades de medida parametrizables para el select de la modal */
+        const textoUnidadesMedida = '{"unidades": [' +
+            '{"cod":"Lt", "desc":"Litros"},' +
+            '{"cod":"bls30kg", "desc":"Bolsa 30kg"},' +
+            '{"cod":"bls20kg", "desc":"Bolsa 20kg"},' +
+            '{"cod":"caja2lts", "desc":"Caja 2 litros"}' +
+        ']}';
+
+        /* 1. Carga del select de unidades al iniciar */
+        function cargarSelectModal() {
+            const objUm = JSON.parse(textoUnidadesMedida);
+            const select = document.getElementById("modalSelectUm");
+            objUm.unidades.forEach(function(item) {
+                const opt = document.createElement("option");
+                opt.value = item.cod;
+                opt.textContent = item.desc + " (" + item.cod + ")";
+                select.appendChild(opt);
+            });
+        }
+
+        /* 2. Cargar datos en la tabla (especiales.pdf pág. 6) */
+        function cargarDatos() {
+            const tbDatos = document.getElementById("tbDatos");
+            vaciarDatos();
+
+            const objJson = JSON.parse(textoJSONFacturas);
+            let acumCant = 0;
+            let acumMonto = 0;
+
+            objJson.facturas.forEach(function(item) {
+                agregarFilaATabla(item);
+                acumCant += item.cantidad;
+                acumMonto += item.totalRenglon;
+            });
+
+            document.getElementById("totCantidad").textContent = acumCant;
+            document.getElementById("totMonto").textContent = "$" + acumMonto.toFixed(2);
+        }
+
+        /* Helper para crear fila con createElement y setAttribute campo-dato */
+        function agregarFilaATabla(item) {
+            const tbDatos = document.getElementById("tbDatos");
+            const tr = document.createElement("tr");
+
+            const campos = [
+                { id: "nroFactura", valor: item.nroFactura },
+                { id: "codProd", valor: item.codProd },
+                { id: "unidadMedida", valor: item.unidadMedida },
+                { id: "descripcion", valor: item.descripcion },
+                { id: "cantidad", valor: item.cantidad },
+                { id: "precioUnit", valor: "$" + item.precioUnit.toFixed(2) },
+                { id: "totalRenglon", valor: "$" + item.totalRenglon.toFixed(2) },
+                { id: "pdfComprobante", valor: "<a class='linkPdf' href='#' onclick=\"alert('Abriendo comprobante: " + item.pdfComprobante + "'); return false;\">" + item.pdfComprobante + "</a>" }
+            ];
+
+            campos.forEach(function(campo) {
+                const td = document.createElement("td");
+                td.setAttribute("campo-dato", campo.id);
+                td.innerHTML = campo.valor;
+                tr.appendChild(td);
+            });
+
+            tbDatos.appendChild(tr);
+        }
+
+        /* 3. Vaciar datos del tbody (especiales.pdf pág. 3) */
+        function vaciarDatos() {
+            const tbDatos = document.getElementById("tbDatos");
+            while (tbDatos.childNodes.length > 0) {
+                tbDatos.removeChild(tbDatos.childNodes[0]);
+            }
+            document.getElementById("totCantidad").textContent = "0";
+            document.getElementById("totMonto").textContent = "$ 0.00";
+        }
+
+        /* 4. Funciones de apertura y cierre de modal con bloqueo de interacción (especiales.pdf pág. 7 y 8) */
+        function abrirModal() {
+            document.getElementById("contenedorPrincipal").className = "contenedorPasivo";
+            document.getElementById("ventanaModal").className = "ventanaModalPrendido";
+        }
+
+        function cerrarModal() {
+            document.getElementById("contenedorPrincipal").className = "contenedorActivo";
+            document.getElementById("ventanaModal").className = "ventanaModalApagado";
+        }
+
+        /* 5. Cálculo dinámico en el formulario modal */
+        const inCant = document.getElementById("modalCantidad");
+        const inPrec = document.getElementById("modalPrecioUnit");
+        const inTot = document.getElementById("modalTotalRenglon");
+
+        function recalcularTotalModal() {
+            const c = parseFloat(inCant.value) || 0;
+            const p = parseFloat(inPrec.value) || 0;
+            inTot.value = (c * p).toFixed(2);
+        }
+
+        inCant.addEventListener("keyup", recalcularTotalModal);
+        inCant.addEventListener("change", recalcularTotalModal);
+        inPrec.addEventListener("keyup", recalcularTotalModal);
+        inPrec.addEventListener("change", recalcularTotalModal);
+
+        /* 6. Agregar renglón cargado desde la modal a la tabla y actualizar acumulación */
+        function agregarRenglonDesdeForm() {
+            const c = parseFloat(inCant.value) || 0;
+            const p = parseFloat(inPrec.value) || 0;
+            const t = c * p;
+
+            const nuevoRegistro = {
+                nroFactura: document.getElementById("modalNroFactura").value,
+                codProd: document.getElementById("modalCodProd").value,
+                unidadMedida: document.getElementById("modalSelectUm").value,
+                descripcion: document.getElementById("modalDescripcion").value,
+                cantidad: c,
+                precioUnit: p,
+                totalRenglon: t,
+                pdfComprobante: document.getElementById("modalPdf").value
+            };
+
+            agregarFilaATabla(nuevoRegistro);
+
+            /* Actualiza acumuladores en el tfoot */
+            const cantActual = parseFloat(document.getElementById("totCantidad").textContent) || 0;
+            const montoActual = parseFloat(document.getElementById("totMonto").textContent.replace("$", "")) || 0;
+            document.getElementById("totCantidad").textContent = cantActual + c;
+            document.getElementById("totMonto").textContent = "$" + (montoActual + t).toFixed(2);
+
+            document.getElementById("formAltaModal").reset();
+            inTot.value = "";
+            cerrarModal();
+        }
+
+        window.addEventListener("load", function() {
+            cargarSelectModal();
+        });
+    </script>
+
+</body>
+</html>
