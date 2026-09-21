@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabla Dinámica - Renglones de Factura de Compra</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Contenedor principal responsive según viewport (captura 29 y 31) */
+        .contenedorTabla {
+            width: 96vw;
+            max-width: 1200px;
+            background-color: #f7f9e8;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        /* Cabecera superior con título y botones (captura 29) */
+        .cabeceraSuperior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background-color: #f7f9e8;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .cabeceraSuperior h2 {
+            margin: 0;
+            font-size: 1.3em;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .botoneraControl {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btnAccion {
+            padding: 9px 24px;
+            font-size: 0.9em;
+            font-weight: 600;
+            background-color: #f8fafc;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btnAccion:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* Contenedor con scroll de la tabla */
+        .areaTablaScroll {
+            width: 100%;
+            overflow-x: auto;
+            background-color: #cbd5e1; /* Fondo gris de la zona intermedia según captura 29 */
+        }
+
+        /* Estructura de la tabla con scroll vertical en tbody */
+        table {
+            width: 100%;
+            min-width: 900px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        /* Encabezado y Pie en tono coral/salmón según captura 29 y 30 */
+        thead tr, tfoot tr {
+            background-color: #ff6b52;
+            color: #ffffff;
+        }
+
+        thead th {
+            padding: 10px 12px;
+            font-size: 0.85em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-right: 1px solid #f87171;
+        }
+
+        thead th:last-child {
+            border-right: none;
+        }
+
+        tfoot td {
+            padding: 8px 12px;
+            font-size: 0.82em;
+            font-weight: 600;
+            border-right: 1px solid #f87171;
+        }
+
+        tfoot td:last-child {
+            border-right: none;
+        }
+
+        /* Cuerpo de la tabla con scroll */
+        tbody {
+            background-color: #f1f5f9;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #cbd5e1;
+            transition: background-color 0.15s ease;
+        }
+
+        /* Filas intercaladas según captura 30 */
+        tbody tr:nth-child(even) {
+            background-color: #fde8e4;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #e2e8f0;
+        }
+
+        tbody tr:hover {
+            background-color: #fed7aa;
+        }
+
+        tbody td {
+            padding: 9px 12px;
+            font-size: 0.88em;
+            color: #0f172a;
+        }
+
+        /* Pie general del ejercicio */
+        .pieSeccion {
+            background-color: #f7f9e8;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.9em;
+            color: #475569;
+            font-weight: 600;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        /* Enlace de comprobante PDF */
+        .linkPdf {
+            color: #0284c7;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .linkPdf:hover {
+            text-decoration: underline;
+        }
+
+        /* Barra de navegación inferior */
+        .contenedorNavegacion {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .btnVolver {
+            padding: 8px 16px;
+            margin: 0 4px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+
+        /* Adaptabilidad en pantallas reducidas */
+        @media (max-width: 768px) {
+            .cabeceraSuperior {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .botoneraControl {
+                justify-content: space-between;
+            }
+
+            .btnAccion {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedorTabla">
+        <!-- Barra superior -->
+        <div class="cabeceraSuperior">
+            <h2>Renglones de Facturas de Compra</h2>
+            <div class="botoneraControl">
+                <button type="button" id="btCargar" class="btnAccion" onclick="cargarDatos()">Cargar datos</button>
+                <button type="button" id="btVaciar" class="btnAccion" onclick="vaciarDatos()">Vaciar datos</button>
+            </div>
+        </div>
+
+        <!-- Área de la tabla -->
+        <div class="areaTablaScroll">
+            <table id="tablaFacturas">
+                <thead>
+                    <tr>
+                        <th>NroFactura</th>
+                        <th>cod-prod</th>
+                        <th>Unidad-medida</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>PrecioUnit</th>
+                        <th>TotalRenglon</th>
+                        <th>PdfComprobante</th>
+                    </tr>
+                </thead>
+                <tbody id="tbDatos">
+                    <!-- Filas generadas dinámicamente desde el JSON -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>sum NroFactura</td>
+                        <td>sum cod-prod</td>
+                        <td>sum um</td>
+                        <td>sum descripción</td>
+                        <td id="totCantidad">0</td>
+                        <td>-</td>
+                        <td id="totMonto">$ 0.00</td>
+                        <td>-</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="pieSeccion">
+            Pie de informe de comprobantes de compra
+        </div>
+    </div>
+
+    <!-- Script con manipulación de DOM, createElement, JSON.parse y atributos campo-dato -->
+    <script type="text/javascript">
+        /* 1. Variable JSON con los datos de Renglones de Factura asignados (json.pdf y especiales.pdf) */
+        const textoJSONFacturas = '{"facturas": [' +
+            '{"nroFactura":"FC-0001-00001201", "codProd":"PNT-01", "descripcion":"Pintura Látex Interior Lavable", "unidadMedida":"Lt", "cantidad":10, "precioUnit":4500.00, "totalRenglon":45000.00, "pdfComprobante":"factura_1201.pdf"},' +
+            '{"nroFactura":"FC-0001-00001202", "codProd":"CEM-30", "descripcion":"Cemento Portland Tipo Loma", "unidadMedida":"bls30kg", "cantidad":25, "precioUnit":8200.00, "totalRenglon":205000.00, "pdfComprobante":"factura_1202.pdf"},' +
+            '{"nroFactura":"FC-0001-00001203", "codProd":"CAL-20", "descripcion":"Cal Hidráulica para Revoque", "unidadMedida":"bls20kg", "cantidad":40, "precioUnit":3100.50, "totalRenglon":124020.00, "pdfComprobante":"factura_1203.pdf"},' +
+            '{"nroFactura":"FC-0001-00001204", "codProd":"IMP-02", "descripcion":"Impermeabilizante Techos Rojo", "unidadMedida":"caja2lts", "cantidad":15, "precioUnit":9400.00, "totalRenglon":141000.00, "pdfComprobante":"factura_1204.pdf"},' +
+            '{"nroFactura":"FC-0001-00001205", "codProd":"SOL-01", "descripcion":"Solvente Sintético Desengrasante", "unidadMedida":"Lt", "cantidad":8, "precioUnit":3850.00, "totalRenglon":30800.00, "pdfComprobante":"factura_1205.pdf"},' +
+            '{"nroFactura":"FC-0001-00001206", "codProd":"CEM-30", "descripcion":"Cemento Reforzado Alta Resistencia", "unidadMedida":"bls30kg", "cantidad":30, "precioUnit":8500.00, "totalRenglon":255000.00, "pdfComprobante":"factura_1206.pdf"},' +
+            '{"nroFactura":"FC-0001-00001207", "codProd":"PNT-02", "descripcion":"Esmalte Satinado Blanco Puro", "unidadMedida":"caja2lts", "cantidad":12, "precioUnit":11200.00, "totalRenglon":134400.00, "pdfComprobante":"factura_1207.pdf"}' +
+        ']}';
+
+        /* 2. Función para cargar dinámicamente los renglones (especiales.pdf pág. 6) */
+        function cargarDatos() {
+            const tbDatos = document.getElementById("tbDatos");
+
+            /* Evita duplicación si ya está cargada */
+            vaciarDatos();
+
+            /* Parseo del string JSON a objeto (json.pdf pág. 2) */
+            const objJson = JSON.parse(textoJSONFacturas);
+
+            let acumuladorCantidad = 0;
+            let acumuladorMonto = 0;
+
+            /* Recorrido con forEach creando nodos dinámicos (especiales.pdf pág. 6) */
+            objJson.facturas.forEach(function(item) {
+                const objTr = document.createElement("tr");
+
+                /* Celda 1: NroFactura */
+                const tdFac = document.createElement("td");
+                tdFac.setAttribute("campo-dato", "nroFactura");
+                tdFac.innerHTML = item.nroFactura;
+                objTr.appendChild(tdFac);
+
+                /* Celda 2: cod-prod */
+                const tdCod = document.createElement("td");
+                tdCod.setAttribute("campo-dato", "codProd");
+                tdCod.innerHTML = item.codProd;
+                objTr.appendChild(tdCod);
+
+                /* Celda 3: Unidad-medida */
+                const tdUm = document.createElement("td");
+                tdUm.setAttribute("campo-dato", "unidadMedida");
+                tdUm.innerHTML = item.unidadMedida;
+                objTr.appendChild(tdUm);
+
+                /* Celda 4: Descripción */
+                const tdDesc = document.createElement("td");
+                tdDesc.setAttribute("campo-dato", "descripcion");
+                tdDesc.innerHTML = item.descripcion;
+                objTr.appendChild(tdDesc);
+
+                /* Celda 5: Cantidad */
+                const tdCant = document.createElement("td");
+                tdCant.setAttribute("campo-dato", "cantidad");
+                tdCant.innerHTML = item.cantidad;
+                objTr.appendChild(tdCant);
+
+                /* Celda 6: PrecioUnit */
+                const tdPrecio = document.createElement("td");
+                tdPrecio.setAttribute("campo-dato", "precioUnit");
+                tdPrecio.innerHTML = "$" + item.precioUnit.toFixed(2);
+                objTr.appendChild(tdPrecio);
+
+                /* Celda 7: TotalRenglon */
+                const tdTotal = document.createElement("td");
+                tdTotal.setAttribute("campo-dato", "totalRenglon");
+                tdTotal.innerHTML = "$" + item.totalRenglon.toFixed(2);
+                objTr.appendChild(tdTotal);
+
+                /* Celda 8: PdfComprobante */
+                const tdPdf = document.createElement("td");
+                tdPdf.setAttribute("campo-dato", "pdfComprobante");
+                tdPdf.innerHTML = "<a class='linkPdf' href='#' onclick=\"alert('Abriendo: " + item.pdfComprobante + "'); return false;\">" + item.pdfComprobante + "</a>";
+                objTr.appendChild(tdPdf);
+
+                /* Inserta la fila completa en tbody */
+                tbDatos.appendChild(objTr);
+
+                acumuladorCantidad += item.cantidad;
+                acumuladorMonto += item.totalRenglon;
+            });
+
+            /* Actualización de totales en el tfoot */
+            document.getElementById("totCantidad").innerHTML = acumuladorCantidad;
+            document.getElementById("totMonto").innerHTML = "$" + acumuladorMonto.toFixed(2);
+        }
+
+        /* 3. Función para vaciar el tbody (especiales.pdf pág. 3) */
+        function vaciarDatos() {
+            const tbDatos = document.getElementById("tbDatos");
+            while (tbDatos.childNodes.length > 0) {
+                tbDatos.removeChild(tbDatos.childNodes[0]);
+            }
+            document.getElementById("totCantidad").innerHTML = "0";
+            document.getElementById("totMonto").innerHTML = "$ 0.00";
+        }
+    </script>
+
+    <!-- Barra de retorno -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a Especiales</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
