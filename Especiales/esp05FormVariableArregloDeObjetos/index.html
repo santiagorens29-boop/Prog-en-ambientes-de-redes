@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alta de Renglón de Factura de Compra</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Contenedor principal con fondo beige/amarillo claro según captura */
+        .contenedorFormulario {
+            background-color: #f7f9e8;
+            border: 1px solid #cbd5e1;
+            width: 95vw;
+            max-width: 900px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        /* Encabezado gris */
+        .encabezadoForm {
+            background-color: #e2e8f0;
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .encabezadoForm h2 {
+            margin: 0;
+            font-size: 1.4em;
+            color: #0f172a;
+        }
+
+        .encabezadoForm h3 {
+            margin: 4px 0 0 0;
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        /* Formulario con grilla fluida responsive (2 columnas en desktop) */
+        form {
+            padding: 25px 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 30px;
+        }
+
+        .campoGrupo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campoGrupo label {
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-bottom: 6px;
+            color: #0f172a;
+        }
+
+        .campoControl {
+            padding: 10px 12px;
+            font-size: 0.95em;
+            border: 1px solid #94a3b8;
+            border-radius: 3px;
+            background-color: #ffffff;
+            outline: none;
+            width: 100%;
+            transition: border-color 0.2s ease;
+        }
+
+        .campoControl:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+        }
+
+        .campoControl[readonly] {
+            background-color: #e2e8f0;
+            cursor: not-allowed;
+        }
+
+        /* Botón Enviar */
+        .areaBoton {
+            grid-column: span 2;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        .btnEnviar {
+            padding: 12px 35px;
+            background-color: #cbd5e1;
+            color: #0f172a;
+            border: 1px solid #94a3b8;
+            font-weight: 700;
+            font-size: 0.95em;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btnEnviar:hover {
+            background-color: #94a3b8;
+            color: #ffffff;
+        }
+
+        /* Pie del formulario */
+        .pieForm {
+            background-color: #e2e8f0;
+            padding: 12px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #475569;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        /* ADAPTACIÓN VIEWPORT / RWD (Una sola columna en pantallas angostas) */
+        @media (max-width: 650px) {
+            form {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 18px 20px;
+            }
+
+            .areaBoton {
+                grid-column: span 1;
+                justify-content: stretch;
+            }
+
+            .btnEnviar {
+                width: 100%;
+            }
+        }
+
+        /* Barra de navegación de retorno */
+        .contenedorNavegacion {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .btnVolver {
+            padding: 8px 16px;
+            margin: 0 4px;
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btnVolver:hover {
+            background-color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedorFormulario">
+        <div class="encabezadoForm">
+            <h2>Formulario para ALTA</h2>
+            <h3>Renglones de Factura de Compra</h3>
+        </div>
+
+        <form id="formFactura" action="#" method="get">
+            <!-- Nro Factura -->
+            <div class="campoGrupo">
+                <label for="nroFactura">NroFactura:</label>
+                <input type="text" id="nroFactura" name="nroFactura" class="campoControl" placeholder="FC-A-0001-00004582" required />
+            </div>
+
+            <!-- Unidad de Medida: CARGADA DESDE JSON -->
+            <div class="campoGrupo">
+                <label for="selectUnidadMedida">Unidad-medida:</label>
+                <select id="selectUnidadMedida" name="unidadMedida" class="campoControl" required>
+                    <option value="">Seleccione una unidad...</option>
+                </select>
+            </div>
+
+            <!-- Código de Producto -->
+            <div class="campoGrupo">
+                <label for="codProd">cod-prod:</label>
+                <input type="text" id="codProd" name="codProd" class="campoControl" placeholder="PRD-0101" required />
+            </div>
+
+            <!-- Cantidad -->
+            <div class="campoGrupo">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" class="campoControl" min="1" value="1" required />
+            </div>
+
+            <!-- Descripción -->
+            <div class="campoGrupo">
+                <label for="descripcion">Descripcion-producto-servicio:</label>
+                <input type="text" id="descripcion" name="descripcion" class="campoControl" placeholder="Descripción del ítem" required />
+            </div>
+
+            <!-- Precio Unitario -->
+            <div class="campoGrupo">
+                <label for="precioUnit">PrecioUnit:</label>
+                <input type="number" id="precioUnit" name="precioUnit" class="campoControl" step="0.01" min="0.01" placeholder="0.00" required />
+            </div>
+
+            <!-- Total Renglón (Calculado automáticamente) -->
+            <div class="campoGrupo">
+                <label for="totalRenglon">TotalRenglon:</label>
+                <input type="number" id="totalRenglon" name="totalRenglon" class="campoControl" readonly placeholder="0.00" />
+            </div>
+
+            <!-- PDF Comprobante -->
+            <div class="campoGrupo">
+                <label for="pdfComprobante">PdfComprobante:</label>
+                <input type="text" id="pdfComprobante" name="pdfComprobante" class="campoControl" placeholder="archivo_comprobante.pdf" required />
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="areaBoton">
+                <button type="submit" class="btnEnviar">ENVIAR</button>
+            </div>
+        </form>
+
+        <div class="pieForm">
+            Pie del formulario
+        </div>
+    </div>
+
+    <!-- Script con JSON.parse, forEach dinámico y cálculo automático (json.pdf y especiales.pdf) -->
+    <script type="text/javascript">
+        /* 1. Variable con la cadena en formato textual JSON (json.pdf pág. 1 y especiales.pdf pág. 4) */
+        const textoUnidadesMedida = '{"unidadesMedida": [' +
+            '{"codUni":"Lt", "descripcion":"Litros"},' +
+            '{"codUni":"bls30kg", "descripcion":"Bolsa 30kg"},' +
+            '{"codUni":"bls20kg", "descripcion":"Bolsa 20kg"},' +
+            '{"codUni":"caja2lts", "descripcion":"Caja 2 litros"}' +
+        ']}';
+
+        /* 2. Parseo de JSON a objeto nativo de JavaScript (json.pdf pág. 2 y especiales.pdf pág. 5) */
+        const objJson = JSON.parse(textoUnidadesMedida);
+
+        /* 3. Creación dinámica de elementos <option> dentro del <select> (especiales.pdf pág. 5) */
+        function cargarSelectUnidades() {
+            const select = document.getElementById("selectUnidadMedida");
+
+            objJson.unidadesMedida.forEach(function(item) {
+                const opcion = document.createElement("option");
+                opcion.setAttribute("value", item.codUni);
+                opcion.innerHTML = item.descripcion + " (" + item.codUni + ")";
+                select.appendChild(opcion);
+            });
+        }
+
+        /* 4. Cálculo en tiempo real de TotalRenglon = Cantidad * PrecioUnit */
+        const inputCantidad = document.getElementById("cantidad");
+        const inputPrecio = document.getElementById("precioUnit");
+        const inputTotal = document.getElementById("totalRenglon");
+
+        function calcularTotal() {
+            const cant = parseFloat(inputCantidad.value) || 0;
+            const precio = parseFloat(inputPrecio.value) || 0;
+            inputTotal.value = (cant * precio).toFixed(2);
+        }
+
+        inputCantidad.addEventListener("keyup", calcularTotal);
+        inputCantidad.addEventListener("change", calcularTotal);
+        inputPrecio.addEventListener("keyup", calcularTotal);
+        inputPrecio.addEventListener("change", calcularTotal);
+
+        /* Ejecución al cargar */
+        window.addEventListener("load", function() {
+            cargarSelectUnidades();
+        });
+    </script>
+
+    <!-- Barra de retorno -->
+    <div class="contenedorNavegacion">
+        <button class="btnVolver" type="button" onclick="location.href='../index.html'">Volver a Especiales</button>
+        <button class="btnVolver" type="button" onclick="location.href='../../index.html'">Volver al Inicio</button>
+    </div>
+
+</body>
+</html>
