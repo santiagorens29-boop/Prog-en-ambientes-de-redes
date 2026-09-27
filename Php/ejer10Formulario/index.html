@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10 - Formulario sin validación (GET)</title>
+    <link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+
+<div class="tarjeta">
+    <h1>Envío de Datos (Método GET)</h1>
+    
+    <!-- Formulario sin validación para experimentar el flujo nativo -->
+    <form action="./respuesta.php" method="get">
+        <div class="grupo-campo">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre">
+        </div>
+
+        <div class="grupo-campo">
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido">
+        </div>
+
+        <button type="submit" class="btn-enviar">Ingresar la información</button>
+    </form>
+</div>
+
+</body>
+</html>
