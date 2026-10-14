@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 18 - Formulario a JSON con Fetch</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cabecera {
+            width: 100%;
+            max-width: 650px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-volver {
+            padding: 8px 14px;
+            background-color: #475569;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .tarjeta-formulario {
+            background: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #2563eb;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .subtitulo-alumno {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .campo {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 4px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            outline: none;
+            background-color: #f8fafc;
+        }
+
+        input:focus, select:focus {
+            border-color: #2563eb;
+            background-color: #ffffff;
+        }
+
+        .fila-doble {
+            display: flex;
+            gap: 15px;
+        }
+
+        .fila-doble .campo {
+            flex: 1;
+        }
+
+        .contenedor-botones {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-tradicional {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-tradicional:hover {
+            background-color: #cbd5e1;
+        }
+
+        .btn-ajax {
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 11px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-ajax:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-ajax:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        #mensajeEspera {
+            margin-top: 14px;
+            font-size: 0.88rem;
+            color: #b45309;
+            font-weight: bold;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cabecera">
+        <a href="../index.html" class="btn-volver">&larr; Volver al Menú PHP</a>
+    </div>
+
+    <div class="tarjeta-formulario">
+        <h2>13) Renglones de factura de compra</h2>
+        <p class="subtitulo-alumno">Alumno: Rens Santiago</p>
+
+        <!-- Formulario configurado con action y method para el envío tradicional -->
+        <form id="formFactura" method="post" action="./respuesta.php">
+            <div class="fila-doble">
+                <div class="campo">
+                    <label for="nroFactura">NroFactura:</label>
+                    <input type="text" id="nroFactura" name="nroFactura" value="FC-A-0001-00004821" required>
+                </div>
+                <div class="campo">
+                    <label for="codProd">cod-prod:</label>
+                    <input type="text" id="codProd" name="codProd" value="PRD-9902" required>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="descripcion">Descripcion-producto-servicio:</label>
+                <input type="text" id="descripcion" name="descripcion" value="Modulo Memoria Servidor 32GB" required>
+            </div>
+
+            <div class="campo">
+                <label for="unidadMedida">Unidad-medida (parametrizable):</label>
+                <select id="unidadMedida" name="unidadMedida">
+                    <option value="caja2lts">caja2lts</option>
+                    <option value="bls30kg">bls30kg</option>
+                    <option value="bls20kg">bls20kg</option>
+                    <option value="Lt">Lt</option>
+                    <option value="unidades" selected>unidades</option>
+                </select>
+            </div>
+
+            <div class="fila-doble">
+                <div class="campo">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" value="5" step="1" required>
+                </div>
+                <div class="campo">
+                    <label for="precioUnit">PrecioUnit ($):</label>
+                    <input type="number" id="precioUnit" name="precioUnit" value="45000" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="fila-doble">
+                <div class="campo">
+                    <label for="totalRenglon">TotalRenglon ($):</label>
+                    <input type="number" id="totalRenglon" name="totalRenglon" value="225000" readonly style="background-color: #e2e8f0;">
+                </div>
+                <div class="campo">
+                    <label for="pdfComprobante">PdfComprobante:</label>
+                    <input type="text" id="pdfComprobante" name="pdfComprobante" value="comprobante_fc_4821.pdf">
+                </div>
+            </div>
+
+            <div class="contenedor-botones">
+                <!-- Botón 1: Envío convencional (recarga y reemplaza la pantalla por el JSON) -->
+                <button type="submit" class="btn-tradicional">Enviar form de manera tradicional</button>
+
+                <!-- Botón 2: Disparo AJAX asincrónico -->
+                <button type="button" id="btnDisparoAjax" class="btn-ajax">Disparar requerimiento asincrónico AJAX</button>
+            </div>
+
+            <p id="mensajeEspera">&#9203; Esperando 3 segundos de respuesta del servidor...</p>
+        </form>
+    </div>
+
+    <script>
+        // Cálculo dinámico automático del total del renglón en el cliente
+        const inputCant = document.getElementById('cantidad');
+        const inputPrecio = document.getElementById('precioUnit');
+        const inputTotal = document.getElementById('totalRenglon');
+
+        function actualizarTotal() {
+            const cant = parseFloat(inputCant.value) || 0;
+            const precio = parseFloat(inputPrecio.value) || 0;
+            inputTotal.value = (cant * precio).toFixed(2);
+        }
+
+        inputCant.addEventListener('input', actualizarTotal);
+        inputPrecio.addEventListener('input', actualizarTotal);
+
+        // Lógica de AJAX mediante API Fetch y FormData (phpParte2.pdf Páginas 11 y 12)
+        const formFactura = document.getElementById('formFactura');
+        const btnAjax = document.getElementById('btnDisparoAjax');
+        const mensajeEspera = document.getElementById('mensajeEspera');
+
+        btnAjax.addEventListener('click', function () {
+            // Empaquetado completo del formulario con FormData (Página 11)
+            const objDatosFormulario = new FormData(formFactura);
+
+            // Opciones de configuración de fetch (Página 12)
+            const options = {
+                method: 'POST',
+                body: objDatosFormulario
+            };
+
+            // Indicador de espera
+            btnAjax.disabled = true;
+            mensajeEspera.style.display = 'block';
+
+            // Disparo asincrónico
+            fetch('./respuesta.php', options)
+                .then(respuesta => {
+                    return respuesta.text(); // Extraemos la respuesta como texto
+                })
+                .then(textoRespuesta => {
+                    // Alerta cuando la promesa es CUMPLIDA tras la demora simulada
+                    alert("Respuesta recibida por AJAX (Promesa Cumplida):\n\n" + textoRespuesta);
+                    mensajeEspera.style.display = 'none';
+                    btnAjax.disabled = false;
+                })
+                .catch(error => {
+                    alert("Fallo de red: " + error.message);
+                    mensajeEspera.style.display = 'none';
+                    btnAjax.disabled = false;
+                });
+        });
+    </script>
+</body>
+</html>
