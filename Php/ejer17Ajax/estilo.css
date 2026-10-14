@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    padding: 25px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cabecera-ejercicio {
+    width: 100%;
+    max-width: 950px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.boton-volver {
+    padding: 8px 16px;
+    background-color: #334155;
+    color: #f8fafc;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.boton-volver:hover {
+    background-color: #475569;
+}
+
+/* Grilla modular de 4 paneles */
+.contenedor-paneles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 18px;
+    width: 100%;
+    max-width: 950px;
+}
+
+.panel {
+    background-color: #1e293b;
+    border-radius: 8px;
+    padding: 22px;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.panel h2 {
+    font-size: 1.15rem;
+    margin-bottom: 15px;
+    color: #38bdf8;
+    border-bottom: 2px solid #0284c7;
+    padding-bottom: 6px;
+}
+
+/* Panel Entrada */
+.grupo-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.grupo-input label {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+
+.grupo-input input[type="text"] {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #475569;
+    background-color: #0f172a;
+    color: #f8fafc;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.grupo-input input[type="text"]:focus {
+    border-color: #38bdf8;
+}
+
+/* Panel Botón Disparador */
+.panel-accion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1e293b 0%, #172554 100%);
+}
+
+.btn-encriptar {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.15s, background-color 0.2s;
+}
+
+.btn-encriptar:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.btn-encriptar:disabled {
+    background-color: #475569;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Panel Estado de Requerimiento (Promesa) */
+.estado-promesa {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.estado-inicial {
+    background-color: #334155;
+    color: #cbd5e1;
+}
+
+.estado-pendiente {
+    background-color: #b45309;
+    color: #fef08a;
+    animation: palpitar 1.2s infinite;
+}
+
+.estado-cumplido {
+    background-color: #15803d;
+    color: #bbf7d0;
+}
+
+.estado-error {
+    background-color: #b91c1c;
+    color: #fecaca;
+}
+
+@keyframes palpitar {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* Panel Resultado */
+.panel-resultado {
+    grid-column: span 2;
+    min-height: 180px;
+    background-color: #0b1329;
+}
+
+.resultado-contenido {
+    font-family: Consolas, monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #f8fafc;
+}
+
+.resultado-contenido .res-item {
+    margin-bottom: 12px;
+}
+
+.resultado-contenido .res-hash {
+    display: block;
+    background-color: #1e293b;
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: #38bdf8;
+    word-break: break-all;
+    border: 1px solid #334155;
+}

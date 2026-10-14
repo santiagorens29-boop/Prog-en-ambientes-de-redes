@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 17 - AJAX y Promesas con API Fetch</title>
+    <link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+
+    <div class="cabecera-ejercicio">
+        <a href="../index.html" class="boton-volver">&larr; Volver al Menú PHP</a>
+        <h1>Ejercicio 17: Comunicación Asincrónica con AJAX y Fetch</h1>
+    </div>
+
+    <div class="contenedor-paneles">
+        <!-- Panel 1: Entrada -->
+        <div class="panel">
+            <h2>Ingrese dato de entrada:</h2>
+            <div class="grupo-input">
+                <label for="entradaClave">Texto / Clave a encriptar:</label>
+                <input type="text" id="entradaClave" placeholder="Escriba aquí..." autofocus autocomplete="off">
+            </div>
+        </div>
+
+        <!-- Panel 2: Disparo Asincrónico -->
+        <div class="panel panel-accion">
+            <h2>Acción Asincrónica:</h2>
+            <button id="btnDisparo" class="btn-encriptar">
+                <span>Encriptar mediante AJAX</span>
+                <span style="font-size: 1.3rem;">&rarr;</span>
+            </button>
+        </div>
+
+        <!-- Panel 3: Monitor de Estado de la Promesa -->
+        <div class="panel">
+            <h2>Estado del requerimiento:</h2>
+            <p>Estado de la promesa asincrónica:</p>
+            <span id="badgeEstado" class="estado-promesa estado-inicial">SIN INICIAR</span>
+        </div>
+
+        <!-- Panel 4: Destino del Resultado devuelto por el Servidor -->
+        <div class="panel panel-resultado">
+            <h2>Resultado del Servidor:</h2>
+            <div id="contenedorResultado" class="resultado-contenido">
+                <p style="color: #64748b; font-style: italic;">Esperando el disparo del requerimiento para procesar...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de control AJAX nativo -->
+    <script src="./script.js"></script>
+</body>
+</html>
