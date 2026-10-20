@@ -21,7 +21,6 @@
             padding: 15px 25px;
         }
 
-        /* Barra de navegación superior */
         .barra-nav {
             display: flex;
             justify-content: space-between;
@@ -44,7 +43,6 @@
             background-color: #475569;
         }
 
-        /* Contenedor tipo SPA */
         .tablero-spa {
             background-color: #1e293b;
             border-radius: 8px;
@@ -56,7 +54,6 @@
             flex: 1;
         }
 
-        /* Encabezado superior */
         .tablero-header {
             background-color: #f8fafc;
             color: #0f172a;
@@ -133,7 +130,6 @@
             opacity: 0.9;
         }
 
-        /* Tabla y estructura con scroll interno */
         .contenedor-tabla {
             width: 100%;
             overflow-x: auto;
@@ -155,7 +151,6 @@
             z-index: 10;
         }
 
-        /* Fila de Títulos con ordenamiento */
         .fila-titulos th {
             background-color: #ef4444;
             color: #ffffff;
@@ -173,7 +168,6 @@
             text-decoration: underline;
         }
 
-        /* Fila de Filtros */
         .fila-filtros th {
             background-color: #fee2e2;
             padding: 6px 8px;
@@ -192,7 +186,6 @@
             outline: none;
         }
 
-        /* Cuerpo de la tabla con scroll */
         tbody {
             background-color: #334155;
             color: #f8fafc;
@@ -217,6 +210,17 @@
             border-right: 1px solid #475569;
         }
 
+        .btn-pdf {
+            display: inline-block;
+            background-color: #ef4444;
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
         .estado-espera {
             text-align: center;
             font-style: italic;
@@ -225,7 +229,6 @@
             font-size: 0.95rem;
         }
 
-        /* Pie de tabla y contador */
         .tablero-footer {
             background-color: #f8fafc;
             color: #0f172a;
@@ -247,7 +250,6 @@
     </div>
 
     <div class="tablero-spa">
-        <!-- Encabezado del Tablero -->
         <div class="tablero-header">
             <div class="tablero-titulo">
                 <h1>Renglones de Factura de Compra</h1>
@@ -264,11 +266,9 @@
             </div>
         </div>
 
-        <!-- Tabla con Scroll Interno -->
         <div class="contenedor-tabla">
             <table>
                 <thead>
-                    <!-- Fila 1: Títulos interactivos para cambiar el orden (clic en th) -->
                     <tr class="fila-titulos">
                         <th data-col="nro_factura" title="Ordenar por NroFactura">Nro Factura &uarr;&darr;</th>
                         <th data-col="cod_prod" title="Ordenar por Código Producto">Cód Prod &uarr;&darr;</th>
@@ -277,10 +277,9 @@
                         <th data-col="cantidad" title="Ordenar por Cantidad">Cantidad &uarr;&darr;</th>
                         <th data-col="precio_unit" title="Ordenar por Precio">Precio Unit &uarr;&darr;</th>
                         <th data-col="total_renglon" title="Ordenar por Total">Total Renglón &uarr;&darr;</th>
-                        <th data-col="fecha_factura" title="Ordenar por Fecha">Fecha Factura &uarr;&darr;</th>
+                        <th data-col="pdf_comprobante" title="Ordenar por Comprobante">PdfComprobante &uarr;&darr;</th>
                     </tr>
 
-                    <!-- Fila 2: Inputs de filtro por columna -->
                     <tr class="fila-filtros">
                         <th><input type="text" id="f_nro_factura" placeholder="Filtrar nro..."></th>
                         <th><input type="text" id="f_cod_prod" placeholder="Filtrar cód..."></th>
@@ -293,7 +292,7 @@
                         <th><input type="text" id="f_cantidad" disabled placeholder="-"></th>
                         <th><input type="text" id="f_precio_unit" disabled placeholder="-"></th>
                         <th><input type="text" id="f_total_renglon" disabled placeholder="-"></th>
-                        <th><input type="text" id="f_fecha_factura" placeholder="AAAA-MM-DD"></th>
+                        <th><input type="text" id="f_pdf_comprobante" placeholder="Filtrar pdf..."></th>
                     </tr>
                 </thead>
                 <tbody id="cuerpoTabla">
@@ -304,14 +303,12 @@
             </table>
         </div>
 
-        <!-- Pie con contador de registros -->
         <div class="tablero-footer">
             <div id="lblRegistros">Nro de registros: 0</div>
             <div>Pie de Tablero SPA</div>
         </div>
     </div>
 
-    <!-- Script de Control del Tablero (Patrón Plantilla/Control en JS nativo) -->
     <script>
         const inputOrden = document.getElementById('orden');
         const btnCargar = document.getElementById('btnCargar');
@@ -324,14 +321,13 @@
         const fNroFactura = document.getElementById('f_nro_factura');
         const fCodProd = document.getElementById('f_cod_prod');
         const fDescripcion = document.getElementById('f_descripcion');
-        const fFechaFactura = document.getElementById('f_fecha_factura');
+        const fPdfComprobante = document.getElementById('f_pdf_comprobante');
 
-        // 1. Cargar combo auxiliar de unidades de medida al iniciar la SPA (phpParteTresBaseDeDatosApunte.pdf)
+        // 1. Cargar combo auxiliar de unidades de medida al inicio
         document.addEventListener('DOMContentLoaded', function () {
             fetch('./salidaJsonUnidadesMedida.php')
                 .then(res => res.json())
                 .then(data => {
-                    // Alert didáctico mostrando el JSON auxiliar recibido
                     alert("Alerta al abrir el ejercicio (Tabla Auxiliar de Unidades de Medida en JSON):\n\n" + JSON.stringify(data));
 
                     if (data.unidadesMedida) {
@@ -346,25 +342,22 @@
                 .catch(err => console.error("Error al cargar unidades:", err));
         });
 
-        // 2. Función principal cargaTabla()
+        // 2. Función cargaTabla()
         function cargaTabla() {
-            // A. Construcción de parámetros con URLSearchParams (Página 4 del apunte)
             const objDatosOrdenFiltros = new URLSearchParams();
             objDatosOrdenFiltros.append('orden', inputOrden.value);
             objDatosOrdenFiltros.append('f_nro_factura', fNroFactura.value);
             objDatosOrdenFiltros.append('f_cod_prod', fCodProd.value);
             objDatosOrdenFiltros.append('f_descripcion', fDescripcion.value);
             objDatosOrdenFiltros.append('f_unidad_medida', selectUnidad.value);
-            objDatosOrdenFiltros.append('f_fecha_factura', fFechaFactura.value);
+            objDatosOrdenFiltros.append('f_pdf_comprobante', fPdfComprobante.value);
 
-            // B. Primer Alert: Parámetros salientes en el body del requerimiento POST
+            // Alert 1: Parámetros en el body POST
             alert("Lo que sale del navegador en el body (POST):\n" + objDatosOrdenFiltros.toString());
 
-            // C. Vaciado del tbody y mensaje de espera (Página 4)
             cuerpoTabla.innerHTML = '<tr><td colspan="8" class="estado-espera">Esperando respuesta del servidor...</td></tr>';
             lblRegistros.textContent = 'Nro de registros: ...';
 
-            // D. Disparo asincrónico con fetch
             const options = {
                 method: 'POST',
                 headers: {
@@ -374,9 +367,9 @@
             };
 
             fetch('./salidaJsonFacturasConPrepare.php', options)
-                .then(res => res.text()) // Extraemos el texto crudo para el alert pedagógico
+                .then(res => res.text())
                 .then(textoJson => {
-                    // E. Segundo Alert: Promesa cumplida y contenido JSON en crudo
+                    // Alert 2: Promesa Cumplida con JSON en crudo
                     alert("Respuesta arribada del servidor (Promesa Cumplida):\n\n" + textoJson);
 
                     const data = JSON.parse(textoJson);
@@ -394,7 +387,6 @@
                         return;
                     }
 
-                    // F. Poblamiento dinámico de filas y celdas
                     data.renglones.forEach(r => {
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
@@ -405,12 +397,13 @@
                             <td>${r.cantidad}</td>
                             <td>$${r.precio_unit.toFixed(2)}</td>
                             <td>$${r.total_renglon.toFixed(2)}</td>
-                            <td>${r.fecha_factura}</td>
+                            <td>
+                                <span class="btn-pdf" title="Comprobante digital">&#128196; ${r.pdf_comprobante}</span>
+                            </td>
                         `;
                         cuerpoTabla.appendChild(tr);
                     });
 
-                    // G. Actualización del contador de registros
                     lblRegistros.textContent = 'Nro de registros: ' + (data.cuenta !== undefined ? data.cuenta : data.renglones.length);
                 })
                 .catch(err => {
@@ -420,7 +413,7 @@
                 });
         }
 
-        // 3. Manejadores de Eventos
+        // Manejadores de eventos
         btnCargar.addEventListener('click', cargaTabla);
 
         btnVaciar.addEventListener('click', function () {
@@ -428,7 +421,6 @@
             lblRegistros.textContent = 'Nro de registros: 0';
         });
 
-        // Evento de ordenamiento al hacer clic sobre los encabezados th (Página 6)
         document.querySelectorAll('.fila-titulos th').forEach(th => {
             th.addEventListener('click', function () {
                 const columna = this.getAttribute('data-col');
@@ -437,11 +429,9 @@
             });
         });
 
-        // Filtrado dinámico cuando cambia el combo desplegable
         selectUnidad.addEventListener('change', cargaTabla);
 
-        // Filtrado al presionar Enter en cualquier campo de filtro
-        [fNroFactura, fCodProd, fDescripcion, fFechaFactura].forEach(inp => {
+        [fNroFactura, fCodProd, fDescripcion, fPdfComprobante].forEach(inp => {
             inp.addEventListener('keyup', function (e) {
                 if (e.key === 'Enter') {
                     cargaTabla();
